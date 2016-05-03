@@ -10,6 +10,10 @@ public interface Player {
 	
 	public void setSize(int x, int y);
 	
+	public void setName(String name);
+	
+	public String getName();
+	
 	public void moveUp();
 	
 	public void moveDown();
@@ -63,5 +67,6 @@ public interface Player {
 	public boolean isFacingLeft();
 	
 	public boolean isFacingRight();
-
+	
+	
 }

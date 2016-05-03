@@ -9,6 +9,10 @@ public interface Enemy {
 	
 	public void action();
 	
+	public void setName(String name);
+	
+	public String getName();
+
 	public void idle();
 	
 	public void moveUp();
