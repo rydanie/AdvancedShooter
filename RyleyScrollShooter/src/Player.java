@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 public interface Player {
 	
-	public void draw(Graphics g);
+	//public void draw(Graphics g);
 	
 	public void setSize(int x, int y);
 	

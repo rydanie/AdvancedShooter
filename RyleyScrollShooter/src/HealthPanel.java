@@ -11,6 +11,30 @@ import javax.swing.*;
  * @author melissa
  *
  */
-public class HealthPanel {
+public class HealthPanel extends JPanel implements Runnable {
+
+	JLabel l;
+	
+	public HealthPanel(){
+		super();
+		
+		this.setLayout(new GridLayout(1,2));
+		
+		l = new JLabel("I Work TOO");
+		
+		this.add(l);
+		
+		this.setBackground(Color.GREEN);
+		
+		this.setVisible(true);
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

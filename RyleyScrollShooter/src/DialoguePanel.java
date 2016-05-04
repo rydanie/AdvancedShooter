@@ -11,6 +11,28 @@ import javax.swing.*;
  * @author Ryley Danielson
  *
  */
-public class DialoguePanel {
+public class DialoguePanel extends JPanel implements Runnable {
+	
+	JLabel l;
+	
+	public DialoguePanel(){
+		super();
+		
+		this.setLayout(new GridLayout(1,2));
+		
+		l = new JLabel("I Work to Talk");
+		
+		this.add(l);
+		
+		
+		this.setVisible(true);
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

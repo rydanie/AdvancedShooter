@@ -15,6 +15,8 @@ public class StartScreen extends JFrame implements ActionListener {
 
 	 public GridBagLayout layout;
 	 public JLabel title;
+	 
+	 GameFrame gf;
 	
 	public StartScreen(){
 		super();
@@ -74,6 +76,7 @@ public class StartScreen extends JFrame implements ActionListener {
 		
 		case("start main"):
 			this.setVisible(false);
+			gf = new GameFrame();
 		}
 	}
 

@@ -3,7 +3,7 @@ import java.awt.Point;
 
 public interface Enemy {
 
-	public void draw(Graphics g);
+	//public void draw(Graphics g);
 	
 	public void setSize(int height, int width);
 	

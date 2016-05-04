@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.io.File;
 
 public interface GameLevel {
 
@@ -8,7 +9,9 @@ public interface GameLevel {
 	
 	public void endSuccess();
 	
-	public void draw(Graphics g);
+	//public void draw(Graphics g);
+	
+	public void genLevel(File f);
 	
 	public void setEnemyCount(int n);
 	

@@ -3,7 +3,7 @@ import java.awt.Point;
 
 public interface Projectile {
 
-	public void draw(Graphics g);
+	//public void draw(Graphics g);
 	
 	public void setSize(int x, int y);
 	
