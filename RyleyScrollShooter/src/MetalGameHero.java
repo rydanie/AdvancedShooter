@@ -8,14 +8,31 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * 
+ * @author Ryley Danielson
+ *
+ */
+
 public class MetalGameHero implements Runnable, Player, GameObject {
 
 	String name1 = "MHero_Front.jpg";
+	String name2 = "MHero_Back.jpg";
+	String name3 = "MHero_Left.jpg";
+	String name4 = "MHero_Right.jpg";
+	String characterName;
+	boolean up;
+	boolean down;
+	boolean left;
+	boolean right;
 	BufferedImage img;
-	int sizeP =20;
+	int sizeP =75;
 	int originX;
 	int originY;
-	Rectangle hitBox;
+	int sizeX = 50;
+	int sizeY = 50;
+	Rectangle hitBox = new Rectangle();
+	
 	
 	public MetalGameHero(Point p){
 		
@@ -26,7 +43,7 @@ public class MetalGameHero implements Runnable, Player, GameObject {
 		
 		setThisObjectLocation(p);
 		
-		hitBox = new Rectangle();
+		setBounds( hitBox );
 		
 		System.out.println("I Loaded");
 	}
@@ -82,10 +99,10 @@ public class MetalGameHero implements Runnable, Player, GameObject {
 		}
         */
        //R = new Rectangle(originX, originY, sizeX, sizeY);
-       g.drawImage(img, originX, originY, sizeP, sizeP, null);
+       g.drawImage(img, originX, originY, sizeX, sizeY, null);
         
         
-        System.out.println( "Redrawing Image @" + 20 + ", " + 20 + "; " + 20 + " x " + 20);
+        System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
         //this.setSize( this.getPreferredSize() );
 	}
 
@@ -236,46 +253,106 @@ public class MetalGameHero implements Runnable, Player, GameObject {
 	@Override
 	public boolean isFacingUp() {
 		// TODO Auto-generated method stub
+		if(up == true){
+			return up;
+		}else{
+		
 		return false;
+		}
 	}
 
 	@Override
 	public boolean isFacingDown() {
 		// TODO Auto-generated method stub
+		if(down == true){
+			return down;
+		}else{
+		
 		return false;
+		}
 	}
 
 	@Override
 	public boolean isFacingLeft() {
 		// TODO Auto-generated method stub
+		if(left == true){
+			return left;
+		}else{
+		
 		return false;
+		}
 	}
 
 	@Override
 	public boolean isFacingRight() {
 		// TODO Auto-generated method stub
+		if(right == true){
+			return right;
+		}else{
+		
 		return false;
+		}
 	}
 
 
 	@Override
 	public void setName(String name) {
 		// TODO Auto-generated method stub
-		
+		characterName = name;
 	}
 
 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return characterName;
 	}
+	
+	public void setBounds( Rectangle b ) {
+        b.setBounds( originX, originY, sizeP, sizeP );
+    }
 
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void setFacingUp() {
+		// TODO Auto-generated method stub
+		up = true;
+		down = false;
+		left = false;
+		right = false;
+	}
+
+	@Override
+	public void setFacingDown() {
+		// TODO Auto-generated method stub
+		up = false;
+		down = true;
+		left = false;
+		right = false;
+	}
+
+	@Override
+	public void setFacingLeft() {
+		// TODO Auto-generated method stub
+		up = false;
+		down = false;
+		left = true;
+		right = false;
+	}
+
+	@Override
+	public void setFacingRight() {
+		// TODO Auto-generated method stub
+		up = false;
+		down = false;
+		left = false;
+		right = true;
 	}
 
 }

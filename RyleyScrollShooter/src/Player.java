@@ -68,5 +68,14 @@ public interface Player {
 	
 	public boolean isFacingRight();
 	
+	public void setFacingUp(); 
+
+	public void setFacingDown();
+
+	public void setFacingLeft();
+
+	public void setFacingRight();
+
+	
 	
 }
