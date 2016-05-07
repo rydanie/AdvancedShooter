@@ -1,5 +1,8 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 /**
@@ -12,9 +15,9 @@ public class Level_1 implements Runnable, GameLevel {
 	
 	int numLevel = 1;
 	DrawingObject obj;
-	GameObject go;
+	GameObject gobj;
 	ArrayList<GameObject> gmob;
-	
+	ArrayList<DrawingObject> drob;
 	
 	public Level_1(){
 		
@@ -82,10 +85,55 @@ public class Level_1 implements Runnable, GameLevel {
 		
 	}
 
+	//@Override
+	public void genLevel() {
+		// TODO Auto-generated method stub
+		
+		//drob.clear();
+   		
+   		try{
+   			
+   			File f =new File("Level_1Test");
+   			
+   			FileInputStream fin = new FileInputStream(f.toString());
+   			ObjectInputStream ois = new ObjectInputStream(fin);
+   			 try {
+   				drob =  (ArrayList<DrawingObject>) ois.readObject();
+   			} catch (ClassNotFoundException e1) {
+   				// TODO Auto-generated catch block
+   				e1.printStackTrace();
+   			}
+   			ois.close();
+   		}catch(Exception e){
+   			e.printStackTrace();
+   		}
+   		
+   		for(int i =0; i<drob.size(); i++){
+   			obj = drob.get(i);
+   			if(obj.getColor()== Color.BLUE){
+   				gobj =new MetalGameHero(obj.getPoint());
+   			}else if(obj.getColor() == Color.RED){
+   				gobj = new BasicEnemy(obj.getPoint());
+   			}else if(obj.getColor() == Color.GREEN){
+   				gobj = new HealthPack(obj.getPoint());
+   			}else if(obj.getColor() == Color.BLACK){
+   				gobj = new BorderWall(obj.getPoint(),obj.getSize());
+   			}
+   			
+   			gmob.add(gobj);
+   		}
+	}
+
+	@Override
+	public ArrayList<GameObject> getGmob() {
+		// TODO Auto-generated method stub
+		return gmob;
+	}
+
 	@Override
 	public void genLevel(File f) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

@@ -24,7 +24,8 @@ public class HealthPack implements Runnable, GameObject, Serializable{
 	int sizeY = 50;
 	Rectangle bounds = new Rectangle();
 	
-	public HealthPack(){
+	public HealthPack(Point p){
+		setThisObjectLocation(p);
 		setBounds(bounds);
 		loadImage(name1);
 	}
@@ -61,7 +62,8 @@ public class HealthPack implements Runnable, GameObject, Serializable{
 	@Override
 	public void setThisObjectLocation(Point p) {
 		// TODO Auto-generated method stub
-		
+		originX = p.x;
+		originY = p.y;
 	}
 
 	@Override

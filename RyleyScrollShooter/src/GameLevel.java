@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.io.File;
+import java.util.ArrayList;
 
 public interface GameLevel {
 
@@ -24,5 +25,7 @@ public interface GameLevel {
 	public void setLevelNumber(int i);
 	
 	public int getLevelNumber();
+	
+	public ArrayList<GameObject> getGmob();
 	
 }

@@ -146,6 +146,21 @@ public class BWBox implements DrawingObject, Serializable {
 			// TODO Auto-generated method stub
 			
 		}
+		
+		@Override
+		public Point getPoint() {
+			// TODO Auto-generated method stub
+			Point p = new Point(originX, originY);
+			return p;
+		}
+
+		@Override
+		public Point getSize() {
+			// TODO Auto-generated method stub
+			Point p = new Point(sizeX,sizeY);
+			return p;
+		}
+
 
 		
 }

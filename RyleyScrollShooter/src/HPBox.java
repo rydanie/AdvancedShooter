@@ -148,4 +148,18 @@ public class HPBox implements DrawingObject, Serializable {
 			// TODO Auto-generated method stub
 			fillout = fo;
 		}
+		
+		@Override
+		public Point getPoint() {
+			// TODO Auto-generated method stub
+			Point p = new Point(originX, originY);
+			return p;
+		}
+
+		@Override
+		public Point getSize() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 }

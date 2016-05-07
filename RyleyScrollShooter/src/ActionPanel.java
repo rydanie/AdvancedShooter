@@ -3,6 +3,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -14,6 +15,11 @@ import javax.swing.*;
 public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseListener, ActionListener {
 JLabel l;
 	
+	Level_1 L1 = new Level_1();
+	File f;
+	ArrayList<GameObject> gmob;
+ 	int levelNumber = 1;
+
 	public ActionPanel(){
 		super();
 		
@@ -27,11 +33,22 @@ JLabel l;
 		
 		this.setVisible(true);
 		
+		run();
+		
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		
+		if (levelNumber == 1){
+
+			L1.genLevel();
+			gmob =L1.getGmob();
+			
+			repaint();
+		}
+		
 		
 	}
 
@@ -88,5 +105,15 @@ JLabel l;
 		// TODO Auto-generated method stub
 		
 	}
+	
+	 public void paintComponent(Graphics g){
+		    
+	    	super.paintComponent(g);
+	    	
+	    	for(int i = 0; i<gmob.size(); i++){
+	    		
+	    		gmob.get(i).draw(g);
+	    	}
+	    }
 
 }

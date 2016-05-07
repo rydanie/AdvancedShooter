@@ -24,8 +24,10 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 	int sizeY;
 	Rectangle bounds = new Rectangle();
 	
-	public BorderWall() {
+	public BorderWall(Point origin, Point size) {
 		// TODO Auto-generated constructor stub
+		setThisObjectLocation(origin);
+		setSize(size);
 		setBounds(bounds);
 		loadImage(name1);
 	}
@@ -63,7 +65,8 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 	@Override
 	public void setThisObjectLocation(Point p) {
 		// TODO Auto-generated method stub
-		
+		originX =p.x;
+		originY =p.y;
 	}
 
 	@Override
@@ -97,6 +100,7 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
     	
         setBounds( bounds );
     }
+    
     
     /**
      * Called repeatedly while moving an object (usually in a mouseDragged()
@@ -146,6 +150,21 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+
+	@Override
+	public void setLocation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void setSize(Point p) {
+		// TODO Auto-generated method stub
+		sizeX = p.x;
+		sizeY = p.y;
 	}
 
 }

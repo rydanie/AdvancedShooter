@@ -71,5 +71,30 @@ public class BorderBox implements Runnable, DrawingObject, Wall, Serializable{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public Point getPoint() {
+		
+		return null;
+	}
+
+	@Override
+	public void setLocation() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSize(Point p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Point getSize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

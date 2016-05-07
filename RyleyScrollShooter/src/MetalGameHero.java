@@ -41,8 +41,9 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	BasicProjectile bp;
 	
 	
-	public MetalGameHero(){
-		setBounds(bounds);
+	public MetalGameHero(Point p){
+		
+		setThisObjectLocation(p);
 		//File name = new File("MHero_Front.jpg");
 		//name1 = name;
 		

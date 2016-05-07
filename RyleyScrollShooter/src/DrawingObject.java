@@ -67,5 +67,9 @@ public interface DrawingObject {
 	 */
 	public void setFill(int fo);
 	
+	public Point getPoint();
+	
+	public Point getSize();
+	
 	
 }

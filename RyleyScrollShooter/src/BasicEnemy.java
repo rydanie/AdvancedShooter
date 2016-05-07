@@ -28,8 +28,9 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	int sizeY = 50;
 	Rectangle bounds = new Rectangle();
 	
-	public BasicEnemy() {
+	public BasicEnemy(Point p) {
 		// TODO Auto-generated constructor stub
+		setThisObjectLocation(p);
 		setBounds(bounds);
 		loadImage(name1);
 	}
@@ -66,7 +67,9 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	@Override
 	public void setThisObjectLocation(Point p) {
 		// TODO Auto-generated method stub
-		
+		originX = p.x;
+		originY = p.y;
+				
 	}
 
 	@Override
