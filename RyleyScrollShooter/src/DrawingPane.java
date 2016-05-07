@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-//import com.sun.jndi.cosnaming.IiopUrl.Address;
+import com.sun.jndi.cosnaming.IiopUrl.Address;
 
 public class DrawingPane extends JPanel implements ActionListener, MouseMotionListener, MouseListener,Serializable {
 	

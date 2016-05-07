@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
@@ -14,7 +15,7 @@ import javax.imageio.ImageIO;
  *
  */
 
-public class MetalGameHero implements Runnable, Player, GameObject {
+public class MetalGameHero implements Runnable, Player, GameObject, Serializable {
 
 	String name1 = "MHero_Front.jpg";
 	String name2 = "MHero_Back.jpg";

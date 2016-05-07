@@ -5,10 +5,11 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
-public class HealthPack implements Runnable, GameObject{
+public class HealthPack implements Runnable, GameObject, Serializable{
 	String name1 = "HealthBox_2.jpg";
 	String characterName;
 	boolean up;
