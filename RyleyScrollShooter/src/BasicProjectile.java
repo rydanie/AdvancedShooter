@@ -1,14 +1,14 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+import java.awt.*;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
-public class BasicProjectile implements Runnable, Projectile, GameObject{
+public class BasicProjectile implements Runnable, Projectile, GameObject, Serializable{
 
 	String name1 = "EnemyProjectile.jpg";
 	String name2 = "HeroProjectile.jpg";
@@ -17,17 +17,20 @@ public class BasicProjectile implements Runnable, Projectile, GameObject{
 	boolean down;
 	boolean left;
 	boolean right;
+	boolean enemy;
 	BufferedImage img;
 	int sizeP =75;
 	int originX;
 	int originY;
 	int sizeX = 50;
 	int sizeY = 50;
+	double damage;
 	Rectangle bounds = new Rectangle();
 	
-	public BasicProjectile(){
+	public BasicProjectile(Point p){
 		setBounds(bounds);
 		loadImage(name1);
+		setThisObjectLocation(p);
 	}
 	
 	@Override
@@ -62,19 +65,22 @@ public class BasicProjectile implements Runnable, Projectile, GameObject{
 	@Override
 	public void setThisObjectLocation(Point p) {
 		// TODO Auto-generated method stub
-		
+		originX = p.x;
+		originY = p.y;
 	}
 
 	@Override
 	public Point getThisObjectLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		Point p = new Point(originX,originY);
+		return p;
 	}
 
 	@Override
 	public void setSize(int x, int y) {
 		// TODO Auto-generated method stub
-		
+		sizeX =x;
+		sizeY =y;
 	}
 
 	@Override
@@ -90,32 +96,33 @@ public class BasicProjectile implements Runnable, Projectile, GameObject{
 	}
 
 	@Override
-	public void fireUp(Boolean b, Point p) {
+	public void fireUp() {
 		// TODO Auto-generated method stub
-		
+		originY +=2;
 	}
 
 	@Override
-	public void fireDown(Boolean b, Point p) {
+	public void fireDown() {
 		// TODO Auto-generated method stub
-		
+		originY -=2;
 	}
 
 	@Override
-	public void fireLeft(Boolean b, Point p) {
+	public void fireLeft() {
 		// TODO Auto-generated method stub
-		
+		originX -=2;
 	}
 
 	@Override
-	public void fireRight(Boolean b, Point p) {
+	public void fireRight() {
 		// TODO Auto-generated method stub
-		
+		originX +=2;
 	}
 
 	@Override
 	public boolean collide() {
 		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -193,6 +200,18 @@ public class BasicProjectile implements Runnable, Projectile, GameObject{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void setEnemy(boolean b) {
+		// TODO Auto-generated method stub
+		enemy =b;
+	}
+
+	@Override
+	public void setDamge(double d) {
+		// TODO Auto-generated method stub
+		damage = d;
 	}
     
 }

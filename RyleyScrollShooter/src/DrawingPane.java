@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import com.sun.jndi.cosnaming.IiopUrl.Address;
+//import com.sun.jndi.cosnaming.IiopUrl.Address;
 
 public class DrawingPane extends JPanel implements ActionListener, MouseMotionListener, MouseListener,Serializable {
 	
@@ -33,19 +33,19 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
 	int a;
 	int b;
 	int check;
-	GameObject obj;
-	static ArrayList<GameObject> drob;
+	DrawingObject obj;
+	static ArrayList<DrawingObject> drob;
 	
-	public static final int l = 1;
-	public static final int rec = 2;
-	public static final int s = 3;
-	public static final int c = 4;
+	//public static final int l = 1;
+	//public static final int rec = 2;
+	//public static final int s = 3;
+	//public static final int c = 4;
     
     public DrawingPane() {
         super(); 
         
         
-        drob = new ArrayList<GameObject>();
+        drob = new ArrayList<DrawingObject>();
         
         // always call super() in an extended/derived class!
         //this.setSize( 500, 500 );
@@ -102,13 +102,13 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
     	
     	if(check !=0 || check !=1 ||check !=2||check !=3||check !=4||check !=6||check !=10){
 	    	if(check == 1){
-	    		obj = new BorderWall();
+	    		obj = new BWBox();
 	    	}else if(check == 2){
-	    		obj = new BasicEnemy();
+	    		obj = new BEBox();
 	    	}else if(check == 3) {
-	    		obj = new MetalGameHero();
+	    		obj = new MGHBox();
 	    	}else if(check == 4){
-	    		obj = new HealthPack();
+	    		obj = new HPBox();
 	    	}
 	    	//}else if(check == s) {
 	    		//int[] q = {x, x+12, x+54,x+18,x+28,x, x-28, x-18, x-54, x-12};
@@ -314,7 +314,7 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
    			inf.writeObject(drob);
    			System.out.println("flfwejfjdhlk");
    			
-   			inf.close();
+   			//inf.close();
    		}catch(Exception e){
    			e.printStackTrace();
    		}
@@ -336,7 +336,7 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
    			FileInputStream fin = new FileInputStream(f.toString());
    			ObjectInputStream ois = new ObjectInputStream(fin);
    			 try {
-   				drob =  (ArrayList<GameObject>) ois.readObject();
+   				drob =  (ArrayList<DrawingObject>) ois.readObject();
    			} catch (ClassNotFoundException e1) {
    				// TODO Auto-generated catch block
    				e1.printStackTrace();

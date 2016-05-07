@@ -123,11 +123,11 @@ public class JMenuFrame extends JFrame implements ActionListener {
         
         menuBar.add( menu );
         
-        menu = new JMenu( "Colors" );
+       // menu = new JMenu( "Colors" );
         menuItem = new JMenuItem( "Color Pane" );
         menuItem.setActionCommand("colorBox");
         menuItem.addActionListener(this);
-        menu.add( menuItem );
+        //menu.add( menuItem );
         
         menuBar.add( menu );
         

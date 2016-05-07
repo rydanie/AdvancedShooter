@@ -1,16 +1,16 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.awt.*;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	
+
 	String name1 = "BasicEnemy_Front.jpg";
 	String name2 = "BasicEnemy_Back.jpg";
 	String name3 = "BasicEnemy_Lect.jpg";
@@ -284,6 +284,8 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
         originY = p.y;
         //lastX = p.x;
         //lastY = p.y;
+        
+        setBounds(bounds);
     }
     
     /**
@@ -296,7 +298,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
         //sizeX = p.x - originX;
         //sizeY = p.y  - originY;
     	
-        //setBounds( bounds );
+        setBounds( bounds );
     }
     
     /**

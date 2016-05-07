@@ -15,6 +15,7 @@ public class Level_1 implements Runnable, GameLevel {
 	GameObject go;
 	ArrayList<GameObject> gmob;
 	
+	
 	public Level_1(){
 		
 		

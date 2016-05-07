@@ -1,13 +1,12 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.awt.*;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 /**
  * 
@@ -16,6 +15,7 @@ import javax.imageio.ImageIO;
  */
 
 public class MetalGameHero implements Runnable, Player, GameObject, Serializable {
+
 
 	String name1 = "MHero_Front.jpg";
 	String name2 = "MHero_Back.jpg";
@@ -32,8 +32,13 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	int originY;
 	int sizeX = 50;
 	int sizeY = 50;
-	Rectangle hitBox = new Rectangle();
+	double health = 100;
+	double rat = 25;
+	double mat = 100;
+	private final double limit = 100; 
+	//Rectangle hitBox = new Rectangle();
 	Rectangle bounds = new Rectangle();
+	BasicProjectile bp;
 	
 	
 	public MetalGameHero(){
@@ -43,7 +48,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 		
 		loadImage(name1);
 		
-		setBounds( hitBox );
+		setBounds( bounds );
 		
 		System.out.println("I Loaded");
 	}
@@ -74,7 +79,8 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	@Override
 	public Point getThisObjectLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		Point p = new Point(originX, originY);
+		return p;
 	}
 
 	@Override
@@ -109,31 +115,32 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	@Override
 	public void setSize(int x, int y) {
 		// TODO Auto-generated method stub
-		
+		sizeX = x;
+		sizeY =y;
 	}
 
 	@Override
 	public void moveUp() {
 		// TODO Auto-generated method stub
-		
+		originY += 1;
 	}
 
 	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
-		
+		originY -= 1;
 	}
 
 	@Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
-		
+		originX -= 1;
 	}
 
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
-		
+		originX += 1;
 	}
 
 	@Override
@@ -151,13 +158,25 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	@Override
 	public Point getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		Point p = new Point(originX, originY);
+		
+		return p;
 	}
 
 	@Override
 	public void attackRanged() {
 		// TODO Auto-generated method stub
-		
+		bp = new BasicProjectile(getLocation());
+		bp.setEnemy(false);
+		if(isFacingUp() == true){
+			bp.fireUp();
+		} else if(isFacingDown() == true){
+			bp.fireDown();
+		} else if(isFacingLeft() == true){
+			bp.fireRight();
+		} else if(isFacingRight() == true){
+			bp.fireRight();
+		}
 	}
 
 	@Override
@@ -173,51 +192,56 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	}
 
 	@Override
-	public void setHealth(Double health) {
+	public void setHealth(Double health1) {
 		// TODO Auto-generated method stub
-		
+		health = health1;
 	}
 
 	@Override
 	public Double getHealth() {
 		// TODO Auto-generated method stub
-		return null;
+		return health;
 	}
 
 	@Override
 	public void looseHealth(Double damage) {
 		// TODO Auto-generated method stub
-		
+		health -= damage;
 	}
 
 	@Override
 	public void gainHealth(Double gain) {
 		// TODO Auto-generated method stub
+		health += gain;
 		
+		if (health > limit){
+			health = 100;
+		}
 	}
 
 	@Override
 	public void setRangeAttackDamage(Double damage) {
 		// TODO Auto-generated method stub
-		
+		rat = damage;
+		bp.setDamge(rat);
 	}
 
 	@Override
 	public Double getRangedAttackDamage() {
 		// TODO Auto-generated method stub
-		return null;
+		return rat;
 	}
 
 	@Override
 	public void setMeleeAttackDamage(Double damage) {
 		// TODO Auto-generated method stub
-		
+		mat = damage;
 	}
 
 	@Override
 	public Double getMeleeAttackDamage() {
 		// TODO Auto-generated method stub
-		return null;
+		return mat;
 	}
 
 	@Override
@@ -247,7 +271,11 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	@Override
 	public boolean isDead() {
 		// TODO Auto-generated method stub
+		if(health < 0){
+			return true;
+		}else{
 		return false;
+		}
 	}
 
 	@Override
@@ -356,6 +384,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
         originY = p.y;
         //lastX = p.x;
         //lastY = p.y;
+        setBounds(bounds);
     }
     
     /**
@@ -368,7 +397,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
        // sizeX = p.x - originX;
        // sizeY = p.y  - originY;
     	
-        //setBounds( bounds );
+        setBounds( bounds );
     }
     
     /**
@@ -391,6 +420,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
      */
     public void setBounds( Rectangle b ) {
         b.setBounds( originX, originY, sizeX, sizeY );
+        System.out.println("Bounds                                                Set");
     }
     
     /**

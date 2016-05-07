@@ -1,15 +1,15 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.awt.*;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class HealthPack implements Runnable, GameObject, Serializable{
+
 	String name1 = "HealthBox_2.jpg";
 	String characterName;
 	boolean up;
@@ -81,6 +81,7 @@ public class HealthPack implements Runnable, GameObject, Serializable{
         originY = p.y;
         //lastX = p.x;
         //lastY = p.y;
+        setBounds(bounds);
     }
     
     /**
@@ -93,7 +94,7 @@ public class HealthPack implements Runnable, GameObject, Serializable{
         //sizeX = p.x - originX;
         //sizeY = p.y  - originY;
     	
-        //setBounds( bounds );
+        setBounds( bounds );
     }
     
     /**

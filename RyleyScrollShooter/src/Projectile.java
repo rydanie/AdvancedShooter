@@ -11,15 +11,19 @@ public interface Projectile {
 	
 	public Point getLocation();
 	
-	public void fireUp(Boolean b, Point p);
+	public void setEnemy(boolean b);
 	
-	public void fireDown(Boolean b, Point p);
+	public void fireUp();
 	
-	public void fireLeft(Boolean b, Point p);
+	public void fireDown();
 	
-	public void fireRight(Boolean b, Point p);
+	public void fireLeft();
+	
+	public void fireRight();
 	
 	public boolean collide();
 	
 	public boolean isEnemy();
+	
+	public void setDamge(double d);
 }
