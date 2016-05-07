@@ -32,16 +32,15 @@ public class MetalGameHero implements Runnable, Player, GameObject {
 	int sizeX = 50;
 	int sizeY = 50;
 	Rectangle hitBox = new Rectangle();
+	Rectangle bounds = new Rectangle();
 	
 	
-	public MetalGameHero(Point p){
-		
+	public MetalGameHero(){
+		setBounds(bounds);
 		//File name = new File("MHero_Front.jpg");
 		//name1 = name;
 		
 		loadImage(name1);
-		
-		setThisObjectLocation(p);
 		
 		setBounds( hitBox );
 		
@@ -49,7 +48,7 @@ public class MetalGameHero implements Runnable, Player, GameObject {
 	}
 	
 	public void loadImage(String s){
-		BufferedImage img = null;
+		img = null;
 		try {
 		    img = ImageIO.read(new File(s));
 		} catch (IOException e) {
@@ -308,10 +307,6 @@ public class MetalGameHero implements Runnable, Player, GameObject {
 		return characterName;
 	}
 	
-	public void setBounds( Rectangle b ) {
-        b.setBounds( originX, originY, sizeP, sizeP );
-    }
-
 
 	@Override
 	public void run() {
@@ -354,5 +349,58 @@ public class MetalGameHero implements Runnable, Player, GameObject {
 		left = false;
 		right = true;
 	}
+
+	public void start( Point p ) {
+        originX = p.x;
+        originY = p.y;
+        //lastX = p.x;
+        //lastY = p.y;
+    }
+    
+    /**
+     * Called repeatedly while dragging an object to size (usually in a 
+     * mouseDragged() MouseMotionListener).
+     * 
+     * @param p 
+     */
+    public void drag( Point p ) {
+       // sizeX = p.x - originX;
+       // sizeY = p.y  - originY;
+    	
+        //setBounds( bounds );
+    }
+    
+    /**
+     * Called repeatedly while moving an object (usually in a mouseDragged()
+     * MouseMotionListener).
+     * 
+     * @param p 
+     */
+    public void move( Point p ) {
+        originX = p.x ;
+        originY = p.y ;
+        setBounds( bounds );
+    }
+    
+    /**
+     * Update the bounding box. The Rectangle argument is typically but not always
+     * in this object. This is required for @method contains() to work.
+     * 
+     * @param b 
+     */
+    public void setBounds( Rectangle b ) {
+        b.setBounds( originX, originY, sizeX, sizeY );
+    }
+    
+    /**
+     * Returns true if the point p is in the bounding box for this object. Might
+     * be used to select and/or move an object.
+     * 
+     * @param p
+     * @return 
+     */
+    public boolean contains( Point p ) {
+    	return bounds.contains(p);
+    }
 
 }

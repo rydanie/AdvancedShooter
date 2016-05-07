@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import com.sun.jndi.cosnaming.IiopUrl.Address;
+//import com.sun.jndi.cosnaming.IiopUrl.Address;
 
 public class DrawingPane extends JPanel implements ActionListener, MouseMotionListener, MouseListener,Serializable {
 	
@@ -33,8 +33,8 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
 	int a;
 	int b;
 	int check;
-	DrawingObject obj;
-	static ArrayList<DrawingObject> drob;
+	GameObject obj;
+	static ArrayList<GameObject> drob;
 	
 	public static final int l = 1;
 	public static final int rec = 2;
@@ -45,7 +45,7 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
         super(); 
         
         
-        drob = new ArrayList<DrawingObject>();
+        drob = new ArrayList<GameObject>();
         
         // always call super() in an extended/derived class!
         //this.setSize( 500, 500 );
@@ -53,6 +53,7 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
         // size is handled by parent pane placement in JFrame
         // make a border
         setBorder( BorderFactory.createLineBorder(Color.RED) );
+        this.setBackground(Color.WHITE);
         setVisible( true );
         
         // we need both a mouse listener (for clicks)...
@@ -98,40 +99,37 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
     	y = e.getY();
     	//a
     	//b
-	    	if(check == rec){
-	    		obj = new MyRectangle();
-	    	}else if(check == c){
-	    		obj = new MyCircle();
-	    	}else if(check == l) {
-	    		obj = new MyLine(x,y,x,y);
-	    	}else if(check == s) {
+    	
+    	if(check !=0 || check !=1 ||check !=2||check !=3||check !=4||check !=6||check !=10){
+	    	if(check == 1){
+	    		obj = new BorderWall();
+	    	}else if(check == 2){
+	    		obj = new BasicEnemy();
+	    	}else if(check == 3) {
+	    		obj = new MetalGameHero();
+	    	}else if(check == 4){
+	    		obj = new HealthPack();
+	    	}
+	    	//}else if(check == s) {
 	    		//int[] q = {x, x+12, x+54,x+18,x+28,x, x-28, x-18, x-54, x-12};
 	    		//int[] w = {y, y+36, y+36, y+54, y+96, y+72, y+96, y+54, y+36, y+36 };
-	    		obj = new MyStar(Integer.parseInt(ToolPanel.po));
-	    	}else if(check == 6){
-	    		obj = new MyPolygon(Integer.parseInt(ToolPanel.po2));
-	    	}else if(check == 10){
-	    		obj = new MyImage(ToolPanel.nameI);
-	    		System.out.println("dfbdjbshgdfj,gbs");
-	    	}else if(check == 0){
-	    		for(int i = drob.size()-1; i>= 0; i--){
-	    			if(drob.get(i).contains(e.getPoint())){
-	    				//System.out.println("star listen to me");
-	    				obj = drob.get(i);
-	    				break;
-	    			}else{
-	    				obj = null;
-	    			}
-	    		}
-	    	}
+	    		//obj = new MyStar(Integer.parseInt(ToolPanel.po));
+	    	//}else if(check == 6){
+	    		//obj = new MyPolygon(Integer.parseInt(ToolPanel.po2));
+	    	//}else if(check == 10){
+	    		//obj = new MyImage(ToolPanel.nameI);
+	    		//System.out.println("dfbdjbshgdfj,gbs");
+	    	//}
     	
-    
-    			if(obj != null){
-    				//obj.draw(getGraphics());
-    				obj.start(e.getPoint());
-    				drob.add(obj);
-    			}
-    			
+	    	if(obj != null){
+				//obj.draw(getGraphics());
+				obj.start(e.getPoint());
+				drob.add(obj);
+				System.out.println("Added obj");
+	    	}
+	    }
+    	
+	    	
     		if(check == 5){
     			for(int i = drob.size()-1; i>= 0; i--){
 	    			if(drob.get(i).contains(e.getPoint())){
@@ -144,8 +142,8 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
 	    			
 	    		}
     			if(obj!=null){
-    				obj.setFill(ColorPanel.fo);
-	    			obj.setColor(JMenuFrame.getColor());
+    				//obj.setFill(ColorPanel.fo);
+	    			//obj.setColor(JMenuFrame.getColor());
 	    			}
     		}else if(check == 7){
     			for(int i = drob.size()-1; i>= 0; i--){
@@ -172,17 +170,28 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
 	    			
 	    		}
     			
-    		}
+    		}else if(check == 0){
+	    		for(int i = drob.size()-1; i>= 0; i--){
+	    			if(drob.get(i).contains(e.getPoint())){
+	    				//System.out.println("star listen to me");
+	    				obj = drob.get(i);
+	    				break;
+	    			}else{
+	    				obj = null;
+	    			}
+	    		}
+	    	}
     	
     	
 
         System.out.println( "mousePressed" );
         
         repaint();
+    	}
 	 
         
   
-    }
+   
 
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -269,9 +278,23 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
    	 * @param f
    	 */
    	public void loadImage(File f){
-   		BufferedImage image = new BufferedImage(40,20, BufferedImage.TYPE_INT_RGB);
-   		Graphics2D g2 = image.createGraphics();
-   		paint(g2);
+   		BufferedImage image = null; //new BufferedImage(40,20, BufferedImage.TYPE_INT_RGB);
+   		//Graphics2D g2 = image.createGraphics();
+   		//paint(g2);
+   		
+   		try {
+			image = ImageIO.read(f);
+			//image.getScaledInstance(30, 40, 1);
+			//image.set
+			Graphics2D g2 = image.createGraphics();
+	   		paint(g2);
+			System.out.println("I loaded an image");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+   		
+   		repaint();
    		//try{
    			//ImageIO.read(f);
    		//} catch (Exception e) {
@@ -309,10 +332,11 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
    		drob.clear();
    		
    		try{
+   			
    			FileInputStream fin = new FileInputStream(f.toString());
    			ObjectInputStream ois = new ObjectInputStream(fin);
    			 try {
-   				drob =  (ArrayList<DrawingObject>) ois.readObject();
+   				drob =  (ArrayList<GameObject>) ois.readObject();
    			} catch (ClassNotFoundException e1) {
    				// TODO Auto-generated catch block
    				e1.printStackTrace();
@@ -320,7 +344,6 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
    			ois.close();
    			
    		}catch(Exception e){
-   			JOptionPane.showMessageDialog(null, "File Not Found or Not Compatable");
    			e.printStackTrace();
    		}
    		

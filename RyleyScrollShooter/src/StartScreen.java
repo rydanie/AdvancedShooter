@@ -17,7 +17,7 @@ public class StartScreen extends JFrame implements ActionListener {
 	 public JLabel title;
 	 
 	 GameFrame gf;
-	
+	JMenuFrame jmf;
 	public StartScreen(){
 		super();
 		
@@ -55,6 +55,14 @@ public class StartScreen extends JFrame implements ActionListener {
         start.setActionCommand("start main");
         this.add(start);
         
+        c.gridx = 0;
+        c.gridy = 3;
+        
+        JButton editer = new JButton("Level Editor");
+        editer.addActionListener(this);
+        editer.setActionCommand("level editer");
+        this.add(editer);
+        
         //this.setForeground(Color.BLUE);//(new BufferedImage(new File("uiImage")));
         
         this.pack();
@@ -77,6 +85,16 @@ public class StartScreen extends JFrame implements ActionListener {
 		case("start main"):
 			this.setVisible(false);
 			gf = new GameFrame();
+			break;
+			
+		case("level editer"):
+			this.setVisible(false);
+			jmf = new JMenuFrame();
+			break;
+			
+		default:
+			System.out.println("You killed us all");
+			break;
 		}
 	}
 

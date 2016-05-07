@@ -2,8 +2,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.Serializable;
 
-public class BorderBox implements Runnable, DrawingObject, Wall{
+public class BorderBox implements Runnable, DrawingObject, Wall, Serializable{
 
 	@Override
 	public boolean contains() {
