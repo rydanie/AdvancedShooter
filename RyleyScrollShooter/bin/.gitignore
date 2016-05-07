@@ -17,3 +17,5 @@
 /BasicEnemy.class
 /BasicProjectile.class
 /Wall.class
+/BorderBox.class
+/DrawingPane.class

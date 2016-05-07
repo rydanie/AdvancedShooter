@@ -1,7 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Point;
 
-public class BorderWall implements Runnable, GameObject {
+public class BorderWall implements Runnable, Wall, GameObject {
 
 	@Override
 	public void draw(Graphics g) {
@@ -25,6 +25,12 @@ public class BorderWall implements Runnable, GameObject {
 	public void run() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean contains() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
