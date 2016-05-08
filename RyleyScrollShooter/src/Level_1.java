@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class Level_1 implements Runnable, GameLevel {
 	ArrayList<DrawingObject> drob;
 	
 	public Level_1(){
-		
+		drob = new ArrayList<DrawingObject>();
 		
 	}
 
@@ -86,14 +87,15 @@ public class Level_1 implements Runnable, GameLevel {
 	}
 
 	//@Override
-	public void genLevel() {
+	public void genLevel() throws IOException {
 		// TODO Auto-generated method stub
 		
 		//drob.clear();
    		
    		try{
+   			drob = new ArrayList<DrawingObject>();
    			
-   			File f =new File("Level_1Test");
+   			File f =new File("this");
    			
    			FileInputStream fin = new FileInputStream(f.toString());
    			ObjectInputStream ois = new ObjectInputStream(fin);

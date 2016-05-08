@@ -15,7 +15,7 @@ import javax.swing.*;
 public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseListener, ActionListener {
 JLabel l;
 	
-	Level_1 L1 = new Level_1();
+	Level_1 L1;
 	File f;
 	ArrayList<GameObject> gmob;
  	int levelNumber = 1;
@@ -25,11 +25,13 @@ JLabel l;
 		
 		this.setLayout(new GridLayout(1,2));
 		
-		l = new JLabel("I Work");
+		//l = new JLabel("I Work");
 		
-		this.add(l);
+		//this.add(l);
 		
-		this.setBackground(Color.BLACK);
+		//this.setBackground(Color.BLACK);
+		
+		L1 =new Level_1();
 		
 		this.setVisible(true);
 		
@@ -43,7 +45,12 @@ JLabel l;
 		
 		if (levelNumber == 1){
 
-			L1.genLevel();
+			try {
+				L1.genLevel();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			gmob =L1.getGmob();
 			
 			repaint();
