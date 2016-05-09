@@ -12,13 +12,15 @@ import javax.swing.*;
  * @author Ryley Danielson
  *
  */
-public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseListener, ActionListener {
+public class ActionPanel extends JPanel implements Runnable, MouseListener, ActionListener {
 JLabel l;
 	
-	Level_1 L1;
+	//Level_1 L1;
 	File f;
 	ArrayList<GameObject> gmob;
  	int levelNumber = 1;
+ 	
+ 	JComponent component = new JComponent();
 
 	public ActionPanel(){
 		super();
@@ -31,9 +33,11 @@ JLabel l;
 		
 		//this.setBackground(Color.BLACK);
 		
-		L1 =new Level_1();
+		//L1 =new Level_1();
 		
 		this.setVisible(true);
+		
+		
 		
 		run();
 		
@@ -45,6 +49,8 @@ JLabel l;
 		
 		if (levelNumber == 1){
 
+			Level_1 L1 = new Level_1();
+			
 			try {
 				L1.genLevel();
 			} catch (IOException e) {
@@ -57,6 +63,13 @@ JLabel l;
 		}
 		
 		
+	}
+	
+	public void setBinding(){
+		component.getInputMap().put(KeyStroke.getKeyStroke("F2"),
+                "doSomething");
+component.getActionMap().put("doSomething",
+                 anAction);
 	}
 
 	@Override
@@ -95,23 +108,7 @@ JLabel l;
 		
 	}
 
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 	 public void paintComponent(Graphics g){
 		    
