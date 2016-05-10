@@ -14,7 +14,9 @@ import java.util.ArrayList;
 
 public class Level_1 implements Runnable, GameLevel {
 	
+	static MetalGameHero pUnit;
 	int numLevel = 1;
+	File f;
 	DrawingObject obj;
 	GameObject gobj;
 	ArrayList<GameObject> gmob;
@@ -22,7 +24,7 @@ public class Level_1 implements Runnable, GameLevel {
 	
 	public Level_1(){
 		drob = new ArrayList<DrawingObject>();
-		
+		gmob = new ArrayList<GameObject>();
 	}
 
 	@Override
@@ -93,9 +95,8 @@ public class Level_1 implements Runnable, GameLevel {
 		//drob.clear();
    		
    		try{
-   			drob = new ArrayList<DrawingObject>();
    			
-   			File f =new File("this");
+   			f =new File("this");
    			
    			FileInputStream fin = new FileInputStream(f.toString());
    			ObjectInputStream ois = new ObjectInputStream(fin);
@@ -112,17 +113,26 @@ public class Level_1 implements Runnable, GameLevel {
    		
    		for(int i =0; i<drob.size(); i++){
    			obj = drob.get(i);
+				System.out.println("drob " + drob.size());
    			if(obj.getColor()== Color.BLUE){
    				gobj =new MetalGameHero(obj.getPoint());
+   				pUnit = (MetalGameHero) gobj;
+   				System.out.println("hero");
    			}else if(obj.getColor() == Color.RED){
    				gobj = new BasicEnemy(obj.getPoint());
+   				System.out.println("enemy");
    			}else if(obj.getColor() == Color.GREEN){
    				gobj = new HealthPack(obj.getPoint());
+   				System.out.println("health");
    			}else if(obj.getColor() == Color.BLACK){
-   				gobj = new BorderWall(obj.getPoint(),obj.getSize());
+   				gobj = new BorderWall(obj.getPoint(),obj.getSize());   				
+   				System.out.println("wall");
+
    			}
    			
+   			if(gobj != null){
    			gmob.add(gobj);
+   			}
    		}
 	}
 

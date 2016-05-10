@@ -140,6 +140,7 @@ public class HPBox implements DrawingObject, Serializable {
 		@Override
 		public Color getColor() {
 			// TODO Auto-generated method stub
+			c = Color.GREEN;
 			return c;
 		}
 

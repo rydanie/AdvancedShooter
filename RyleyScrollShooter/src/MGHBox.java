@@ -139,6 +139,7 @@ public class MGHBox implements DrawingObject, Serializable {
 		@Override
 		public Color getColor() {
 			// TODO Auto-generated method stub
+			c = Color.BLUE;
 			return c;
 		}
 

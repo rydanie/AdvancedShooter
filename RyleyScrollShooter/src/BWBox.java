@@ -56,12 +56,14 @@ public class BWBox implements DrawingObject, Serializable {
 	        Graphics2D g2d = (Graphics2D)g;
 	        
 	        //fillout = ColorPanel.fo;
-	        
+	        /*
 	        if(c != null){
 		        g2d.setColor( c );
 			 }else{
 				 g2d.setColor( Color.BLACK );
+				 
 			 }
+			 */
 	        //g2d.clearRect( originX, originY, sizeX, sizeY );  // this is cool to make a background-filled rectangle!
 	       
 				g.fillRect(originX, originY, sizeX, sizeY);
@@ -138,6 +140,7 @@ public class BWBox implements DrawingObject, Serializable {
 		@Override
 		public Color getColor() {
 			// TODO Auto-generated method stub
+			c = Color.BLACK;
 			return c;
 		}
 

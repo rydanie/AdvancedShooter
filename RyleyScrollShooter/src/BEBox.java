@@ -139,6 +139,7 @@ public class BEBox implements DrawingObject, Serializable {
 		@Override
 		public Color getColor() {
 			// TODO Auto-generated method stub
+			c = Color.RED;
 			return c;
 		}
 
