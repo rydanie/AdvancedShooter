@@ -21,7 +21,7 @@ JLabel l;
 	Player pUnit;
  	int levelNumber = 1;
  	
- 	JComponent component = new JComponent();
+ 	//JComponent component = new JComponent();
 
 	public ActionPanel(){
 		super();
@@ -40,15 +40,12 @@ JLabel l;
 		
 		this.setBackground(Color.WHITE);
 		
-		addKeyListener(this);
+		//addKeyListener(this);
 		
 		this.setVisible(true);
 		
 		
-<<<<<<< HEAD
-=======
-		
->>>>>>> origin/master
+
 		run();
 		
 	}
@@ -78,10 +75,10 @@ JLabel l;
 	}
 	
 	public void setBinding(){
-		component.getInputMap().put(KeyStroke.getKeyStroke("F2"),
-                "doSomething");
-component.getActionMap().put("doSomething",
-                 anAction);
+		//component.getInputMap().put(KeyStroke.getKeyStroke("F2"),
+       //         "doSomething");
+//component.getActionMap().put("doSomething",
+                // anAction);
 	}
 
 	public void findPlayer(ArrayList<GameObject> h){
