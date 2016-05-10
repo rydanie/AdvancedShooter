@@ -69,6 +69,7 @@ public class BEBox implements DrawingObject, Serializable {
 	
 	        
 	        System.out.println( "Redrawing rectangle @" + originX + ", " + originY + "; " + sizeX + " x " + sizeY);
+	        
 	        //this.setSize( this.getPreferredSize() );
 	    }
 	    
@@ -82,6 +83,8 @@ public class BEBox implements DrawingObject, Serializable {
 	        originY = p.y;
 	        lastX = p.x;
 	        lastY = p.y;
+	        
+	        setBounds(bounds);
 	    }
 	    
 	    /**

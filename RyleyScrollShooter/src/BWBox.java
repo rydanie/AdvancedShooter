@@ -83,6 +83,8 @@ public class BWBox implements DrawingObject, Serializable {
 	        originY = p.y;
 	        lastX = p.x;
 	        lastY = p.y;
+	        
+	        setBounds(bounds);
 	    }
 	    
 	    /**
