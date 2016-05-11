@@ -12,9 +12,11 @@ import javax.swing.*;
  * @author Ryley Danielson
  *
  */
-public class ActionPanel extends JPanel implements Runnable, MouseListener, ActionListener {
-JLabel l;
-	
+
+//    http://staticvoidgames.com/tutorials/swing/listeners
+
+public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseListener, ActionListener {
+	JLabel l;
 	//Level_1 L1;
 	File f;
 	ArrayList<GameObject> gmob;
@@ -25,6 +27,7 @@ JLabel l;
 
 	public ActionPanel(){
 		super();
+		
 		
 		//this.setLayout(new GridLayout(1,2));
 		
@@ -75,10 +78,10 @@ JLabel l;
 	}
 	
 	public void setBinding(){
-		//component.getInputMap().put(KeyStroke.getKeyStroke("F2"),
-       //         "doSomething");
-//component.getActionMap().put("doSomething",
-                // anAction);
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        .put(KeyStroke.getKeyStroke("ENTER"), "test");
+		getActionMap().put("test", this); 
+    	//this.addActionListener(this);
 	}
 
 	public void findPlayer(ArrayList<GameObject> h){
@@ -142,5 +145,56 @@ JLabel l;
 	   
 	    	}
 	    }
+
+
+	 public void keyTyped(KeyEvent e) {
+	        System.out.println("Key typed: " + e.getKeyChar());
+	    }
+
+	  public void keyPressed(KeyEvent e) {
+	        System.out.println("Key pressed: " + e.getKeyChar());
+	        
+	        
+	        if (e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+	            System.out.println("Right typed.");
+	        } 
+	        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) {
+	            System.out.println("Left typed.");
+	        } 
+	        else if (e.getKeyCode() == KeyEvent.VK_UP ) {
+	            System.out.println("Up typed.");
+	        } 
+	        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) {
+	            System.out.println("Down typed.");
+	        }
+	        else{
+	            System.out.println("Key typed: " + e.getKeyChar());
+	            
+	            if(e.getKeyChar() == 'w'){
+	            	
+	            }else if(e.getKeyChar() == 'a'){
+	            	
+	            } else if(e.getKeyChar() == 's'){
+	            	
+	            }else if(e.getKeyChar() == 'd'){
+	            	
+	            }else if(e.getKeyChar() == 'e'){
+	            	
+	            }else if(e.getKeyChar() == 'q'){
+	            	
+	            }else if(e.getKeyChar() == 'a'){
+	            	
+	            }else if(e.getKeyChar() == 'a'){
+	            	
+	            }
+	        }
+	        
+	    }
+
+	  public void keyReleased(KeyEvent e) {
+	        System.out.println("Key released: " + e.getKeyChar());
+	    }
+		
+	
 
 }
