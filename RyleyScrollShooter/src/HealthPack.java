@@ -69,7 +69,8 @@ public class HealthPack implements Runnable, GameObject, Serializable{
 	@Override
 	public Point getThisObjectLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		Point p = new Point(originX, originY);
+		return p;
 	}
 
 	@Override

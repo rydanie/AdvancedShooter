@@ -11,7 +11,7 @@ import javax.swing.*;
  * @author Ryley Danielson
  *
  */
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame implements KeyListener {
 
 	DialoguePanel dp;
 	ActionPanel ap;
@@ -22,15 +22,57 @@ public class GameFrame extends JFrame {
 		
 		this.setLayout(new BorderLayout());
 		
+		
+		
 		dp = new DialoguePanel();
 		ap = new ActionPanel();
 		hp = new HealthPanel();
 		
-		this.add(dp, BorderLayout.NORTH);
+		//this.add(dp, BorderLayout.NORTH);
 		this.add(ap, BorderLayout.CENTER);
-		this.add(hp, BorderLayout.SOUTH);
+		//this.add(hp, BorderLayout.SOUTH);
 		
-		this.setSize(400,400);
+		this.addKeyListener(this);
+		//ap.addKeyListener(this);
+		ap.setFocusable(true);
+        ap.requestFocusInWindow();
+		
+		this.setSize(100,100);
 		this.setVisible(true);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT ) {
+            System.out.println("Right typed."
+            		+ ""
+            		+ " This is gameframe");
+        } 
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) {
+            System.out.println("Left typed.");
+        } 
+        else if (e.getKeyCode() == KeyEvent.VK_UP ) {
+            System.out.println("Up typed.");
+        } 
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) {
+            System.out.println("Down typed.");
+        }
+        else{
+            System.out.println("Key typed: " + e.getKeyChar());
+        }
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

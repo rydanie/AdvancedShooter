@@ -21,6 +21,8 @@ public class StartScreen extends JFrame implements ActionListener {
 	public StartScreen(){
 		super();
 		
+		//this.addKeyListener(this);
+		
 		layout =new GridBagLayout();
 		
 		this.setLayout( layout );
@@ -63,6 +65,10 @@ public class StartScreen extends JFrame implements ActionListener {
         editer.setActionCommand("level editer");
         this.add(editer);
         
+        //sets input focus in gf
+        //gf.setFocusable(true);
+        //gf.requestFocusInWindow();
+        
         //this.setForeground(Color.BLUE);//(new BufferedImage(new File("uiImage")));
         
         this.pack();
@@ -85,6 +91,8 @@ public class StartScreen extends JFrame implements ActionListener {
 		case("start main"):
 			this.setVisible(false);
 			gf = new GameFrame();
+			//gf.setFocusable(true);
+	        //gf.requestFocusInWindow();
 			break;
 			
 		case("level editer"):
@@ -98,5 +106,7 @@ public class StartScreen extends JFrame implements ActionListener {
 		}
 	}
 
+
+	
 	
 }

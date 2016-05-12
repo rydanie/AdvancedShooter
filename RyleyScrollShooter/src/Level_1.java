@@ -113,7 +113,7 @@ public class Level_1 implements Runnable, GameLevel {
    		
    		for(int i =0; i<drob.size(); i++){
    			obj = drob.get(i);
-				System.out.println("drob " + drob.size());
+				//System.out.println("drob " + drob.size());
    			if(obj.getColor()== Color.BLUE){
    				gobj =new MetalGameHero(obj.getPoint());
    				pUnit = (MetalGameHero) gobj;
