@@ -198,6 +198,15 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 	public boolean contains(Point p) {
 		// TODO Auto-generated method stub
 		
+		for(int i = 0; i < 50; i++){
+			
+			if(bounds.contains(p.x, p.y + i ) || bounds.contains(p.x + i, p.y + i) || bounds.contains(p.x + 50, p.y +i)){
+				return true;
+			}
+		}
+		return false;
+		
+		/*
 		if(bounds.contains(p)){
 			return true;
 		} else if(bounds.contains(p.x, p.y + 50)){
@@ -234,7 +243,7 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 		} else {
 			return false;
 		}
-	
+	*/
 				
 	}
 
