@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class BorderBox implements Runnable, DrawingObject, Wall, Serializable{
 
-	@Override
+	
 	public boolean contains() {
 		// TODO Auto-generated method stub
 		return false;

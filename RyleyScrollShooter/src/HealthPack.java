@@ -12,6 +12,7 @@ public class HealthPack implements Runnable, GameObject, Serializable{
 
 	String name1 = "HealthBox_2.jpg";
 	String characterName;
+	String type = "HPack";
 	boolean up;
 	boolean down;
 	boolean left;
@@ -142,5 +143,29 @@ public class HealthPack implements Runnable, GameObject, Serializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void setObjectType(String s) {
+		// TODO Auto-generated method stub
+		type =s;
+	}
+
+	@Override
+	public String getObjectType() {
+		// TODO Auto-generated method stub
+		return type;
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return bounds;
+	}
+
+	@Override
+	public boolean contains(Rectangle p) {
+		// TODO Auto-generated method stub
+		return bounds.contains(p);
 	}
 }

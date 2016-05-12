@@ -21,7 +21,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	JLabel l;
 	GameLevel L1;
 	File f;
-	ArrayList<GameObject> gmob;
+	static ArrayList<GameObject> gmob;
 	Player pUnit;// = Level_1.pUnit;
  	int levelNumber = 1;
  	
@@ -102,6 +102,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			repaint();
 		}
 		
+		//playerCollision();
+		
 		repaint();
 		
 		/*
@@ -131,7 +133,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			System.out.println(h.get(i).getThisObjectLocation()+ "hello");
 			System.out.println(Level_1.pUnit.getLocation() + "goodbye");
 			
-			if(h.get(i).getThisObjectLocation().getX() == Level_1.pUnit.getLocation().getX()){
+			if(h.get(i).getObjectType() == "Hero"){
 				
 				System.out.println();
 				
@@ -147,6 +149,47 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			}
 		}
 	}
+	
+	public void playerCollision(){
+	
+		for(int i =0; i < gmob.size(); i++){
+			
+			Rectangle r = ((GameObject) pUnit).getBounds();
+			
+			System.out.println("playerCollision " + pUnit.getLocation());
+			System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
+			System.out.println( gmob.get(i).contains(pUnit.getLocation()) );
+			
+				
+				if(gmob.get(i).getObjectType() == "BDWall"){
+					
+					System.out.println("It is a wall");
+					
+					if(pUnit.isFacingUp()){
+						System.out.println("Up");
+						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						pUnit.moveDown();
+						}
+					}else if(pUnit.isFacingDown()){
+						System.out.println("Down");
+						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						pUnit.moveUp();
+						}
+					}else if(pUnit.isFacingLeft()){
+						System.out.println("Left");
+						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						pUnit.moveRight();
+						}
+					}else if(pUnit.isFacingRight()){
+						System.out.println("Right");
+						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						pUnit.moveLeft();
+						}
+					}
+				}
+			}
+		}
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -175,7 +218,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		BasicProjectile bp = new BasicProjectile(pUnit.getLocation());
+		bp.draw(getGraphics());
 	}
 
 	@Override
@@ -209,51 +253,54 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	        
 	        if (e.getKeyCode() == KeyEvent.VK_RIGHT ) {
 	            System.out.println("Right typed.");
-	            System.out.println("Moving Right");
-	            pUnit.isFacingRight();
+	            pUnit.setFacingRight();
 	            System.out.println("Moving Right");
             	pUnit.moveRight();
             	System.out.println("Moving Right");
 	        } 
 	        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) {
 	            System.out.println("Left typed.");
-	            pUnit.isFacingLeft();
+	            pUnit.setFacingLeft();
             	pUnit.moveLeft();
             	System.out.println("Moving Left");
 	        } 
 	        else if (e.getKeyCode() == KeyEvent.VK_UP ) {
 	            System.out.println("Up typed.");
-	            pUnit.isFacingUp();
+	            pUnit.setFacingUp();
             	pUnit.moveUp();
             	System.out.println("Moving up");
 	        } 
 	        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) {
 	            System.out.println("Down typed.");
-	            pUnit.isFacingRight();
-            	pUnit.moveRight();
+	            pUnit.setFacingDown();
+            	pUnit.moveDown();
             	System.out.println("Moving Right");
 	        }
 	       // else{
 	       //     System.out.println("Key typed: " + e.getKeyChar());
 	            
 	        else if(e.getKeyChar() == 'w'){
-	            	pUnit.isFacingUp();
+	            	pUnit.setFacingUp();
 	            	pUnit.moveUp();
 	            	System.out.println("Moving up");
 	            }else if(e.getKeyChar() == 'a'){
-	            	pUnit.isFacingLeft();
+	            	pUnit.setFacingLeft();
 	            	pUnit.moveLeft();
 	            	System.out.println("Moving Left");
 	            } else if(e.getKeyChar() == 's'){
-	            	pUnit.isFacingDown();
+	            	pUnit.setFacingDown();
 	            	pUnit.moveDown();
 	            	System.out.println("Moving Down");
 	            }else if(e.getKeyChar() == 'd'){
-	            	pUnit.isFacingRight();
+	            	pUnit.setFacingRight();
 	            	pUnit.moveRight();
 	            	System.out.println("Moving Right");
 	            }else if(e.getKeyChar() == 'e'){
-	            	
+	            	BasicProjectile bp = new BasicProjectile(pUnit.getLocation());
+	        		bp.draw(getGraphics());
+	        		if(pUnit.isDead()){
+	        			bp.fireRight();
+	        		}
 	            }else if(e.getKeyChar() == 'q'){
 	            	
 	            }else if(e.getKeyChar() == 'a'){
@@ -261,6 +308,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            }else if(e.getKeyChar() == 'a'){
 	            	
 	            }
+	        
+	        playerCollision();
 	        
 	        repaint();
 	            
@@ -273,71 +322,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	  
 	  
 	  
-	  public class kb implements KeyListener{
-	    	
-	    	
-	    	
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-				//(Property change listener/ key listener
-				 
-				if (e.getKeyCode() == KeyEvent.VK_RIGHT ) {
-		            System.out.println("Right typed.");
-		        } 
-		        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) {
-		            System.out.println("Left typed.");
-		        } 
-		        else if (e.getKeyCode() == KeyEvent.VK_UP ) {
-		            System.out.println("Up typed.");
-		        } 
-		        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) {
-		            System.out.println("Down typed.");
-		        }
-		        else{
-		            System.out.println("Key typed: " + e.getKeyChar());
-		            
-		            if(e.getKeyChar() == 'w'){
-		            	pUnit.isFacingUp();
-		            	pUnit.moveUp();
-		            }else if(e.getKeyChar() == 'a'){
-		            	pUnit.isFacingLeft();
-		            	pUnit.moveLeft();
-		            } else if(e.getKeyChar() == 's'){
-		            	pUnit.isFacingDown();
-		            	pUnit.moveDown();
-		            }else if(e.getKeyChar() == 'd'){
-		            	pUnit.isFacingRight();
-		            	pUnit.moveRight();
-		            }else if(e.getKeyChar() == 'e'){
-		            	
-		            }else if(e.getKeyChar() == 'q'){
-		            	
-		            }else if(e.getKeyChar() == 'a'){
-		            	
-		            }else if(e.getKeyChar() == 'a'){
-		            	
-		            }
-		        }
-				
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-				
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-	    	
-	    }
-		
+	  
 	
 
 }

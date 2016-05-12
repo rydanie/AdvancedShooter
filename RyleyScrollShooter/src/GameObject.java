@@ -18,9 +18,17 @@ public interface GameObject {
 	
 	public void setBounds(Rectangle r);
 	
+	public Rectangle getBounds();
+	
+	public boolean contains(Rectangle p);
+	
 	public boolean contains(Point p);
 	
 	public void loadImage(String s);
+	
+	public void setObjectType(String s);
+	
+	public String getObjectType();
 	
 	
 

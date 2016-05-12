@@ -13,6 +13,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	String name1 = "EnemyProjectile.jpg";
 	String name2 = "HeroProjectile.jpg";
 	String characterName;
+	String type = "BProjectile";
 	boolean up;
 	boolean down;
 	boolean left;
@@ -31,6 +32,8 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 		setBounds(bounds);
 		loadImage(name1);
 		setThisObjectLocation(p);
+		run();
+		
 	}
 	
 	@Override
@@ -135,7 +138,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		fireRight();
 	}
 
 	public void start( Point p ) {
@@ -212,6 +215,30 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	public void setDamge(double d) {
 		// TODO Auto-generated method stub
 		damage = d;
+	}
+
+	@Override
+	public void setObjectType(String s) {
+		// TODO Auto-generated method stub
+		type = s;
+	}
+
+	@Override
+	public String getObjectType() {
+		// TODO Auto-generated method stub
+		return type;
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return bounds;
+	}
+
+	@Override
+	public boolean contains(Rectangle p) {
+		// TODO Auto-generated method stub
+		return bounds.contains(p);
 	}
     
 }

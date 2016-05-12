@@ -16,6 +16,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	String name3 = "BasicEnemy_Lect.jpg";
 	String name4 = "BaiscEnemy_Right.jpg";
 	String characterName;
+	String type = "BEnemy";
 	boolean up;
 	boolean down;
 	boolean left;
@@ -27,6 +28,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	int sizeX = 50;
 	int sizeY = 50;
 	Rectangle bounds = new Rectangle();
+	
 	
 	public BasicEnemy(Point p) {
 		// TODO Auto-generated constructor stub
@@ -347,5 +349,29 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void setObjectType(String s) {
+		// TODO Auto-generated method stub
+		type = s;
+	}
+
+	@Override
+	public String getObjectType() {
+		// TODO Auto-generated method stub
+		return type;
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return bounds;
+	}
+
+	@Override
+	public boolean contains(Rectangle p) {
+		// TODO Auto-generated method stub
+		return bounds.contains(p);
 	}
 }

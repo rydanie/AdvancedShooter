@@ -2,7 +2,7 @@ import java.awt.Point;
 
 public interface Wall {
 	
-	public boolean contains();
+	//public boolean contains();
 	
 	public void setLocation();
 	

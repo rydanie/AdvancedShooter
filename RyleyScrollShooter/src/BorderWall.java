@@ -12,6 +12,7 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 
 	String name1 = "BasicWall.jpg";
 	String characterName;
+	String type = "BDWall";
 	boolean up;
 	boolean down;
 	boolean left;
@@ -87,6 +88,7 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
         originY = p.y;
         //lastX = p.x;
         //lastY = p.y;
+        setBounds(bounds);
     }
     
     /**
@@ -132,15 +134,10 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
      * @param p
      * @return 
      */
-    public boolean contains( Point p ) {
-    	return bounds.contains(p);
-    }
-
-	@Override
-	public boolean contains() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    
+    			
+    			//bounds.contains(p);
+    //}
 
 	@Override
 	public void loadImage(String s) {
@@ -167,5 +164,80 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 		sizeX = p.x;
 		sizeY = p.y;
 	}
+
+
+	@Override
+	public void setObjectType(String s) {
+		// TODO Auto-generated method stub
+		type =s;
+	}
+
+
+	@Override
+	public String getObjectType() {
+		// TODO Auto-generated method stub
+		return type;
+	}
+
+
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return bounds;
+	}
+
+
+	@Override
+	public boolean contains(Rectangle p) {
+		// TODO Auto-generated method stub
+		 return bounds.contains(p);
+	}
+
+
+	@Override
+	public boolean contains(Point p) {
+		// TODO Auto-generated method stub
+		
+		if(bounds.contains(p)){
+			return true;
+		} else if(bounds.contains(p.x, p.y + 50)){
+			return true;
+		} else if(bounds.contains(p.x, p.y +25)){
+			return true;
+		}else if(bounds.contains(p.x, p.y + 10)){
+			return true;
+		} else if(bounds.contains(p.x, p.y +25)){
+			return true;
+		}else if(bounds.contains(p.x, p.y + 30)){
+			return true;
+		} else if(bounds.contains(p.x + 50, p.y +10)){
+			return true;
+		} else if(bounds.contains(p.x + 50, p.y +30)){
+			return true;
+		} else if(bounds.contains(p.x + 50, p.y +10)){
+			return true;
+		} else if(bounds.contains(p.x + 50, p.y +10)){
+			return true;
+		} else if(bounds.contains(p.x + 50, p.y + 50)){
+			return true;
+		} else if(bounds.contains(p.x +50 , p.y +25)){
+			return true;
+		} else if(bounds.contains(p.x, p.y +50)){
+			return true;
+		} else if(bounds.contains(p.x, p.y +25)){
+			return true;
+		} else if(bounds.contains(p.x +50 , p.y +10 )){
+			return true;
+		} else if(bounds.contains(p.x + 50, p.y )){
+			return true;
+		
+		} else {
+			return false;
+		}
+	
+				
+	}
+
+
 
 }

@@ -22,6 +22,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	String name3 = "MHero_Left.jpg";
 	String name4 = "MHero_Right.jpg";
 	String characterName;
+	String type = "Hero";
 	boolean up;
 	boolean down;
 	boolean left;
@@ -52,6 +53,9 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 		setBounds( bounds );
 		
 		System.out.println("I Loaded");
+		
+		//run();
+		
 	}
 	
 	public void loadImage(String s){
@@ -123,25 +127,25 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	@Override
 	public void moveUp() {
 		// TODO Auto-generated method stub
-		originY -= 1;
+		originY -= 5;
 	}
 
 	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
-		originY += 1;
+		originY += 5;
 	}
 
 	@Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
-		originX -= 1;
+		originX -= 5;
 	}
 
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
-		originX += 1;
+		originX += 5;
 	}
 
 	@Override
@@ -272,55 +276,39 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	@Override
 	public boolean isDead() {
 		// TODO Auto-generated method stub
-		if(health < 0){
+		
 			return true;
-		}else{
-		return false;
-		}
+		
 	}
 
 	@Override
 	public boolean isFacingUp() {
 		// TODO Auto-generated method stub
-		if(up == true){
+	
 			return up;
-		}else{
-		
-		return false;
-		}
+	
 	}
 
 	@Override
 	public boolean isFacingDown() {
 		// TODO Auto-generated method stub
-		if(down == true){
-			return down;
-		}else{
 		
-		return false;
-		}
+			return down;
+		
 	}
 
 	@Override
 	public boolean isFacingLeft() {
 		// TODO Auto-generated method stub
-		if(left == true){
-			return left;
-		}else{
 		
-		return false;
-		}
+			return left;
+		
 	}
 
 	@Override
 	public boolean isFacingRight() {
 		// TODO Auto-generated method stub
-		if(right == true){
 			return right;
-		}else{
-		
-		return false;
-		}
 	}
 
 
@@ -341,7 +329,42 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		for(int i =0; i < ActionPanel.gmob.size(); i++){
+			
+			Rectangle r = this.getBounds();
+			
+			System.out.println("playerCollision " + this.getLocation());
+			System.out.println("objectCollision " +	ActionPanel.gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
+			System.out.println( ActionPanel.gmob.get(i).contains(this.getLocation()) );
+			
+				
+				if(ActionPanel.gmob.get(i).getObjectType() == "BDWall"){
+					
+					System.out.println("It is a wall");
+					
+					if(this.isFacingUp()){
+						System.out.println("Up");
+						while (this.contains(ActionPanel.gmob.get(i).getThisObjectLocation()) == true && ActionPanel.gmob.get(i).getObjectType() != "Hero"){
+						this.moveDown();
+						}
+					}else if(this.isFacingDown()){
+						System.out.println("Down");
+						while (this.contains(ActionPanel.gmob.get(i).getThisObjectLocation()) == true && ActionPanel.gmob.get(i).getObjectType() != "Hero"){
+							this.moveUp();
+						}
+					}else if(this.isFacingLeft()){
+						System.out.println("Left");
+						while (this.contains(ActionPanel.gmob.get(i).getThisObjectLocation()) == true && ActionPanel.gmob.get(i).getObjectType() != "Hero"){
+							this.moveDown();						this.moveRight();
+						}
+					}else if(this.isFacingRight()){
+						System.out.println("Right");
+						while (this.contains(ActionPanel.gmob.get(i).getThisObjectLocation()) == true && ActionPanel.gmob.get(i).getObjectType() != "Hero"){
+							this.moveLeft();
+						}
+					}
+				}
+			}
 	}
 
 	@Override
@@ -434,5 +457,29 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
     public boolean contains( Point p ) {
     	return bounds.contains(p);
     }
+
+	@Override
+	public void setObjectType(String s) {
+		// TODO Auto-generated method stub
+		type =s;
+	}
+
+	@Override
+	public String getObjectType() {
+		// TODO Auto-generated method stub
+		return type;
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return bounds;
+	}
+
+	@Override
+	public boolean contains(Rectangle p) {
+		// TODO Auto-generated method stub
+		return bounds.contains(p);
+	}
 
 }
