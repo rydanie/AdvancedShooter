@@ -127,25 +127,25 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	@Override
 	public void moveUp() {
 		// TODO Auto-generated method stub
-		originY -= 5;
+		originY -= 15;
 	}
 
 	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
-		originY += 5;
+		originY += 15;
 	}
 
 	@Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
-		originX -= 5;
+		originX -= 15;
 	}
 
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
-		originX += 5;
+		originX += 15;
 	}
 
 	@Override

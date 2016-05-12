@@ -7,6 +7,7 @@ public class OpenGame {
 		// TODO Auto-generated method stub
 
 			StartScreen t = new StartScreen();
+			//new Thread(t).start();
 	}
 
 }

@@ -11,7 +11,7 @@ import javax.swing.*;
  * @author Ryley Danielson
  *
  */
-public class StartScreen extends JFrame implements ActionListener {
+public class StartScreen extends JFrame implements Runnable, ActionListener {
 
 	 public GridBagLayout layout;
 	 public JLabel title;
@@ -93,6 +93,7 @@ public class StartScreen extends JFrame implements ActionListener {
 			gf = new GameFrame();
 			//gf.setFocusable(true);
 	        //gf.requestFocusInWindow();
+			new Thread(gf).start();
 			break;
 			
 		case("level editer"):
@@ -103,6 +104,22 @@ public class StartScreen extends JFrame implements ActionListener {
 		default:
 			System.out.println("You killed us all");
 			break;
+		}
+	}
+
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		while(true){
+			this.repaint();
+			
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -24,6 +24,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	static ArrayList<GameObject> gmob;
 	Player pUnit;// = Level_1.pUnit;
  	int levelNumber = 1;
+ 	long proStartTime;
+ 	long proElapseTime;
  	
  	//JComponent component = new JComponent();
  	
@@ -44,6 +46,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		//L1 =new Level_1();
 		
 		gmob = new ArrayList<GameObject>();
+		
+		//proTimer = new Timer(250);
 		
 		this.setBackground(Color.WHITE);
 		
@@ -266,7 +270,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	        } 
 	        else if (e.getKeyCode() == KeyEvent.VK_UP ) {
 	            System.out.println("Up typed.");
-	            pUnit.setFacingUp();
+	            pUnit.setFacingUp(); 
             	pUnit.moveUp();
             	System.out.println("Moving up");
 	        } 
@@ -296,11 +300,14 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            	pUnit.moveRight();
 	            	System.out.println("Moving Right");
 	            }else if(e.getKeyChar() == 'e'){
+	            	proElapseTime = System.currentTimeMillis() - proStartTime;
+	            	if(proElapseTime > 750){
 	            	BasicProjectile bp = new BasicProjectile(pUnit.getLocation());
-	        		bp.draw(getGraphics());
-	        		if(pUnit.isDead()){
-	        			bp.fireRight();
-	        		}
+	            	new Thread(bp).start();
+	            	gmob.add(bp);
+	            	proStartTime = System.currentTimeMillis();
+	            	}
+	        		
 	            }else if(e.getKeyChar() == 'q'){
 	            	
 	            }else if(e.getKeyChar() == 'a'){

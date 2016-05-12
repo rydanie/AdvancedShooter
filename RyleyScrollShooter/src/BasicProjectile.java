@@ -26,13 +26,15 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	int sizeX = 50;
 	int sizeY = 50;
 	double damage;
+	Timer proTimer;
 	Rectangle bounds = new Rectangle();
 	
 	public BasicProjectile(Point p){
 		setBounds(bounds);
 		loadImage(name1);
 		setThisObjectLocation(p);
-		run();
+		
+		//proTimer = new Timer(250)
 		
 	}
 	
@@ -61,7 +63,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
        g.drawImage(img, originX, originY, sizeX, sizeY, null);
         
         
-        System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
+        System.out.println( "Redrawing Projectile@" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
         //this.setSize( this.getPreferredSize() );
 	}
 
@@ -138,7 +140,15 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		fireRight();
+		BasicProjectile bp = this;
+			Timer timer = new Timer(1000/200,new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					bp.fireRight();
+				}
+
+			} );
+			
+			timer.start();
 	}
 
 	public void start( Point p ) {
