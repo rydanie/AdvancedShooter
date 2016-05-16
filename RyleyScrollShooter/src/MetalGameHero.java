@@ -171,7 +171,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	@Override
 	public void attackRanged() {
 		// TODO Auto-generated method stub
-		bp = new BasicProjectile(getLocation());
+		bp = new BasicProjectile(getLocation(), 1, 1);
 		bp.setEnemy(false);
 		if(isFacingUp() == true){
 			bp.fireUp();

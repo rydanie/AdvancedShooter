@@ -25,13 +25,16 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	int originY;
 	int sizeX = 50;
 	int sizeY = 50;
+	int dir;
+	int pType;
 	double damage;
 	Timer proTimer;
 	Rectangle bounds = new Rectangle();
 	
-	public BasicProjectile(Point p){
+	public BasicProjectile(Point p, int direction, int projectileType ){
 		setBounds(bounds);
 		loadImage(name1);
+		dir = direction;
 		setThisObjectLocation(p);
 		
 		//proTimer = new Timer(250)
@@ -103,13 +106,13 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	@Override
 	public void fireUp() {
 		// TODO Auto-generated method stub
-		originY +=2;
+		originY -=2;
 	}
 
 	@Override
 	public void fireDown() {
 		// TODO Auto-generated method stub
-		originY -=2;
+		originY +=2;
 	}
 
 	@Override
@@ -143,7 +146,15 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 		BasicProjectile bp = this;
 			Timer timer = new Timer(1000/200,new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					bp.fireRight();
+					if(dir == 1){
+						fireUp();
+					}else if(dir == 2){
+						fireDown();
+					}else if(dir == 3){
+						fireLeft();
+					}else if(dir == 4){
+						fireRight();
+					}
 				}
 
 			} );

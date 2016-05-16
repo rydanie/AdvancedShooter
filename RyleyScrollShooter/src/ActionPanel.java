@@ -23,7 +23,10 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	File f;
 	static ArrayList<GameObject> gmob;
 	Player pUnit;// = Level_1.pUnit;
+	BasicProjectile bp;
  	int levelNumber = 1;
+ 	int dir;
+ 	int pType;
  	long proStartTime;
  	long proElapseTime;
  	
@@ -143,6 +146,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				
 				pUnit = (Player) h.get(i);
 				
+				pUnit.setFacingDown();
 				
 				
 				break;
@@ -222,7 +226,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		BasicProjectile bp = new BasicProjectile(pUnit.getLocation());
+		BasicProjectile bp = new BasicProjectile(pUnit.getLocation(), 1, 1);
 		bp.draw(getGraphics());
 	}
 
@@ -263,22 +267,22 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
             	System.out.println("Moving Right");
 	        } 
 	        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) {
-	            System.out.println("Left typed.");
+	            //System.out.println("Left typed.");
 	            pUnit.setFacingLeft();
             	pUnit.moveLeft();
-            	System.out.println("Moving Left");
+            	//System.out.println("Moving Left");
 	        } 
 	        else if (e.getKeyCode() == KeyEvent.VK_UP ) {
-	            System.out.println("Up typed.");
+	           // System.out.println("Up typed.");
 	            pUnit.setFacingUp(); 
             	pUnit.moveUp();
-            	System.out.println("Moving up");
+            	//System.out.println("Moving up");
 	        } 
 	        else if (e.getKeyCode() == KeyEvent.VK_DOWN ) {
-	            System.out.println("Down typed.");
+	            //System.out.println("Down typed.");
 	            pUnit.setFacingDown();
             	pUnit.moveDown();
-            	System.out.println("Moving Right");
+            	//System.out.println("Moving Right");
 	        }
 	       // else{
 	       //     System.out.println("Key typed: " + e.getKeyChar());
@@ -301,8 +305,29 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            	System.out.println("Moving Right");
 	            }else if(e.getKeyChar() == 'e'){
 	            	proElapseTime = System.currentTimeMillis() - proStartTime;
-	            	if(proElapseTime > 750){
-	            	BasicProjectile bp = new BasicProjectile(pUnit.getLocation());
+	            	if(proElapseTime > 250){
+	            		
+	        			if(pUnit.isFacingUp() == true){
+	        				dir = 1;
+	        				bp = new BasicProjectile(pUnit.getLocation(), dir , 1);
+		            		bp.setEnemy(false);
+	        				bp.fireUp();
+	        			} else if(pUnit.isFacingDown() == true){
+	        				dir =2;
+	        				bp = new BasicProjectile(pUnit.getLocation(), dir, 1);
+		            		bp.setEnemy(false);
+	        				bp.fireDown();
+	        			} else if(pUnit.isFacingLeft() == true){
+	        				dir = 3;
+	        				bp = new BasicProjectile(pUnit.getLocation(), dir, 1);
+		            		bp.setEnemy(false);
+	        				bp.fireRight();
+	        			} else if(pUnit.isFacingRight() == true){
+	        				dir = 4;
+	        				bp = new BasicProjectile(pUnit.getLocation(), dir, 1);
+		            		bp.setEnemy(false);
+	        				bp.fireRight();
+		        		}
 	            	new Thread(bp).start();
 	            	gmob.add(bp);
 	            	proStartTime = System.currentTimeMillis();
