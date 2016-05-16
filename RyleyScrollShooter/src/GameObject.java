@@ -30,6 +30,8 @@ public interface GameObject {
 	
 	public String getObjectType();
 	
+	public void containsPoint(Point p);
+	
 	
 
 }

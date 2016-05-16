@@ -261,5 +261,11 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 		// TODO Auto-generated method stub
 		return bounds.contains(p);
 	}
+
+	@Override
+	public void containsPoint(Point p) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

@@ -193,7 +193,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveLeft();
 						}
-					}
+					}else if()
 				}
 			}
 		}

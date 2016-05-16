@@ -248,5 +248,12 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 	}
 
 
+	@Override
+	public void containsPoint(Point p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }
