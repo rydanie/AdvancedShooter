@@ -170,6 +170,13 @@ public class HealthPack implements Runnable, GameObject, Serializable{
 	}
 
 	@Override
+	public boolean containsProjectile(Point p) {
+		return true;
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public void containsPoint(Point p) {
 		// TODO Auto-generated method stub
 		

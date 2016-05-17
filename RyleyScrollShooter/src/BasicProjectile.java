@@ -19,6 +19,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	boolean left;
 	boolean right;
 	boolean enemy;
+	boolean collide;
 	BufferedImage img;
 	int sizeP =75;
 	int originX;
@@ -131,7 +132,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	public boolean collide() {
 		// TODO Auto-generated method stub
 		
-		return false;
+		return collide;
 	}
 
 	@Override
@@ -267,5 +268,17 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void setCollide(boolean b) {
+		// TODO Auto-generated method stub
+		collide = b;
+	}
+
+	@Override
+	public boolean containsProjectile(Point p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
     
 }

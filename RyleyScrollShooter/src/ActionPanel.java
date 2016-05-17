@@ -193,7 +193,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveLeft();
 						}
-					}else if()
+					}else if(gmob.get(i).containsProjectile(bp.getLocation()) == true);
+						bp.setCollide(true);
 				}
 			}
 		}
@@ -244,11 +245,30 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	    	
 	    	for(int i = 1; i< gmob.size(); i++){
 	    		
-	    		System.out.println(gmob.get(i));
+	    		//BasicProjectile b = (BasicProjectile) gmob.get(i);
+	    		
+	    		//if(gmob.get(i).getObjectType() == "BProjectile"){
+	    			
+	    			
+	    			//if(b.collide() == true){
+	    			//	gmob.remove(i);
+	    			//	b = null;
+	    			//	i++;
+	    			//}
+	    			
+	    			//if(gmob.get(i) == null){
+	    			//	i++;
+	    			//}
+	    		//}
+	    		
+	    		//if(b == null){
+	    		//System.out.println(gmob.get(i));
 	    		gmob.get(i).draw(g);
+	    		}
 	   
 	    	}
-	    }
+
+	    
 
 
 	 public void keyTyped(KeyEvent e) {

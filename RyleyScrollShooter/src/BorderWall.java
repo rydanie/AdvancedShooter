@@ -249,6 +249,14 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 
 
 	@Override
+	public boolean containsProjectile(Point p) {
+		// TODO Auto-generated method stub
+		return bounds.contains(p);
+		
+	}
+
+
+	@Override
 	public void containsPoint(Point p) {
 		// TODO Auto-generated method stub
 		
