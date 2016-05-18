@@ -153,14 +153,14 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	*/
 		    	
 		    	try {
-					Thread.sleep(50);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 		    	
-		    	if(i>10){
+		    	if(i>20){
 		    		break;
 		    	}
 		    }
@@ -190,14 +190,14 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	*/
 		    	
 		    	try {
-					Thread.sleep(50);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 		    	
-		    	if(i>10){
+		    	if(i>20){
 		    		break;
 		    	}
 		    }
@@ -227,14 +227,14 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	*/
 		    	
 		    	try {
-					Thread.sleep(50);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		    	
 		    	
-		    	if(i>10){
+		    	if(i>20){
 		    		break;
 		    	}
 		    }
@@ -264,14 +264,14 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	*/
 		    	
 		    	try {
-					Thread.sleep(50);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 				
-		    	if(i>10){
+		    	if(i>20){
 		    		break;
 		    	}
 		    }

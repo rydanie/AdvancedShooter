@@ -200,10 +200,14 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 		
 		for(int i = 0; i < 50; i++){
 			
-			if(bounds.contains(p.x, p.y + i ) || bounds.contains(p.x + i, p.y) || bounds.contains(p.x + i, p.y +50)|| bounds.contains(p.x + 50, p.y +i)){
+			//if(bounds.contains(p.x + i, p.y +i)){
+				//return true;
+			//}
+				if(bounds.contains(p.x, p.y + i ) || bounds.contains(p.x + i, p.y) || bounds.contains(p.x + i, p.y +50)|| bounds.contains(p.x + 50, p.y +i)){
 				return true;
 			}
-		}
+		
+}
 		return false;
 		
 		/*

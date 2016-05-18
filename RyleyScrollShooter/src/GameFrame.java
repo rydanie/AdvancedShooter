@@ -22,7 +22,7 @@ public class GameFrame extends JFrame implements Runnable, KeyListener {
 		
 		this.setLayout(new BorderLayout());
 		
-		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		dp = new DialoguePanel();
 		ap = new ActionPanel();
