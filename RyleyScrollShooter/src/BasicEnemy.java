@@ -24,6 +24,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	boolean down;
 	boolean left;
 	boolean right;
+	boolean collide = false;
 	BufferedImage img;
 	int sizeP =75;
 	int originX;
@@ -31,6 +32,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	int sizeX = 50;
 	int sizeY = 50;
 	int inc;
+	int i;
 	double proElapseTime;
 	double proStartTime;
 	ArrayList<Integer> dList = new ArrayList<Integer>();
@@ -120,59 +122,155 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 			inc = 0;
 			int index = rnd.nextInt(dList.size());
 		    dList.get(index);
-		    int i = 0;
+		    i = 0;
 		 
 			
 			inc = 0;
 			
 		    while(dList.get(index)== 1){
+		    	
+		    	if(collide == true){
+		    		break;
+		    	}
+		    	
 		    	moveUp();
 		    	i++;
+		    	
+		    	if(collide == true){
+		    		break;
+		    	}
+		    	
+		    	/*
+		    	Timer timer = new Timer(100000/2,new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						moveUp();
+						i++;
+					}
+
+				} );
+				
+				timer.start();
+		    	*/
+		    	
 		    	try {
-					Thread.sleep(100);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+		    	
 		    	if(i>10){
 		    		break;
 		    	}
 		    }
 		    while(dList.get(index)== 2){
+		    	
+		    	if(collide == true){
+		    		break;
+		    	}
+		    	
 		    	moveDown();
 		    	i++;
+		    	
+		    	if(collide == true){
+		    		break;
+		    	}
+		    	
+		    	/*
+		    	Timer timer = new Timer(100000/2,new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						moveDown();
+						i++;
+					}
+
+				} );
+				
+				timer.start();
+		    	*/
+		    	
 		    	try {
-					Thread.sleep(100);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+		    	
 		    	if(i>10){
 		    		break;
 		    	}
 		    }
 		    while(dList.get(index)== 3){
+		    	
+		    	if(collide == true){
+		    		break;
+		    	}
+		    	
 		    	moveLeft();
 		    	i++;
+		    	
+		    	if(collide == true){
+		    		break;
+		    	}
+		    	
+		    	/*
+		    	Timer timer = new Timer(100000/2,new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						moveLeft();
+						i++;
+					}
+
+				} );
+				
+				timer.start();
+		    	*/
+		    	
 		    	try {
-					Thread.sleep(100);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		    	
+		    	
 		    	if(i>10){
 		    		break;
 		    	}
 		    }
 		    while(dList.get(index)== 4){
+		    	
+		    	if(collide == true){
+		    		break;
+		    	}
+		    	
 		    	moveRight();
 		    	i++;
+		    	
+		    	if(collide == true){
+		    		break;
+		    	}
+		    	
+		    	/*
+		    	Timer timer = new Timer(100000/2,new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						moveRight();
+						i++;
+					}
+
+				} );
+				
+				timer.start();
+		    	*/
+		    	
 		    	try {
-					Thread.sleep(100);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				
 		    	if(i>10){
 		    		break;
 		    	}
@@ -187,24 +285,28 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	public void moveUp() {
 		// TODO Auto-generated method stub
 		originY -= 2;
+		setFacingUp();
 	}
 
 	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
 		originY += 2;
+		setFacingDown();
 	}
 
 	@Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
 		originX += 2;
+		setFacingLeft();
 	}
 
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
 		originX -= 2;
+		setFacingRight();
 	}
 
 	@Override
@@ -222,7 +324,10 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	@Override
 	public Point getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		Point p =new Point(originX,originY);
+		
+		return p;
 	}
 
 	@Override
@@ -312,7 +417,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	@Override
 	public boolean wallCollision() {
 		// TODO Auto-generated method stub
-		return false;
+		return collide;
 	}
 
 	@Override
@@ -324,25 +429,25 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	@Override
 	public boolean isFacingUp() {
 		// TODO Auto-generated method stub
-		return false;
+		return up;
 	}
 
 	@Override
 	public boolean isFacingDown() {
 		// TODO Auto-generated method stub
-		return false;
+		return down;
 	}
 
 	@Override
 	public boolean isFacingLeft() {
 		// TODO Auto-generated method stub
-		return false;
+		return left;
 	}
 
 	@Override
 	public boolean isFacingRight() {
 		// TODO Auto-generated method stub
-		return false;
+		return right;
 	}
 
 	@Override
@@ -356,14 +461,11 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		// TODO Auto-generated method stub
 		
 		while(true){
-		idle();
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		}
+		
+			idle();
+		}	
+		
+		
 		
 	}
 
@@ -467,6 +569,49 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	@Override
 	public void containsPoint(Point p) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setFacingUp() {
+		// TODO Auto-generated method stub
+		up = true;
+		down = false;
+		left = false;
+		right = false;
+	}
+
+	@Override
+	public void setFacingDown() {
+		// TODO Auto-generated method stub
+		up = false;
+		down = true;
+		left = false;
+		right = false;
+	}
+
+	@Override
+	public void setFacingLeft() {
+		// TODO Auto-generated method stub
+		up = false;
+		down = false;
+		left = true;
+		right = false;
+	}
+
+	@Override
+	public void setFacingRight() {
+		// TODO Auto-generated method stub
+		up = false;
+		down = false;
+		left = false;
+		right = true;
+	}
+
+	@Override
+	public void setWallCollision(boolean b) {
+		// TODO Auto-generated method stub
+		collide = b;
 		
 	}
 }

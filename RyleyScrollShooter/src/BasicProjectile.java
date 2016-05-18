@@ -161,6 +161,13 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 			} );
 			
 			timer.start();
+			
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	}
 
 	public void start( Point p ) {

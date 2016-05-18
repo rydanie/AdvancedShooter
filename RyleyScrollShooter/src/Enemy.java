@@ -57,6 +57,8 @@ public interface Enemy {
 	
 	public boolean isDamaged();
 	
+	public void setWallCollision(boolean b);
+	
 	public boolean wallCollision();
 	
 	public boolean isDead();
@@ -70,5 +72,13 @@ public interface Enemy {
 	public boolean isFacingRight();
 	
 	public boolean playerNear(Point p);
+	
+	public void setFacingUp(); 
+
+	public void setFacingDown();
+
+	public void setFacingLeft();
+
+	public void setFacingRight();
 
 }

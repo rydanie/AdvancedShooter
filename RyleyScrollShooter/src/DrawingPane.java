@@ -73,6 +73,7 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
    			e.printStackTrace();
    		}
    		
+   		
    		repaint();
 
         

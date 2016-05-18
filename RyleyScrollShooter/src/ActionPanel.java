@@ -79,7 +79,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		*/
 		repaint();
 
-		run();
+		
 		
 		
 	}
@@ -88,42 +88,46 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	public void run() {
 		// TODO Auto-generated method stub
 		
-		
-		if (levelNumber == 1){
-
-			Level_1 L1 = new Level_1();
+		while(true){
+			if (levelNumber == 1){
+	
+				Level_1 L1 = new Level_1();
+				
+				try {
+					L1.genLevel();
+					System.out.println();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				gmob =L1.getGmob();
+				
+				findPlayer(gmob);
+				
+				findEnemy(gmob);
+				
+				levelNumber++;
+				  
+				 //this.
+				
+				//repaint();
+			}
 			
+			playerCollision();
+			
+			enemyCollide();
+			
+			repaint();
+			
+			/*
 			try {
-				L1.genLevel();
-			} catch (IOException e) {
+				Thread.sleep((long) 5);
+			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			gmob =L1.getGmob();
-			
-			findPlayer(gmob);
-			
-			findEnemy(gmob);
-			
-			levelNumber++;
-			  
-			 //this.
-			
-			repaint();
+			*/
 		}
-		
-		//playerCollision();
-		
-		repaint();
-		
-		
-		try {
-			Thread.sleep((long) 5);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		
 	}
 	
@@ -221,11 +225,65 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveLeft();
 						}
-					}else if(gmob.get(i).containsProjectile(bp.getLocation()) == true);
-						bp.setCollide(true);
-				}
+					}
+					//}else if(gmob.get(i).containsProjectile(eUnit.getLocation()) == true){
+					//	bp.setCollide(true);
+				//}
 			}
 		}
+	}
+	
+	
+	public void enemyCollide(){
+		
+		for(int i =0; i < gmob.size(); i++){
+			
+			if(gmob.get(i).getObjectType() == "BDWall"){
+				
+				System.out.println("It is a wall");
+				
+				for(int r = 1; r<gmob.size(); r++){
+					
+					if(gmob.get(r).getObjectType() == "BEnemy"){
+						eUnit = (BasicEnemy) gmob.get(r);
+					}
+					
+					if(eUnit.isFacingUp()){
+						System.out.println("Up");
+						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						eUnit.setWallCollision(true);
+						eUnit.moveDown();
+						}
+						eUnit.setWallCollision(false);
+					}else if(eUnit.isFacingDown()){
+						System.out.println("Down");
+						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						eUnit.setWallCollision(true);
+						eUnit.moveUp();
+						}
+						eUnit.setWallCollision(false);
+					}else if(eUnit.isFacingLeft()){
+						System.out.println("Left");
+						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						eUnit.setWallCollision(true);
+						eUnit.moveRight();
+						}
+						//eUnit.setWallCollision(false);
+					}else if(eUnit.isFacingRight()){
+						System.out.println("Right");
+						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						eUnit.setWallCollision(true);
+						eUnit.moveLeft();
+						}
+						eUnit.setWallCollision(false);
+					}
+					//}else if(gmob.get(i).containsProjectile(eUnit.getLocation()) == true){
+					//	bp.setCollide(true);
+				//}
+					}
+			}
+		}
+	}
 	
 	
 	@Override
@@ -353,7 +411,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            	System.out.println("Moving Right");
 	            }else if(e.getKeyChar() == 'e'){
 	            	proElapseTime = System.currentTimeMillis() - proStartTime;
-	            	if(proElapseTime > 250){
+	            	if(proElapseTime > 750){
 	            		
 	        			if(pUnit.isFacingUp() == true){
 	        				dir = 1;
@@ -389,9 +447,11 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            	
 	            }
 	        
-	        //playerCollision();
+	       // playerCollision();
 	        
-	       // repaint();
+	       // enemyCollide();
+	        
+	       //repaint();
 	            
 	        }
 	    //}
