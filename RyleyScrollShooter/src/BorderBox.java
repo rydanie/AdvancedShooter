@@ -27,7 +27,7 @@ public class BorderBox implements Runnable, DrawingObject, Wall, Serializable{
 	        setBounds( bounds );
 	        
 	        //fillout = ColorPanel.fo;
-	        c = Color.RED;
+	        c = Color.MAGENTA;
 	    }
 	    
 	    /**
@@ -143,7 +143,7 @@ public class BorderBox implements Runnable, DrawingObject, Wall, Serializable{
 			@Override
 			public Color getColor() {
 				// TODO Auto-generated method stub
-				c = Color.RED;
+				c = Color.MAGENTA;
 				return c;
 			}
 	
@@ -163,7 +163,9 @@ public class BorderBox implements Runnable, DrawingObject, Wall, Serializable{
 			@Override
 			public Point getSize() {
 				// TODO Auto-generated method stub
-				return null;
+				Point p = new Point(sizeX, sizeY);
+				
+				return p;
 			}
 	
 		

@@ -67,7 +67,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
        g.drawImage(img, originX, originY, sizeX, sizeY, null);
         
         
-        System.out.println( "Redrawing Projectile@" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
+        //System.out.println( "Redrawing Projectile@" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
         //this.setSize( this.getPreferredSize() );
 	}
 
