@@ -145,7 +145,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	public void run() {
 		// TODO Auto-generated method stub
 		BasicProjectile bp = this;
-			Timer timer = new Timer(1000/200,new ActionListener(){
+			Timer timer = new Timer(1000/250,new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					if(dir == 1){
 						fireUp();

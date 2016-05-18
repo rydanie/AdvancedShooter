@@ -23,6 +23,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	File f;
 	static ArrayList<GameObject> gmob;
 	Player pUnit;// = Level_1.pUnit;
+	BasicEnemy eUnit;
 	BasicProjectile bp;
  	int levelNumber = 1;
  	int dir;
@@ -102,6 +103,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			
 			findPlayer(gmob);
 			
+			findEnemy(gmob);
+			
 			levelNumber++;
 			  
 			 //this.
@@ -113,14 +116,14 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		
 		repaint();
 		
-		/*
+		
 		try {
 			Thread.sleep((long) 5);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 		
 	}
 	
@@ -147,8 +150,6 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				pUnit = (Player) h.get(i);
 				
 				pUnit.setFacingDown();
-				
-				
 				break;
 			}
 			
@@ -156,6 +157,33 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				System.out.println("The player is null");
 			}
 		}
+	}
+	
+	public void findEnemy(ArrayList<GameObject> h){
+		
+		for(int i = 0; i<h.size(); i++){
+			
+				System.out.println(h.get(i).getThisObjectLocation()+ "hello");
+				System.out.println(Level_1.pUnit.getLocation() + "goodbye");
+			
+			if(h.get(i).getObjectType() == "BEnemy"){
+				
+				System.out.println();
+				
+				eUnit = (BasicEnemy) h.get(i);
+				
+				new Thread(eUnit).start();
+				
+				
+				
+			}
+			
+			if (eUnit == null){
+				System.out.println("The player is null");
+			}
+		}
+		
+		
 	}
 	
 	public void playerCollision(){
@@ -361,9 +389,9 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            	
 	            }
 	        
-	        playerCollision();
+	        //playerCollision();
 	        
-	        repaint();
+	       // repaint();
 	            
 	        }
 	    //}

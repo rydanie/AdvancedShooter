@@ -54,6 +54,31 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
         // make a border
         setBorder( BorderFactory.createLineBorder(Color.RED) );
         this.setBackground(Color.WHITE);
+        
+        
+        
+        try{
+   			File f = new File("Base_Map");
+   			FileInputStream fin = new FileInputStream(f.toString());
+   			ObjectInputStream ois = new ObjectInputStream(fin);
+   			 try {
+   				drob =  (ArrayList<DrawingObject>) ois.readObject();
+   			} catch (ClassNotFoundException e1) {
+   				// TODO Auto-generated catch block
+   				e1.printStackTrace();
+   			}
+   			ois.close();
+   			
+   		}catch(Exception e){
+   			e.printStackTrace();
+   		}
+   		
+   		repaint();
+
+        
+        
+        
+        
         setVisible( true );
         
         // we need both a mouse listener (for clicks)...

@@ -96,7 +96,7 @@ public class Level_1 implements Runnable, GameLevel {
    		
    		try{
    			
-   			f =new File("this");
+   			f =new File("Lv1");
    			
    			FileInputStream fin = new FileInputStream(f.toString());
    			ObjectInputStream ois = new ObjectInputStream(fin);

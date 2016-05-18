@@ -80,7 +80,7 @@ public class GameFrame extends JFrame implements Runnable, KeyListener {
 	public void run() {
 		// TODO Auto-generated method stub
 		GameFrame frame  = this;
-		Timer timer = new Timer(1000/60,new ActionListener(){
+		Timer timer = new Timer(1000/50,new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				frame.repaint();
 			}

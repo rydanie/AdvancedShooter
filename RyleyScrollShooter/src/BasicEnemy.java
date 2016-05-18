@@ -3,6 +3,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Random;
 import java.awt.*;
 
 import javax.imageio.ImageIO;
@@ -11,6 +13,7 @@ import javax.swing.*;
 public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	
 
+	Random rnd;
 	String name1 = "BasicEnemy_Front.jpg";
 	String name2 = "BasicEnemy_Back.jpg";
 	String name3 = "BasicEnemy_Lect.jpg";
@@ -27,6 +30,10 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	int originY;
 	int sizeX = 50;
 	int sizeY = 50;
+	int inc;
+	double proElapseTime;
+	double proStartTime;
+	ArrayList<Integer> dList = new ArrayList<Integer>();
 	Rectangle bounds = new Rectangle();
 	
 	
@@ -35,6 +42,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		setThisObjectLocation(p);
 		setBounds(bounds);
 		loadImage(name1);
+		dList.add(1); dList.add(2); dList.add(3); dList.add(4); 
 	}
 
 	@Override
@@ -108,31 +116,95 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	@Override
 	public void idle() {
 		// TODO Auto-generated method stub
+		rnd = new Random();
+			inc = 0;
+			int index = rnd.nextInt(dList.size());
+		    dList.get(index);
+		    int i = 0;
+		 
+			
+			inc = 0;
+			
+		    while(dList.get(index)== 1){
+		    	moveUp();
+		    	i++;
+		    	try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	if(i>10){
+		    		break;
+		    	}
+		    }
+		    while(dList.get(index)== 2){
+		    	moveDown();
+		    	i++;
+		    	try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	if(i>10){
+		    		break;
+		    	}
+		    }
+		    while(dList.get(index)== 3){
+		    	moveLeft();
+		    	i++;
+		    	try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	if(i>10){
+		    		break;
+		    	}
+		    }
+		    while(dList.get(index)== 4){
+		    	moveRight();
+		    	i++;
+		    	try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	if(i>10){
+		    		break;
+		    	}
+		    }
+		}
 		
-	}
+	
+		
+	
 
 	@Override
 	public void moveUp() {
 		// TODO Auto-generated method stub
-		
+		originY -= 2;
 	}
 
 	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
-		
+		originY += 2;
 	}
 
 	@Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
-		
+		originX += 2;
 	}
 
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
-		
+		originX -= 2;
 	}
 
 	@Override
@@ -282,6 +354,16 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		
+		while(true){
+		idle();
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 		
 	}
 

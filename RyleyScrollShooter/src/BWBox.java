@@ -65,7 +65,7 @@ public class BWBox implements DrawingObject, Serializable {
 			 }
 			 */
 	        //g2d.clearRect( originX, originY, sizeX, sizeY );  // this is cool to make a background-filled rectangle!
-	       
+	        	g2d.setColor(Color.BLACK);
 				g.fillRect(originX, originY, sizeX, sizeY);
 			
 	        
