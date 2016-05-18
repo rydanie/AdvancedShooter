@@ -53,7 +53,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		
 		//proTimer = new Timer(250);
 		
-		this.setBackground(Color.WHITE);
+		this.setBackground(Color.GRAY);
 		
 		//KeyListener k = new kb();
 		this.addKeyListener(this);
@@ -145,7 +145,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		for(int i = 0; i<h.size(); i++){
 			
 			System.out.println(h.get(i).getThisObjectLocation()+ "hello");
-			System.out.println(Level_1.pUnit.getLocation() + "goodbye");
+			//System.out.println(Level_1.pUnit.getLocation() + "goodbye");
 			
 			if(h.get(i).getObjectType() == "Hero"){
 				
@@ -438,7 +438,9 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		            		bp.setEnemy(false);
 	        				bp.fireRight();
 		        		}
-	            	new Thread(bp).start();
+	            	Thread a = new Thread(bp);
+	            			a.setPriority(a.getPriority() - 1);
+	            			a.start();
 	            	gmob.add(bp);
 	            	proStartTime = System.currentTimeMillis();
 	            	}
