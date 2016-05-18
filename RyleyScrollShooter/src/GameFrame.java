@@ -89,7 +89,13 @@ public class GameFrame extends JFrame implements Runnable, KeyListener {
 		
 		timer.start();
 		
-		new Thread(ap).start();
+		Thread a = new Thread(ap);
+				
+			//	a.setPriority(5);
+				a.start();
+				
+				
+		
 		
 		/*
 		while(true){

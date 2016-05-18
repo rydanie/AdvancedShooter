@@ -165,6 +165,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	
 	public void findEnemy(ArrayList<GameObject> h){
 		
+		Thread foo;
+		
 		for(int i = 0; i<h.size(); i++){
 			
 				System.out.println(h.get(i).getThisObjectLocation()+ "hello");
@@ -176,7 +178,9 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				
 				eUnit = (BasicEnemy) h.get(i);
 				
-				new Thread(eUnit).start();
+				foo = new Thread(eUnit);
+						foo.setPriority(Thread.MIN_PRIORITY);
+						foo.start();
 				
 				
 				
