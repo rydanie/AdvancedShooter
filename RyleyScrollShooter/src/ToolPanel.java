@@ -40,6 +40,7 @@ public class ToolPanel extends JPanel implements ActionListener {
         ButtonGroup bg;
         
         bg = new ButtonGroup();
+        JRadioButton pArea = new JRadioButton( "Playable Area");
         JRadioButton Wall = new JRadioButton( "Wall" );
         JRadioButton Enemy = new JRadioButton( "Enemy" );
         JRadioButton Hero = new JRadioButton( "Hero" );
@@ -51,6 +52,7 @@ public class ToolPanel extends JPanel implements ActionListener {
         //points2 = new JTextField("5");
         //pic = new JTextField("Image File Name Here");
        // NoOperation.setActionCommand("nop");
+        pArea.setActionCommand("playable");
         Wall.setActionCommand( "wall" );
         Enemy.setActionCommand( "enemy" );
         Hero.setActionCommand( "hero" );
@@ -58,6 +60,7 @@ public class ToolPanel extends JPanel implements ActionListener {
         Polygon.setActionCommand("poly");
         picture.setActionCommand("picN");
        // NoOperation.addActionListener(this);
+        pArea.addActionListener(this);
         Wall.addActionListener( this );
         Enemy.addActionListener( this);
         Hero.addActionListener( this );
@@ -69,6 +72,7 @@ public class ToolPanel extends JPanel implements ActionListener {
        // points2.addKeyListener(k);
        // pic.addKeyListener(k);
         
+        bg.add(pArea);
         bg.add( Wall);
         bg.add( Enemy );
         bg.add( Hero );
@@ -82,7 +86,7 @@ public class ToolPanel extends JPanel implements ActionListener {
         unitSelectionPanel.add( Wall );
         unitSelectionPanel.add( Enemy );
         unitSelectionPanel.add( Hero );
-        //unitSelectionPanel.add( points );
+        unitSelectionPanel.add( pArea );
         unitSelectionPanel.add( HealthPack );
         //unitSelectionPanel.add(points2);
         //unitSelectionPanel.add(Polygon);
@@ -127,6 +131,10 @@ public class ToolPanel extends JPanel implements ActionListener {
         case("poly"):
         	check = 6;
            	break;
+           	
+        case("playable"):
+        	check = 20;
+        	break;
         	
         case("picN"):
         	check = 10;
