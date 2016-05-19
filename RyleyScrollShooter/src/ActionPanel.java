@@ -136,7 +136,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	
 	private void allContain() {
 		// TODO Auto-generated method stub
-		for(int i =0; i < gmob.size(); i++){
+for(int i =0; i < gmob.size(); i++){
 			
 			if(gmob.get(i).getObjectType() == "PA"){
 				
@@ -178,10 +178,12 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 						
 					}
 					
+					if(gmob.get(i).getObjectType() == "Hero"){
+						pUnit = (Player) gmob.get(i);
+					}
+					
 				
 					}
-				
-				
 			}
 		}
 	
@@ -242,22 +244,22 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				
 			}
 			
-			if(eUnit.isFacingUp()){
+			if(pUnit.isFacingUp()){
 				//System.out.println("Up");
-				while (gmob.get(i).contains(eUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
-				eUnit.moveDown();
+				while (gmob.get(i).contains(pUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
+				pUnit.moveDown();
 				}
-			}else if(eUnit.isFacingDown()){
+			}else if(pUnit.isFacingDown()){
 				//System.out.println("Down");
-				while (gmob.get(i).contains(eUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
-				eUnit.moveUp();
+				while (gmob.get(i).contains(pUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
+				pUnit.moveUp();
 				}
-			}else if(eUnit.isFacingLeft()){
+			}else if(pUnit.isFacingLeft()){
 				//System.out.println("Left");
-				while (gmob.get(i).contains(eUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
-				eUnit.moveRight();
+				while (gmob.get(i).contains(pUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
+				pUnit.moveRight();
 				}
-			}else if(eUnit.isFacingRight()){
+			}else if(pUnit.isFacingRight()){
 			//	System.out.println("Right");
 				while (gmob.get(i).contains(pUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
 				pUnit.moveLeft();
