@@ -3,6 +3,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.awt.*;
 
 import javax.imageio.ImageIO;
@@ -40,6 +41,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	//Rectangle hitBox = new Rectangle();
 	Rectangle bounds = new Rectangle();
 	BasicProjectile bp;
+	ArrayList<GameObject> pgmob;
 	
 	
 	public MetalGameHero(Point p){
@@ -493,6 +495,13 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	public void containsPoint(Point p) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void playerBounds(ArrayList<GameObject> gmob) {
+		// TODO Auto-generated method stub
+		
+		pgmob = gmob;
 	}
 
 }

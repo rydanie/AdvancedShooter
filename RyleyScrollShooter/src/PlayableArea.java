@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 public class PlayableArea  implements Runnable, GameObject, Wall{
 	
 	
-	String name1 = "BasicWall.jpg";
+	String name1 = "PlayArea.jpg";
 	String characterName;
 	String type = "PA";
 	boolean up;
@@ -32,7 +32,7 @@ public class PlayableArea  implements Runnable, GameObject, Wall{
 		setThisObjectLocation(origin);
 		setSize(size);
 		setBounds(bounds);
-		//loadImage(name1);
+		loadImage(name1);
 	}
 
 
@@ -59,7 +59,7 @@ public class PlayableArea  implements Runnable, GameObject, Wall{
         */
        //R = new Rectangle(originX, originY, sizeX, sizeY);
 		g2d.setColor(Color.WHITE);
-       g.fillRect(originX, originY, sizeX, sizeY);
+       g.drawImage(img, originX, originY, sizeX, sizeY, null);
         
         
         System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);

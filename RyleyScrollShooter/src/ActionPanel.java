@@ -61,22 +61,6 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		this.setVisible(true);
 		
 		
-		//Level_1 L1 = new Level_1();
-		/*
-		try {
-			L1.genLevel(new File("ambush"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		gmob =L1.getGmob();
-		
-		findPlayer(gmob);
-		
-		//levelNumber++;
-		
-		this.addKeyListener(this);
-		*/
 		repaint();
 
 		
@@ -139,6 +123,13 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
     	//this.addActionListener(this);
 	}
 	*/
+	
+	public void playerBounds(){
+		
+		if(pUnit != null){
+			pUnit.playerBounds(gmob);
+		}
+	}
 
 	public void findPlayer(ArrayList<GameObject> h){
 		

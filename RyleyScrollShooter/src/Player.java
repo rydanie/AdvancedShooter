@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -75,6 +76,8 @@ public interface Player {
 	public void setFacingLeft();
 
 	public void setFacingRight();
+
+	public void playerBounds(ArrayList<GameObject> gmob);
 
 	
 	
