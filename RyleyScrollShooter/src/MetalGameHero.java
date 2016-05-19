@@ -41,7 +41,8 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	//Rectangle hitBox = new Rectangle();
 	Rectangle bounds = new Rectangle();
 	BasicProjectile bp;
-	ArrayList<GameObject> pgmob;
+	ArrayList<GameObject> gmob;
+	Player pUnit;
 	
 	
 	public MetalGameHero(Point p){
@@ -498,10 +499,50 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	}
 
 	@Override
-	public void playerBounds(ArrayList<GameObject> gmob) {
+	public void playerBounds(ArrayList<GameObject> mob) {
 		// TODO Auto-generated method stub
 		
-		pgmob = gmob;
+		gmob = mob;
+		
+for(int i =0; i < gmob.size(); i++){
+			
+			Rectangle r = ((GameObject) pUnit).getBounds();
+			
+			System.out.println("playerCollision " + pUnit.getLocation());
+			System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
+			System.out.println( gmob.get(i).contains(pUnit.getLocation()) );
+			
+				
+				if(gmob.get(i).getObjectType() == "BDWall"){
+					
+					System.out.println("It is a wall");
+					
+					if(pUnit.isFacingUp()){
+						System.out.println("Up");
+						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						pUnit.moveDown();
+						}
+					}else if(pUnit.isFacingDown()){
+						System.out.println("Down");
+						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						pUnit.moveUp();
+						}
+					}else if(pUnit.isFacingLeft()){
+						System.out.println("Left");
+						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						pUnit.moveRight();
+						}
+					}else if(pUnit.isFacingRight()){
+						System.out.println("Right");
+						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						pUnit.moveLeft();
+						}
+					}
+					//}else if(gmob.get(i).containsProjectile(eUnit.getLocation()) == true){
+					//	bp.setCollide(true);
+				//}
+			}
+		}
 	}
 
 }
