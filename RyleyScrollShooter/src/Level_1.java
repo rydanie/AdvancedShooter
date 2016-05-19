@@ -127,6 +127,7 @@ public class Level_1 implements Runnable, GameLevel {
    			}else if(obj.getColor() == Color.BLACK){
    				gobj = new BorderWall(obj.getPoint(),obj.getSize());   				
    				System.out.println("wall");
+
    			}else if(obj.getColor() == Color.MAGENTA){
    				gobj = new PlayableArea(obj.getPoint(),obj.getSize());   				
    				System.out.println("Playable Space");

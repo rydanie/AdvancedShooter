@@ -72,7 +72,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
        g.drawImage(img, originX, originY, sizeX, sizeY, null);
         
         
-        //System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
+        System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
         //this.setSize( this.getPreferredSize() );
 	}
 

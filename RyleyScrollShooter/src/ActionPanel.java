@@ -25,7 +25,6 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	Player pUnit;// = Level_1.pUnit;
 	BasicEnemy eUnit;
 	BasicProjectile bp;
-	PlayableArea pa;
  	int levelNumber = 1;
  	int dir;
  	int pType;
@@ -118,8 +117,6 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			
 			enemyCollide();
 			
-			allContain();
-			
 			repaint();
 			
 			/*
@@ -134,61 +131,6 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		
 	}
 	
-	private void allContain() {
-		// TODO Auto-generated method stub
-for(int i =0; i < gmob.size(); i++){
-			
-			if(gmob.get(i).getObjectType() == "PA"){
-				
-				//System.out.println("It is a wall");
-				
-				for(int r = 1; r<gmob.size(); r++){
-					
-					if(gmob.get(r).getObjectType() == "BEnemy"){
-						eUnit = (BasicEnemy) gmob.get(r);
-					}
-					
-					if(eUnit.isFacingUp()){
-						//System.out.println("Up");
-						while (gmob.get(i).contains(eUnit.getLocation()) == false && gmob.get(i).getObjectType() != "BEnemy"){
-						//eUnit.setWallCollision(true);
-						eUnit.moveDown();
-						}
-						//eUnit.setWallCollision(false);
-					}else if(eUnit.isFacingDown()){
-						//System.out.println("Down");
-						while (gmob.get(i).contains(eUnit.getLocation()) == false && gmob.get(i).getObjectType() != "BEnemy"){
-						///eUnit.setWallCollision(true);
-						eUnit.moveUp();
-						}
-						//eUnit.setWallCollision(false);
-					}else if(eUnit.isFacingLeft()){
-						//System.out.println("Left");
-						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
-						//eUnit.setWallCollision(true);
-						eUnit.moveRight();
-						}
-						//eUnit.setWallCollision(false);
-					}else if(eUnit.isFacingRight()){
-						//System.out.println("Right");
-						while (gmob.get(i).contains(eUnit.getLocation()) == false && gmob.get(i).getObjectType() != "BEnemy"){
-						//eUnit.setWallCollision(true);
-						eUnit.moveLeft();
-						}
-						
-					}
-					
-					if(gmob.get(i).getObjectType() == "Hero"){
-						pUnit = (Player) gmob.get(i);
-					}
-					
-				
-					}
-			}
-		}
-	
-	}
-
 	/*
 	public void setBinding(){
 		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
@@ -244,26 +186,8 @@ for(int i =0; i < gmob.size(); i++){
 				
 			}
 			
-			if(pUnit.isFacingUp()){
-				//System.out.println("Up");
-				while (gmob.get(i).contains(pUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
-				pUnit.moveDown();
-				}
-			}else if(pUnit.isFacingDown()){
-				//System.out.println("Down");
-				while (gmob.get(i).contains(pUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
-				pUnit.moveUp();
-				}
-			}else if(pUnit.isFacingLeft()){
-				//System.out.println("Left");
-				while (gmob.get(i).contains(pUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
-				pUnit.moveRight();
-				}
-			}else if(pUnit.isFacingRight()){
-			//	System.out.println("Right");
-				while (gmob.get(i).contains(pUnit.getLocation()) == false && gmob.get(i).getObjectType() != "Hero"){
-				pUnit.moveLeft();
-				}
+			if (eUnit == null){
+				System.out.println("The player is null");
 			}
 		}
 		
@@ -276,32 +200,32 @@ for(int i =0; i < gmob.size(); i++){
 			
 			Rectangle r = ((GameObject) pUnit).getBounds();
 			
-			//System.out.println("playerCollision " + pUnit.getLocation());
-			//System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
-			//System.out.println( gmob.get(i).contains(pUnit.getLocation()) );
+			System.out.println("playerCollision " + pUnit.getLocation());
+			System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
+			System.out.println( gmob.get(i).contains(pUnit.getLocation()) );
 			
 				
 				if(gmob.get(i).getObjectType() == "BDWall"){
 					
-					//System.out.println("It is a wall");
+					System.out.println("It is a wall");
 					
 					if(pUnit.isFacingUp()){
-						//System.out.println("Up");
+						System.out.println("Up");
 						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveDown();
 						}
 					}else if(pUnit.isFacingDown()){
-						//System.out.println("Down");
+						System.out.println("Down");
 						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveUp();
 						}
 					}else if(pUnit.isFacingLeft()){
-						//System.out.println("Left");
+						System.out.println("Left");
 						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveRight();
 						}
 					}else if(pUnit.isFacingRight()){
-					//	System.out.println("Right");
+						System.out.println("Right");
 						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveLeft();
 						}
@@ -320,7 +244,7 @@ for(int i =0; i < gmob.size(); i++){
 			
 			if(gmob.get(i).getObjectType() == "BDWall"){
 				
-				//System.out.println("It is a wall");
+				System.out.println("It is a wall");
 				
 				for(int r = 1; r<gmob.size(); r++){
 					
@@ -329,28 +253,28 @@ for(int i =0; i < gmob.size(); i++){
 					}
 					
 					if(eUnit.isFacingUp()){
-						//System.out.println("Up");
+						System.out.println("Up");
 						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
 						eUnit.setWallCollision(true);
 						eUnit.moveDown();
 						}
 						eUnit.setWallCollision(false);
 					}else if(eUnit.isFacingDown()){
-						//System.out.println("Down");
+						System.out.println("Down");
 						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
 						eUnit.setWallCollision(true);
 						eUnit.moveUp();
 						}
 						eUnit.setWallCollision(false);
 					}else if(eUnit.isFacingLeft()){
-						//System.out.println("Left");
+						System.out.println("Left");
 						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
 						eUnit.setWallCollision(true);
 						eUnit.moveRight();
 						}
 						//eUnit.setWallCollision(false);
 					}else if(eUnit.isFacingRight()){
-						//System.out.println("Right");
+						System.out.println("Right");
 						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
 						eUnit.setWallCollision(true);
 						eUnit.moveLeft();
@@ -438,19 +362,19 @@ for(int i =0; i < gmob.size(); i++){
 
 
 	 public void keyTyped(KeyEvent e) {
-	        //System.out.println("Key typed: " + e.getKeyChar());
+	        System.out.println("Key typed: " + e.getKeyChar());
 	    }
 
 	  public void keyPressed(KeyEvent e) {
-	        //System.out.println("Key pressed: " + e.getKeyChar());
+	        System.out.println("Key pressed: " + e.getKeyChar());
 	        
 	        
 	        if (e.getKeyCode() == KeyEvent.VK_RIGHT ) {
 	            System.out.println("Right typed.");
 	            pUnit.setFacingRight();
-	           // System.out.println("Moving Right");
+	            System.out.println("Moving Right");
             	pUnit.moveRight();
-            	//System.out.println("Moving Right");
+            	System.out.println("Moving Right");
 	        } 
 	        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) {
 	            //System.out.println("Left typed.");
@@ -476,19 +400,19 @@ for(int i =0; i < gmob.size(); i++){
 	        else if(e.getKeyChar() == 'w'){
 	            	pUnit.setFacingUp();
 	            	pUnit.moveUp();
-	            	//System.out.println("Moving up");
+	            	System.out.println("Moving up");
 	            }else if(e.getKeyChar() == 'a'){
 	            	pUnit.setFacingLeft();
 	            	pUnit.moveLeft();
-	            	//System.out.println("Moving Left");
+	            	System.out.println("Moving Left");
 	            } else if(e.getKeyChar() == 's'){
 	            	pUnit.setFacingDown();
 	            	pUnit.moveDown();
-	            	//System.out.println("Moving Down");
+	            	System.out.println("Moving Down");
 	            }else if(e.getKeyChar() == 'd'){
 	            	pUnit.setFacingRight();
 	            	pUnit.moveRight();
-	            	//System.out.println("Moving Right");
+	            	System.out.println("Moving Right");
 	            }else if(e.getKeyChar() == 'e'){
 	            	proElapseTime = System.currentTimeMillis() - proStartTime;
 	            	if(proElapseTime > 750){

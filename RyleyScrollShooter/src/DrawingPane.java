@@ -56,7 +56,7 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
         this.setBackground(Color.WHITE);
         
         
-        /*
+        
         try{
    			File f = new File("Base_Map");
    			FileInputStream fin = new FileInputStream(f.toString());
@@ -69,11 +69,10 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
    			}
    			ois.close();
    			
-   			
    		}catch(Exception e){
    			e.printStackTrace();
    		}
-   		*/
+   		
    		
    		repaint();
 
