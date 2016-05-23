@@ -33,9 +33,11 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	int sizeY = 50;
 	int inc;
 	int i;
+	int num;
 	double proElapseTime;
 	double proStartTime;
 	ArrayList<Integer> dList = new ArrayList<Integer>();
+	ArrayList<GameObject> gmob;
 	Rectangle bounds = new Rectangle();
 	
 	
@@ -72,7 +74,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
        g.drawImage(img, originX, originY, sizeX, sizeY, null);
         
         
-        System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
+        //System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
         //this.setSize( this.getPreferredSize() );
 	}
 
@@ -133,6 +135,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    		break;
 		    	}
 		    	
+		    	this.enemyCollide(gmob, num);
 		    	moveUp();
 		    	i++;
 		    	
@@ -170,6 +173,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    		break;
 		    	}
 		    	
+		    	this.enemyCollide(gmob, num);
 		    	moveDown();
 		    	i++;
 		    	
@@ -196,7 +200,6 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 					e.printStackTrace();
 				}
 				
-		    	
 		    	if(i>20){
 		    		break;
 		    	}
@@ -207,6 +210,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    		break;
 		    	}
 		    	
+		    	this.enemyCollide(gmob, num);
 		    	moveLeft();
 		    	i++;
 		    	
@@ -244,6 +248,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    		break;
 		    	}
 		    	
+		    	this.enemyCollide(gmob, num);
 		    	moveRight();
 		    	i++;
 		    	
@@ -461,7 +466,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		// TODO Auto-generated method stub
 		
 		while(true){
-		
+			
 			idle();
 		}	
 		
@@ -614,4 +619,67 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		collide = b;
 		
 	}
+	
+public void enemyCollide(ArrayList<GameObject> mob, int n){
+		
+		gmob = mob;
+		BasicEnemy eUnit = (BasicEnemy) gmob.get(n);
+	
+		for(int i =0; i < gmob.size(); i++){
+			
+			if(gmob.get(i).getObjectType() == "BDWall"){
+				
+				System.out.println("It is a wall");
+				
+				for(int r = 1; r<gmob.size(); r++){
+					
+					
+					
+					if(eUnit.isFacingUp()){
+						//System.out.println("Up");
+						if (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						eUnit.setWallCollision(true);
+						eUnit.moveDown();
+						}
+						eUnit.setWallCollision(false);
+					}else if(eUnit.isFacingDown()){
+						//System.out.println("Down");
+						if (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						eUnit.setWallCollision(true);
+						eUnit.moveUp();
+						}
+						eUnit.setWallCollision(false);
+					}else if(eUnit.isFacingLeft()){
+						//System.out.println("Left");
+						if (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						eUnit.setWallCollision(true);
+						eUnit.moveRight();
+						}
+						//eUnit.setWallCollision(false);
+					}else if(eUnit.isFacingRight()){
+						//System.out.println("Right");
+						if (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						eUnit.setWallCollision(true);
+						eUnit.moveLeft();
+						}
+						eUnit.setWallCollision(false);
+					}
+					//}else if(gmob.get(i).containsProjectile(eUnit.getLocation()) == true){
+					//	bp.setCollide(true);
+				//}
+					}
+			}
+		}
+	}
+
+public void setGmob(ArrayList<GameObject> gmob2) {
+	// TODO Auto-generated method stub
+	gmob = gmob2;
+}
+
+public void setNum(int i2) {
+	// TODO Auto-generated method stub
+	num = i2;
+}
+	
 }

@@ -55,7 +55,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 		
 		setBounds( bounds );
 		
-		System.out.println("I Loaded");
+		//System.out.println("I Loaded");
 		
 		//run();
 		
@@ -116,7 +116,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
        g.drawImage(img, originX, originY, sizeX, sizeY, null);
         
         
-        System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
+        //System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
         //this.setSize( this.getPreferredSize() );
 	}
 

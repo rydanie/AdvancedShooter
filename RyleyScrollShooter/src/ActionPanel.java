@@ -149,7 +149,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			}
 			
 			if (pUnit == null){
-				System.out.println("The player is null");
+				//System.out.println("The player is null");
 			}
 		}
 	}
@@ -160,14 +160,16 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		
 		for(int i = 0; i<h.size(); i++){
 			
-				System.out.println(h.get(i).getThisObjectLocation()+ "hello");
-				System.out.println(Level_1.pUnit.getLocation() + "goodbye");
+				//System.out.println(h.get(i).getThisObjectLocation()+ "hello");
+				//System.out.println(Level_1.pUnit.getLocation() + "goodbye");
 			
 			if(h.get(i).getObjectType() == "BEnemy"){
 				
 				System.out.println();
 				
 				eUnit = (BasicEnemy) h.get(i);
+				
+				eUnit.setNum(i);
 				
 				foo = new Thread(eUnit);
 						foo.setPriority(Thread.MIN_PRIORITY);
@@ -178,7 +180,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			}
 			
 			if (eUnit == null){
-				System.out.println("The player is null");
+				//System.out.println("The player is null");
 			}
 		}
 		
@@ -191,33 +193,33 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			
 			Rectangle r = ((GameObject) pUnit).getBounds();
 			
-			System.out.println("playerCollision " + pUnit.getLocation());
-			System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
-			System.out.println( gmob.get(i).contains(pUnit.getLocation()) );
+			//System.out.println("playerCollision " + pUnit.getLocation());
+			//System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
+			//System.out.println( gmob.get(i).contains(pUnit.getLocation()) );
 			
 				
 				if(gmob.get(i).getObjectType() == "BDWall"){
 					
-					System.out.println("It is a wall");
+					//System.out.println("It is a wall");
 					
 					if(pUnit.isFacingUp()){
-						System.out.println("Up");
-						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						//System.out.println("Up");
+						if (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveDown();
 						}
 					}else if(pUnit.isFacingDown()){
-						System.out.println("Down");
-						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						//System.out.println("Down");
+						if (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveUp();
 						}
 					}else if(pUnit.isFacingLeft()){
-						System.out.println("Left");
-						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						//System.out.println("Left");
+						if (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveRight();
 						}
 					}else if(pUnit.isFacingRight()){
-						System.out.println("Right");
-						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						//System.out.println("Right");
+						if (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveLeft();
 						}
 					}
@@ -231,6 +233,16 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	
 	public void enemyCollide(){
 		
+		for(int i =0; i< gmob.size(); i++){
+			
+			if(gmob.get(i).getObjectType() == "BEnemy"){
+				eUnit = (BasicEnemy)gmob.get(i);
+				eUnit.setGmob(gmob);
+			}
+		}
+		
+		
+		/*
 		for(int i =0; i < gmob.size(); i++){
 			
 			if(gmob.get(i).getObjectType() == "BDWall"){
@@ -241,32 +253,33 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 					
 					if(gmob.get(r).getObjectType() == "BEnemy"){
 						eUnit = (BasicEnemy) gmob.get(r);
+					
 					}
 					
 					if(eUnit.isFacingUp()){
 						System.out.println("Up");
-						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						if (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
 						eUnit.setWallCollision(true);
 						eUnit.moveDown();
 						}
 						eUnit.setWallCollision(false);
 					}else if(eUnit.isFacingDown()){
 						System.out.println("Down");
-						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						if (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
 						eUnit.setWallCollision(true);
 						eUnit.moveUp();
 						}
 						eUnit.setWallCollision(false);
 					}else if(eUnit.isFacingLeft()){
 						System.out.println("Left");
-						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						if (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
 						eUnit.setWallCollision(true);
 						eUnit.moveRight();
 						}
 						//eUnit.setWallCollision(false);
 					}else if(eUnit.isFacingRight()){
 						System.out.println("Right");
-						while (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
+						if (gmob.get(i).contains(eUnit.getLocation()) == true && gmob.get(i).getObjectType() != "BEnemy"){
 						eUnit.setWallCollision(true);
 						eUnit.moveLeft();
 						}
@@ -278,6 +291,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 					}
 			}
 		}
+		*/
 	}
 	
 	
