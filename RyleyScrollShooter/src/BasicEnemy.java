@@ -629,7 +629,7 @@ public void enemyCollide(ArrayList<GameObject> mob, int n){
 			
 			if(gmob.get(i).getObjectType() == "BDWall"){
 				
-				System.out.println("It is a wall");
+				//System.out.println("It is a wall");
 				
 				for(int r = 1; r<gmob.size(); r++){
 					

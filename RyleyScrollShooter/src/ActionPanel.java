@@ -140,7 +140,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			
 			if(h.get(i).getObjectType() == "Hero"){
 				
-				System.out.println();
+				//System.out.println();
 				
 				pUnit = (Player) h.get(i);
 				
@@ -180,7 +180,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			}
 			
 			if (eUnit == null){
-				//System.out.println("The player is null");
+				//wSystem.out.println("The player is null");
 			}
 		}
 		
