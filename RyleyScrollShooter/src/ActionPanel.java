@@ -101,6 +101,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			
 			enemyCollide();
 			
+			proCollide();
+			
 			repaint();
 			
 			/*
@@ -240,7 +242,18 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				eUnit.setGmob(gmob);
 			}
 		}
+	}
 		
+		
+		public void proCollide(){
+			
+			for(int i =0; i< gmob.size(); i++){
+				
+				if(gmob.get(i).getObjectType() == "BProjectile"){
+					bp = (BasicProjectile)gmob.get(i);
+					bp.setGmob(gmob);
+				}
+			}
 		
 		/*
 		for(int i =0; i < gmob.size(); i++){
@@ -375,11 +388,12 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	        
 	        
 	        if (e.getKeyCode() == KeyEvent.VK_RIGHT ) {
-	            System.out.println("Right typed.");
+	            //System.out.println("Right typed.");
 	            pUnit.setFacingRight();
-	            System.out.println("Moving Right");
+	           // System.out.println("Moving Right");
             	pUnit.moveRight();
-            	System.out.println("Moving Right");
+            	//bp.setGmob(gmob);
+            	//System.out.println("Moving Right");
 	        } 
 	        else if (e.getKeyCode() == KeyEvent.VK_LEFT ) {
 	            //System.out.println("Left typed.");
@@ -427,16 +441,19 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	        				bp = new BasicProjectile(pUnit.getLocation(), dir , 1);
 		            		bp.setEnemy(false);
 	        				bp.fireUp();
+	        				bp.setGmob(gmob);
 	        			} else if(pUnit.isFacingDown() == true){
 	        				dir =2;
 	        				bp = new BasicProjectile(pUnit.getLocation(), dir, 1);
 		            		bp.setEnemy(false);
 	        				bp.fireDown();
+	        				bp.setGmob(gmob);
 	        			} else if(pUnit.isFacingLeft() == true){
 	        				dir = 3;
 	        				bp = new BasicProjectile(pUnit.getLocation(), dir, 1);
 		            		bp.setEnemy(false);
 	        				bp.fireRight();
+	        				bp.setGmob(gmob);
 	        			} else if(pUnit.isFacingRight() == true){
 	        				dir = 4;
 	        				bp = new BasicProjectile(pUnit.getLocation(), dir, 1);
@@ -447,6 +464,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            			a.setPriority(a.getPriority() - 1);
 	            			a.start();
 	            	gmob.add(bp);
+	            	bp.getWhich(gmob.size()-1);
 	            	proStartTime = System.currentTimeMillis();
 	            	}
 	        		

@@ -623,7 +623,9 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 public void enemyCollide(ArrayList<GameObject> mob, int n){
 		
 		gmob = mob;
+	
 		BasicEnemy eUnit = (BasicEnemy) gmob.get(n);
+		
 	
 		for(int i =0; i < gmob.size(); i++){
 			
@@ -668,9 +670,10 @@ public void enemyCollide(ArrayList<GameObject> mob, int n){
 					//	bp.setCollide(true);
 				//}
 					}
+				}
 			}
 		}
-	}
+	
 
 public void setGmob(ArrayList<GameObject> gmob2) {
 	// TODO Auto-generated method stub

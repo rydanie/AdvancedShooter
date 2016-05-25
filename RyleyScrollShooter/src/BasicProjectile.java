@@ -3,6 +3,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.awt.*;
 
 import javax.imageio.ImageIO;
@@ -28,9 +29,11 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	int sizeY = 50;
 	int dir;
 	int pType;
+	int pro;
 	double damage;
 	Timer proTimer;
 	Rectangle bounds = new Rectangle();
+	ArrayList<GameObject> gmob;
 	
 	public BasicProjectile(Point p, int direction, int projectileType ){
 		setBounds(bounds);
@@ -156,6 +159,8 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 					}else if(dir == 4){
 						fireRight();
 					}
+					
+					colDetect();
 				}
 
 			} );
@@ -285,6 +290,46 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	public boolean containsProjectile(Point p) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void setGmob(ArrayList<GameObject> mob) {
+		// TODO Auto-generated method stub
+		gmob = mob;
+		//pro = i;
+	}
+	
+	public ArrayList<GameObject> colDetect(){
+		
+		BasicEnemy eUnit;
+		Player pUnit;
+		BasicProjectile bp2 = (BasicProjectile) gmob.get(pro);
+		BorderWall bdw;//= (BasicEnemy) gmob.get(n);
+	
+		for(int i =0; i < gmob.size(); i++){
+				
+				for(int r = 0; r<gmob.size(); r++){
+					
+					
+					
+					if(bp2.contains(gmob.get(r).getThisObjectLocation()) == true && gmob.get(r).getObjectType()== type && 
+									gmob.get(r).getObjectType()== "Hero"){
+						System.out.println("I hit something");
+					}
+						
+						
+			
+				}
+			}
+		
+		
+		
+		return gmob;
+		
+	}
+
+	public void getWhich(int num) {
+		// TODO Auto-generated method stub
+		pro = num;
 	}
 	
     
