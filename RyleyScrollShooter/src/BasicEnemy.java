@@ -41,6 +41,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	ArrayList<Integer> dList = new ArrayList<Integer>();
 	ArrayList<GameObject> gmob;
 	Rectangle bounds = new Rectangle();
+	BasicProjectile thatHurt;
 	Point p;
 	
 	
@@ -707,17 +708,20 @@ public void enemyCollide(ArrayList<GameObject> mob, int n){
 					
 					if(eUnit.containsProjectile(bp.getLocation(), bp.getSize()) == true){
 						//System.out.println("Up");
-						
+						thatHurt = (BasicProjectile) gmob.get(i);
 						System.out.println("I collided with enemy");
 						gmob.remove(bp);
 						eUnit.setDamaged(bp.getDamage());
+						
 					
 						}
 			
 					//}
 				//}
 			}
+			
 		}
+		
 	}
 	
 
@@ -751,6 +755,11 @@ public void setDamaged(double damaged) {
 			e.printStackTrace();
 		};
 	}
+}
+
+public ArrayList<GameObject> getGmob() {
+	// TODO Auto-generated method stub
+	return gmob;
 }
 	
 }

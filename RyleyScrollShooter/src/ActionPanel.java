@@ -227,7 +227,6 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 						}
 					}
 					
-					try{
 					for(int r =0; r<gmob.size(); r++){
 						if(gmob.get(r).getObjectType() == "BProjectile"){
 							BasicProjectile bp = (BasicProjectile) gmob.get(r);
@@ -236,10 +235,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 							}
 						}
 					}
-					}catch(NullPointerException e){
-						//gmob.remove(bp);
-						e.printStackTrace();
-					}
+				
 					
 					//}else if(gmob.get(i).containsProjectile(eUnit.getLocation()) == true){
 					//	bp.setCollide(true);
@@ -260,6 +256,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				eUnit = (BasicEnemy)gmob.get(i);
 				eUnit.setGmob(gmob);
 				eUnit.setNum(i);
+				eUnit.getGmob();
 			}
 		}
 	}
