@@ -36,9 +36,12 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	int num;
 	double proElapseTime;
 	double proStartTime;
+	double health = 100;
+	BasicEnemy eUnit;
 	ArrayList<Integer> dList = new ArrayList<Integer>();
 	ArrayList<GameObject> gmob;
 	Rectangle bounds = new Rectangle();
+	Point p;
 	
 	
 	public BasicEnemy(Point p) {
@@ -72,6 +75,8 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
         */
        //R = new Rectangle(originX, originY, sizeX, sizeY);
        g.drawImage(img, originX, originY, sizeX, sizeY, null);
+       //g2d.setColor(Color.BLUE);
+       //g.drawRect(bounds.x,bounds.y,bounds.width,bounds.height);
         
         
         //System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
@@ -79,17 +84,18 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	}
 
 	@Override
-	public void setThisObjectLocation(Point p) {
+	public void setThisObjectLocation(Point p2) {
 		// TODO Auto-generated method stub
-		originX = p.x;
-		originY = p.y;
+		originX = p2.x;
+		originY = p2.y;
+		setBounds(bounds);
+		//p = new Point(originX, originY);
 				
 	}
 
 	@Override
 	public Point getThisObjectLocation() {
 		// TODO Auto-generated method stub
-		Point p = new Point(originX, originY);
 		return p;
 	}
 
@@ -137,6 +143,8 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	
 		    	this.enemyCollide(gmob, num);
 		    	moveUp();
+		    	p = new Point(originX, originY);
+		    	setThisObjectLocation(p);
 		    	i++;
 		    	
 		    	if(collide == true){
@@ -175,6 +183,8 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	
 		    	this.enemyCollide(gmob, num);
 		    	moveDown();
+		    	p = new Point(originX, originY);
+		    	setThisObjectLocation(p);		    	
 		    	i++;
 		    	
 		    	if(collide == true){
@@ -212,6 +222,8 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	
 		    	this.enemyCollide(gmob, num);
 		    	moveLeft();
+		    	p = new Point(originX, originY);
+		    	setThisObjectLocation(p);
 		    	i++;
 		    	
 		    	if(collide == true){
@@ -250,6 +262,8 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	
 		    	this.enemyCollide(gmob, num);
 		    	moveRight();
+		    	p = new Point(originX, originY);
+		    	setThisObjectLocation(p);
 		    	i++;
 		    	
 		    	if(collide == true){
@@ -515,7 +529,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
      * @param b 
      */
     public void setBounds( Rectangle b ) {
-        b.setBounds( originX, originY, sizeX, sizeY );
+        b.setBounds( originX, originY, 50, sizeY  );
     }
     
     /**
@@ -526,6 +540,9 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
      * @return 
      */
     public boolean contains( Point p ) {
+    	
+    	//System.out.println(bounds);
+    	
     	return bounds.contains(p);
     }
 
@@ -565,8 +582,19 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	}
 
 	@Override
-	public boolean containsProjectile(Point p) {
-		return true;
+	public boolean containsProjectile(Point p, int i) {
+		
+		for(int e =0; e< i; e++ ){
+			
+			if(bounds.contains(p.x + e, p.y)){
+				return true;
+			}else if(bounds.contains(p.x, p.y + e)){
+				return true;
+			}
+			
+		}
+		
+		return false;
 		// TODO Auto-generated method stub
 		
 	}
@@ -624,7 +652,7 @@ public void enemyCollide(ArrayList<GameObject> mob, int n){
 		
 		gmob = mob;
 	
-		BasicEnemy eUnit = (BasicEnemy) gmob.get(n);
+		eUnit = (BasicEnemy) gmob.get(n);
 		
 	
 		for(int i =0; i < gmob.size(); i++){
@@ -666,13 +694,31 @@ public void enemyCollide(ArrayList<GameObject> mob, int n){
 						}
 						eUnit.setWallCollision(false);
 					}
-					//}else if(gmob.get(i).containsProjectile(eUnit.getLocation()) == true){
-					//	bp.setCollide(true);
-				//}
+					
+					
 					}
-				}
+			}
+			if(gmob.get(i).getObjectType() == "BProjectile"){
+				
+				
+				BasicProjectile bp = (BasicProjectile) gmob.get(i);
+				//System.out.println("It is a wall");
+				//for(int r = 1; r<gmob.size(); r++){
+					
+					if(eUnit.containsProjectile(bp.getLocation(), bp.getSize()) == true){
+						//System.out.println("Up");
+						
+						System.out.println("I collided with enemy");
+						gmob.remove(bp);
+						eUnit.setDamaged(bp.getDamage());
+					
+						}
+			
+					//}
+				//}
 			}
 		}
+	}
 	
 
 public void setGmob(ArrayList<GameObject> gmob2) {
@@ -683,6 +729,27 @@ public void setGmob(ArrayList<GameObject> gmob2) {
 public void setNum(int i2) {
 	// TODO Auto-generated method stub
 	num = i2;
+}
+
+@Override
+public boolean containsProjectile(Point p) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public void setDamaged(double damaged) {
+	// TODO Auto-generated method stub
+	health -= damaged;
+	
+	if(health <= 0){
+		try {
+			Thread.sleep(System.currentTimeMillis());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+	}
 }
 	
 }

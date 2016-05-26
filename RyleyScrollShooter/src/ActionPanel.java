@@ -101,7 +101,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			
 			enemyCollide();
 			
-			proCollide();
+			//proCollide();
 			
 			repaint();
 			
@@ -171,6 +171,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				
 				eUnit = (BasicEnemy) h.get(i);
 				
+				eUnit.setGmob(gmob);
 				eUnit.setNum(i);
 				
 				foo = new Thread(eUnit);
@@ -193,7 +194,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	
 		for(int i =0; i < gmob.size(); i++){
 			
-			Rectangle r = ((GameObject) pUnit).getBounds();
+			Rectangle o = ((GameObject) pUnit).getBounds();
 			
 			//System.out.println("playerCollision " + pUnit.getLocation());
 			//System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
@@ -225,6 +226,17 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 						pUnit.moveLeft();
 						}
 					}
+					
+					for(int r =0; r<gmob.size(); r++){
+						if(gmob.get(r).getObjectType() == "BProjectile"){
+							bp = (BasicProjectile) gmob.get(r);
+							if(gmob.get(i).containsProjectile(bp.getLocation())){
+								gmob.remove(bp);
+							}
+						}
+					}
+					
+					
 					//}else if(gmob.get(i).containsProjectile(eUnit.getLocation()) == true){
 					//	bp.setCollide(true);
 				//}
@@ -240,11 +252,12 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			if(gmob.get(i).getObjectType() == "BEnemy"){
 				eUnit = (BasicEnemy)gmob.get(i);
 				eUnit.setGmob(gmob);
+				eUnit.setNum(i);
 			}
 		}
 	}
 		
-		
+		/*
 		public void proCollide(){
 			
 			for(int i =0; i< gmob.size(); i++){
@@ -254,7 +267,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 					bp.setGmob(gmob);
 				}
 			}
-		
+		*/
+	
 		/*
 		for(int i =0; i < gmob.size(); i++){
 			
@@ -304,9 +318,9 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 					}
 			}
 		}
-		*/
+		
 	}
-	
+	*/
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -464,7 +478,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            			a.setPriority(a.getPriority() - 1);
 	            			a.start();
 	            	gmob.add(bp);
-	            	bp.getWhich(gmob.size()-1);
+	            	//eebp.getWhich(gmob.size()-1);
 	            	proStartTime = System.currentTimeMillis();
 	            	}
 	        		

@@ -26,4 +26,6 @@ public interface Projectile {
 	public boolean isEnemy();
 	
 	public void setDamge(double d);
+	
+	public double getDamage();
 }

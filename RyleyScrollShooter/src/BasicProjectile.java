@@ -25,15 +25,16 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	int sizeP =75;
 	int originX;
 	int originY;
-	int sizeX = 50;
-	int sizeY = 50;
+	int sizeX = 25;
+	int sizeY = 25;
 	int dir;
 	int pType;
 	int pro;
-	double damage;
+	double damage = 50;
 	Timer proTimer;
 	Rectangle bounds = new Rectangle();
 	ArrayList<GameObject> gmob;
+	Point p;
 	
 	public BasicProjectile(Point p, int direction, int projectileType ){
 		setBounds(bounds);
@@ -75,16 +76,17 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	}
 
 	@Override
-	public void setThisObjectLocation(Point p) {
+	public void setThisObjectLocation(Point p2) {
 		// TODO Auto-generated method stub
-		originX = p.x;
-		originY = p.y;
+		originX = p2.x;
+		originY = p2.y;
+		p = new Point(originX, originY);
 	}
 
 	@Override
 	public Point getThisObjectLocation() {
 		// TODO Auto-generated method stub
-		Point p = new Point(originX,originY);
+		
 		return p;
 	}
 
@@ -98,37 +100,46 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	@Override
 	public void setLocation(Point p) {
 		// TODO Auto-generated method stub
-		
+		originX = p.x;
+		originY = p.y;
+		p = new Point(originX, originY);
 	}
 
 	@Override
 	public Point getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		//System.out.println("location got");
+		//System.out.println(p);
+		return p;
 	}
 
 	@Override
 	public void fireUp() {
 		// TODO Auto-generated method stub
 		originY -=2;
+		
+		p = new Point(originX, originY);
 	}
 
 	@Override
 	public void fireDown() {
 		// TODO Auto-generated method stub
 		originY +=2;
+		p = new Point(originX, originY);
 	}
 
 	@Override
 	public void fireLeft() {
 		// TODO Auto-generated method stub
 		originX -=2;
+		p = new Point(originX, originY);
 	}
 
 	@Override
 	public void fireRight() {
 		// TODO Auto-generated method stub
 		originX +=2;
+		p = new Point(originX, originY);
 	}
 
 	@Override
@@ -159,8 +170,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 					}else if(dir == 4){
 						fireRight();
 					}
-					
-					colDetect();
+					//colDetect();
 				}
 
 			} );
@@ -332,5 +342,14 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 		pro = num;
 	}
 	
+	public int getSize(){
+		return sizeX;
+	}
+
+	@Override
+	public double getDamage() {
+		// TODO Auto-generated method stub
+		return damage;
+	}
     
 }

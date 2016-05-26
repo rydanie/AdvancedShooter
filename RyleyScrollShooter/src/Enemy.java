@@ -81,4 +81,8 @@ public interface Enemy {
 
 	public void setFacingRight();
 
+	public boolean containsProjectile(Point p, int i);
+	
+	public void setDamaged(double damaged);
+
 }
