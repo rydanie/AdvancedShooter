@@ -744,6 +744,7 @@ public void setDamaged(double damaged) {
 	
 	if(health <= 0){
 		try {
+			this.loadImage("DeadEBody.jpg");
 			Thread.sleep(System.currentTimeMillis());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

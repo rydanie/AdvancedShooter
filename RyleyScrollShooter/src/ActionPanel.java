@@ -53,7 +53,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		
 		//proTimer = new Timer(250);
 		
-		this.setBackground(Color.GRAY);
+		this.setBackground(Color.WHITE);
 		
 		//KeyListener k = new kb();
 		this.addKeyListener(this);
@@ -227,6 +227,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 						}
 					}
 					
+					try{
 					for(int r =0; r<gmob.size(); r++){
 						if(gmob.get(r).getObjectType() == "BProjectile"){
 							bp = (BasicProjectile) gmob.get(r);
@@ -235,7 +236,9 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 							}
 						}
 					}
-					
+					}catch(NullPointerException e){
+						e.printStackTrace();
+					}
 					
 					//}else if(gmob.get(i).containsProjectile(eUnit.getLocation()) == true){
 					//	bp.setCollide(true);
@@ -394,8 +397,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 
 
 	 public void keyTyped(KeyEvent e) {
-	        System.out.println("Key typed: " + e.getKeyChar());
-	    }
+	 }
 
 	  public void keyPressed(KeyEvent e) {
 	        System.out.println("Key pressed: " + e.getKeyChar());
@@ -429,7 +431,9 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	        }
 	       // else{
 	       //     System.out.println("Key typed: " + e.getKeyChar());
-	            
+
+
+	        
 	        else if(e.getKeyChar() == 'w'){
 	            	pUnit.setFacingUp();
 	            	pUnit.moveUp();
@@ -448,7 +452,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            	System.out.println("Moving Right");
 	            }else if(e.getKeyChar() == 'e'){
 	            	proElapseTime = System.currentTimeMillis() - proStartTime;
-	            	if(proElapseTime > 750){
+	            	if(proElapseTime > 250){
 	            		
 	        			if(pUnit.isFacingUp() == true){
 	        				dir = 1;
@@ -489,7 +493,6 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            }else if(e.getKeyChar() == 'a'){
 	            	
 	            }
-	        
 	       // playerCollision();
 	        
 	       // enemyCollide();
