@@ -200,7 +200,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			//System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
 			//System.out.println( gmob.get(i).contains(pUnit.getLocation()) );
 			
-				
+			try{	
 				if(gmob.get(i).getObjectType() == "BDWall"){
 					
 					//System.out.println("It is a wall");
@@ -230,13 +230,14 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 					try{
 					for(int r =0; r<gmob.size(); r++){
 						if(gmob.get(r).getObjectType() == "BProjectile"){
-							bp = (BasicProjectile) gmob.get(r);
+							BasicProjectile bp = (BasicProjectile) gmob.get(r);
 							if(gmob.get(i).containsProjectile(bp.getLocation())){
 								gmob.remove(bp);
 							}
 						}
 					}
 					}catch(NullPointerException e){
+						//gmob.remove(bp);
 						e.printStackTrace();
 					}
 					
@@ -244,6 +245,9 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 					//	bp.setCollide(true);
 				//}
 			}
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
 		}
 	}
 	
@@ -452,7 +456,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	            	System.out.println("Moving Right");
 	            }else if(e.getKeyChar() == 'e'){
 	            	proElapseTime = System.currentTimeMillis() - proStartTime;
-	            	if(proElapseTime > 250){
+	            	if(proElapseTime > 750){
 	            		
 	        			if(pUnit.isFacingUp() == true){
 	        				dir = 1;
