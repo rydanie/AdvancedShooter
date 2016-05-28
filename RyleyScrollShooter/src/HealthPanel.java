@@ -20,7 +20,11 @@ public class HealthPanel extends JPanel implements Runnable {
 		
 		this.setLayout(new GridLayout(1,2));
 		
-		l = new JLabel("I Work TOO");
+		l =new JLabel();
+		
+		this.add(l);
+		
+		l = new JLabel(Double.toString(ActionPanel.playerHealth));
 		
 		this.add(l);
 		
@@ -33,7 +37,17 @@ public class HealthPanel extends JPanel implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		while (true){
+			l.setText(Double.toString(ActionPanel.playerHealth));
+			
+			if(Double.toString(ActionPanel.playerHealth) == "70"){
+				this.setBackground(Color.YELLOW);
+			}else if(Double.toString(ActionPanel.playerHealth) == "55"){
+				this.setBackground(Color.ORANGE);
+			}else if(Double.toString(ActionPanel.playerHealth) == "30"){
+				this.setBackground(Color.RED);
+			}
+		}
 	}
 
 

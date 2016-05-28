@@ -187,6 +187,12 @@ public class BorderBox implements Runnable, DrawingObject, Wall, Serializable{
 				// TODO Auto-generated method stub
 				
 			}
+
+			@Override
+			public boolean contains(Point p, int r) {
+				// TODO Auto-generated method stub
+				return false;
+			}
 		
 		
 

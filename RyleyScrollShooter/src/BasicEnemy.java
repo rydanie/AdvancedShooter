@@ -41,7 +41,9 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	ArrayList<Integer> dList = new ArrayList<Integer>();
 	ArrayList<GameObject> gmob;
 	Rectangle bounds = new Rectangle();
+	Rectangle detection = new Rectangle();
 	BasicProjectile thatHurt;
+	Player pUnit;
 	Point p;
 	
 	
@@ -110,6 +112,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	public void action() {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 	@Override
@@ -144,6 +147,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	
 		    	this.enemyCollide(gmob, num);
 		    	moveUp();
+		    	setFacingUp();
 		    	p = new Point(originX, originY);
 		    	setThisObjectLocation(p);
 		    	i++;
@@ -184,6 +188,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	
 		    	this.enemyCollide(gmob, num);
 		    	moveDown();
+		    	setFacingDown();
 		    	p = new Point(originX, originY);
 		    	setThisObjectLocation(p);		    	
 		    	i++;
@@ -223,6 +228,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	
 		    	this.enemyCollide(gmob, num);
 		    	moveLeft();
+		    	setFacingLeft();
 		    	p = new Point(originX, originY);
 		    	setThisObjectLocation(p);
 		    	i++;
@@ -263,6 +269,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		    	
 		    	this.enemyCollide(gmob, num);
 		    	moveRight();
+		    	setFacingRight();
 		    	p = new Point(originX, originY);
 		    	setThisObjectLocation(p);
 		    	i++;
@@ -481,7 +488,6 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 		// TODO Auto-generated method stub
 		
 		while(true){
-			
 			idle();
 		}	
 		
@@ -530,7 +536,8 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
      * @param b 
      */
     public void setBounds( Rectangle b ) {
-        b.setBounds( originX, originY, 50, sizeY  );
+        b.setBounds( originX, originY, sizeX, sizeY  );
+        detection.setBounds(originX - 50,originY -50, 100, 100);
     }
     
     /**
@@ -658,6 +665,10 @@ public void enemyCollide(ArrayList<GameObject> mob, int n){
 	
 		for(int i =0; i < gmob.size(); i++){
 			
+			if(gmob.get(i).getObjectType() == "Hero"){
+				pUnit = (Player) gmob.get(i);
+			}
+			
 			if(gmob.get(i).getObjectType() == "BDWall"){
 				
 				//System.out.println("It is a wall");
@@ -695,35 +706,86 @@ public void enemyCollide(ArrayList<GameObject> mob, int n){
 						}
 						eUnit.setWallCollision(false);
 					}
-					
-					
-					}
+				}
 			}
-			if(gmob.get(i).getObjectType() == "BProjectile"){
+					
+				if(gmob.get(i).getObjectType() == "BProjectile"){
 				
 				
 				BasicProjectile bp = (BasicProjectile) gmob.get(i);
 				//System.out.println("It is a wall");
 				//for(int r = 1; r<gmob.size(); r++){
 					
-					if(eUnit.containsProjectile(bp.getLocation(), bp.getSize()) == true){
+					if(eUnit.containsProjectile(bp.getLocation(), bp.getSize()) == true && bp.enemy == false){
 						//System.out.println("Up");
-						thatHurt = (BasicProjectile) gmob.get(i);
+						//thatHurt = (BasicProjectile) gmob.get(i);
+						
+						if(pUnit.isFacingDown()){
+							thatHurt = new BasicProjectile(eUnit.getLocation(), 1, 1);
+							thatHurt.setEnemy(true);
+						}else if(pUnit.isFacingUp()){
+							thatHurt = new BasicProjectile(eUnit.getLocation(), 2, 1);
+							thatHurt.setEnemy(true);
+						}else if(pUnit.isFacingLeft()){
+							thatHurt = new BasicProjectile(eUnit.getLocation(), 4, 1);
+							thatHurt.setEnemy(true);
+						}else if(pUnit.isFacingRight()){
+							thatHurt = new BasicProjectile(eUnit.getLocation(), 3, 1);
+							thatHurt.setEnemy(true);
+						}
+							new Thread(thatHurt).start();
+						
+							
 						System.out.println("I collided with enemy");
 						gmob.remove(bp);
-						eUnit.setDamaged(bp.getDamage());
+						gmob.add(thatHurt);
 						
-					
-						}
-			
-					//}
-				//}
+						eUnit.setDamaged(bp.getDamage());
+					}
+				} 
+				
+				
+				if( gmob.get(i).getObjectType() == "Hero"){
+					pUnit = (Player) gmob.get(i);
+				  if(detection.contains(gmob.get(i).getThisObjectLocation())){
+					proElapseTime = System.currentTimeMillis() - proStartTime;
+		            if(proElapseTime > 750){
+					  if(eUnit.isFacingUp()){
+						  
+						thatHurt = new BasicProjectile(eUnit.getLocation(), 1, 1);
+						thatHurt.setEnemy(true);
+						
+					}else if(eUnit.isFacingDown()){
+						
+						thatHurt = new BasicProjectile(eUnit.getLocation(), 2, 1);
+						thatHurt.setEnemy(true);
+						
+					} else if(eUnit.isFacingRight()){
+						
+						thatHurt = new BasicProjectile(eUnit.getLocation(), 4, 1);
+						thatHurt.setEnemy(true);
+						
+					}else if(eUnit.isFacingLeft() && pUnit.isFacingLeft()){
+						
+						thatHurt = new BasicProjectile(eUnit.getLocation(), 3, 1);
+						thatHurt.setEnemy(true);
+					}
+						new Thread(thatHurt).start();
+						proStartTime = System.currentTimeMillis();
+						
+					//System.out.println("I collided with enemy");
+					gmob.add(thatHurt);
 			}
-			
+				  }
 		}
-		
+			
+
 	}
-	
+		
+				
+			}
+		
+			
 
 public void setGmob(ArrayList<GameObject> gmob2) {
 	// TODO Auto-generated method stub

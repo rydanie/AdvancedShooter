@@ -24,10 +24,12 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	static ArrayList<GameObject> gmob;
 	Player pUnit;// = Level_1.pUnit;
 	BasicEnemy eUnit;
+	BorderWall BDWall;
 	BasicProjectile bp;
  	int levelNumber = 1;
  	int dir;
  	int pType;
+ 	static double playerHealth;
  	long proStartTime;
  	long proElapseTime;
  	
@@ -90,6 +92,8 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				
 				findEnemy(gmob);
 				
+				findWall(gmob);
+				
 				levelNumber++;
 				  
 				 //this.
@@ -100,6 +104,12 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			playerCollision();
 			
 			enemyCollide();
+			
+			findWallA(gmob);
+			
+			playerBounds();
+			
+			//wallCollide();
 			
 			//proCollide();
 			
@@ -130,6 +140,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		
 		if(pUnit != null){
 			pUnit.playerBounds(gmob);
+			gmob = pUnit.getGmob();
 		}
 	}
 
@@ -147,6 +158,10 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				pUnit = (Player) h.get(i);
 				
 				pUnit.setFacingDown();
+				playerHealth = pUnit.getHealth();
+				
+				
+				
 				break;
 			}
 			
@@ -182,13 +197,80 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				
 			}
 			
-			if (eUnit == null){
-				//wSystem.out.println("The player is null");
-			}
+			
 		}
 		
 		
 	}
+	
+	
+	
+public void findWall(ArrayList<GameObject> h){
+		
+		Thread foo;
+		
+		for(int i = 0; i<h.size(); i++){
+			
+				//System.out.println(h.get(i).getThisObjectLocation()+ "hello");
+				//System.out.println(Level_1.pUnit.getLocation() + "goodbye");
+			
+			if(h.get(i).getObjectType() == "BDWall"){
+				
+				System.out.println();
+				
+				BDWall = (BorderWall) h.get(i);
+				
+				BDWall.setGmob(gmob);
+				BDWall.setNum(i);
+				
+				foo = new Thread(BDWall);
+						foo.setPriority(Thread.MIN_PRIORITY);
+						foo.start();
+				
+				System.out.println("Found wall");
+				
+				
+			}
+			
+			
+		}
+		
+		
+	}
+	
+
+
+
+public void findWallA(ArrayList<GameObject> h){
+	
+	
+	for(int i = 0; i<h.size(); i++){
+		
+			//System.out.println(h.get(i).getThisObjectLocation()+ "hello");
+			//System.out.println(Level_1.pUnit.getLocation() + "goodbye");
+		
+		if(h.get(i).getObjectType() == "BDWall"){
+			
+			System.out.println();
+			
+			BDWall = (BorderWall) h.get(i);
+			
+			BDWall.setGmob(gmob);
+			BDWall.setNum(i);
+			
+			
+			
+			
+		}
+		
+		
+	}
+	
+	
+}
+
+
+	
 	
 	public void playerCollision(){
 	
@@ -205,6 +287,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 					
 					//System.out.println("It is a wall");
 					
+					/*
 					if(pUnit.isFacingUp()){
 						//System.out.println("Up");
 						if (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
@@ -226,11 +309,11 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 						pUnit.moveLeft();
 						}
 					}
-					
+					*/
 					for(int r =0; r<gmob.size(); r++){
 						if(gmob.get(r).getObjectType() == "BProjectile"){
 							BasicProjectile bp = (BasicProjectile) gmob.get(r);
-							if(gmob.get(i).containsProjectile(bp.getLocation())){
+							if(gmob.get(i).containsProjectile(bp.getLocation(), bp.getSize())){
 								gmob.remove(bp);
 							}
 						}
@@ -260,6 +343,23 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 			}
 		}
 	}
+	
+	
+	
+public void wallCollide(){
+		
+		for(int i =0; i< gmob.size(); i++){
+			
+			if(gmob.get(i).getObjectType() == "BDWall"){
+				BDWall = (BorderWall)gmob.get(i);
+				BDWall.setGmob(gmob);
+				BDWall.setNum(i);
+				BDWall.getGmob();
+			}
+		}
+	}
+	
+	
 		
 		/*
 		public void proCollide(){
@@ -371,24 +471,6 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	    	
 	    	for(int i = 1; i< gmob.size(); i++){
 	    		
-	    		//BasicProjectile b = (BasicProjectile) gmob.get(i);
-	    		
-	    		//if(gmob.get(i).getObjectType() == "BProjectile"){
-	    			
-	    			
-	    			//if(b.collide() == true){
-	    			//	gmob.remove(i);
-	    			//	b = null;
-	    			//	i++;
-	    			//}
-	    			
-	    			//if(gmob.get(i) == null){
-	    			//	i++;
-	    			//}
-	    		//}
-	    		
-	    		//if(b == null){
-	    		//System.out.println(gmob.get(i));
 	    		gmob.get(i).draw(g);
 	    		}
 	   
@@ -401,7 +483,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	 }
 
 	  public void keyPressed(KeyEvent e) {
-	        System.out.println("Key pressed: " + e.getKeyChar());
+	        //System.out.println("Key pressed: " + e.getKeyChar());
 	        
 	        
 	        if (e.getKeyCode() == KeyEvent.VK_RIGHT ) {
@@ -438,19 +520,19 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	        else if(e.getKeyChar() == 'w'){
 	            	pUnit.setFacingUp();
 	            	pUnit.moveUp();
-	            	System.out.println("Moving up");
+	            	//System.out.println("Moving up");
 	            }else if(e.getKeyChar() == 'a'){
 	            	pUnit.setFacingLeft();
 	            	pUnit.moveLeft();
-	            	System.out.println("Moving Left");
+	            	//System.out.println("Moving Left");
 	            } else if(e.getKeyChar() == 's'){
 	            	pUnit.setFacingDown();
 	            	pUnit.moveDown();
-	            	System.out.println("Moving Down");
+	            	//System.out.println("Moving Down");
 	            }else if(e.getKeyChar() == 'd'){
 	            	pUnit.setFacingRight();
 	            	pUnit.moveRight();
-	            	System.out.println("Moving Right");
+	            	//System.out.println("Moving Right");
 	            }else if(e.getKeyChar() == 'e'){
 	            	proElapseTime = System.currentTimeMillis() - proStartTime;
 	            	if(proElapseTime > 750){

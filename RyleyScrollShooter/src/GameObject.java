@@ -33,6 +33,8 @@ public interface GameObject {
 	public void containsPoint(Point p);
 
 	boolean containsProjectile(Point p);
+
+	public boolean containsProjectile(Point location, int size);
 	
 	
 

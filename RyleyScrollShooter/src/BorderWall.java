@@ -3,6 +3,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.awt.*;
 
 import javax.imageio.ImageIO;
@@ -23,7 +24,11 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 	int originY;
 	int sizeX;
 	int sizeY;
+	int num;
+	int incX;
 	Rectangle bounds = new Rectangle();
+	BorderWall bdWall;
+	ArrayList<GameObject> gmob;
 	
 	public BorderWall(Point origin, Point size) {
 		// TODO Auto-generated constructor stub
@@ -81,7 +86,56 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 	public void run() {
 		// TODO Auto-generated method stub
 		
+		//detectPro(gmob, num);
+		
 	}
+
+	private void detectPro(ArrayList<GameObject> mob, int n) {
+		// TODO Auto-generated method stub
+			
+			gmob = mob;
+		
+			bdWall = (BorderWall) gmob.get(n);
+			
+		
+			for(int i =0; i < gmob.size(); i++){
+				
+				if(gmob.get(i).getObjectType() == "BProjectile"){
+					
+					
+					BasicProjectile bp = (BasicProjectile) gmob.get(i);
+					//System.out.println("It is a wall");
+					//for(int r = 1; r<gmob.size(); r++){
+						
+						if(bdWall.containsProjectile(bp.getLocation())){
+							//System.out.println("Up");
+							//thatHurt = (BasicProjectile) gmob.get(i);
+							System.out.println("I collided with WALL");
+							gmob.remove(bp);
+							//eUnit.setDamaged(bp.getDamage());
+							
+						
+							}
+				
+				}
+			}
+			
+		}
+		
+
+	public void setGmob(ArrayList<GameObject> gmob2) {
+		// TODO Auto-generated method stub
+		gmob = gmob2;
+	}
+
+	public void setNum(int i2) {
+		// TODO Auto-generated method stub
+		num = i2;
+	}
+	
+	
+	
+
 
 	public void start( Point p ) {
         originX = p.x;
@@ -195,16 +249,18 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 
 
 	@Override
-	public boolean contains(Point p) {
+	public boolean contains(Point p, int r) {
 		// TODO Auto-generated method stub
 		
 		for(int i = 0; i < 50; i++){
 			
-			//if(bounds.contains(p.x + i, p.y +i)){
+			if(bounds.contains(p.x + r, p.y) || bounds.contains(p.x, p.y + r)){
 				//return true;
 			//}
-				if(bounds.contains(p.x, p.y + i ) || bounds.contains(p.x + i, p.y) || bounds.contains(p.x + i, p.y +50)|| bounds.contains(p.x + 50, p.y +i)){
-				return true;
+				//if(bounds.contains(p.x, p.y + i ) || bounds.contains(p.x + i, p.y) || bounds.contains(p.x + i, p.y +50)|| bounds.contains(p.x + 50, p.y +i)){
+				
+		
+		return true;
 			}
 		
 }
@@ -252,10 +308,16 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 	}
 
 
-	@Override
-	public boolean containsProjectile(Point p) {
+	
+	public boolean containsProjectile(Point p, int i) {
 		// TODO Auto-generated method stub
-		return bounds.contains(p);
+		
+		for( int t = 0; t<i; t++){
+			if( bounds.contains(p.x + t, p.y)|| bounds.contains(p.x, p.y +t)){
+				return true;
+			}
+		}
+		return false;
 		
 	}
 
@@ -267,5 +329,36 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 	}
 
 
+	public ArrayList<GameObject> getGmob() {
+		// TODO Auto-generated method stub
+		return gmob;
+	}
 
+
+	@Override
+	public boolean contains(Point p) {
+		// TODO Auto-generated method stub
+		for(int i = 0; i < 50; i++){
+			
+			//if(bounds.contains(p.x + i, p.y+i) || bounds.contains(p.x, p.y + r)){
+				//return true;
+			//}
+				if(bounds.contains(p.x, p.y + i ) || bounds.contains(p.x + i, p.y) || bounds.contains(p.x + i, p.y +50)|| bounds.contains(p.x + 50, p.y +i)){
+				
+		
+		return true;
+			}
+		
+}
+		return false;
+
+
+}
+
+
+	@Override
+	public boolean containsProjectile(Point p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -114,6 +114,8 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
         */
        //R = new Rectangle(originX, originY, sizeX, sizeY);
        g.drawImage(img, originX, originY, sizeX, sizeY, null);
+       
+       setBounds(bounds);
         
         
         //System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
@@ -131,24 +133,28 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	public void moveUp() {
 		// TODO Auto-generated method stub
 		originY -= 15;
+		setBounds(bounds);
 	}
 
 	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
 		originY += 15;
+		setBounds(bounds);
 	}
 
 	@Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
 		originX -= 15;
+		setBounds(bounds);
 	}
 
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
 		originX += 15;
+		setBounds(bounds);
 	}
 
 	@Override
@@ -336,9 +342,9 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 			
 			Rectangle r = this.getBounds();
 			
-			System.out.println("playerCollision " + this.getLocation());
-			System.out.println("objectCollision " +	ActionPanel.gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
-			System.out.println( ActionPanel.gmob.get(i).contains(this.getLocation()) );
+			//System.out.println("playerCollision " + this.getLocation());
+			//System.out.println("objectCollision " +	ActionPanel.gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
+			//System.out.println( ActionPanel.gmob.get(i).contains(this.getLocation()) );
 			
 				
 				if(ActionPanel.gmob.get(i).getObjectType() == "BDWall"){
@@ -504,45 +510,96 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 		
 		gmob = mob;
 		
-for(int i =0; i < gmob.size(); i++){
+		for(int r = 0; r<gmob.size(); r++){
+			if(gmob.get(r).getObjectType() == "Hero"){
+				pUnit = (Player) gmob.get(r);
+				System.out.println("I Found the player");
+			}
+		}
+		
+		
+		for(int i =0; i < gmob.size(); i++){
 			
-			Rectangle r = ((GameObject) pUnit).getBounds();
+			//Rectangle r = ((GameObject) pUnit).getBounds();
 			
-			System.out.println("playerCollision " + pUnit.getLocation());
-			System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
-			System.out.println( gmob.get(i).contains(pUnit.getLocation()) );
+			//System.out.println("playerCollision " + pUnit.getLocation());
+			//System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
+			//System.out.println( gmob.get(i).contains(pUnit.getLocation()) );
+				
+				
 			
 				
 				if(gmob.get(i).getObjectType() == "BDWall"){
 					
-					System.out.println("It is a wall");
+					//System.out.println("It is a wall");
 					
 					if(pUnit.isFacingUp()){
-						System.out.println("Up");
-						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						//System.out.println("Up");
+						if (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveDown();
 						}
 					}else if(pUnit.isFacingDown()){
-						System.out.println("Down");
-						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						//System.out.println("Down");
+						if (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveUp();
 						}
 					}else if(pUnit.isFacingLeft()){
-						System.out.println("Left");
-						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						//System.out.println("Left");
+						if (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveRight();
 						}
 					}else if(pUnit.isFacingRight()){
-						System.out.println("Right");
-						while (gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
+						//System.out.println("Right");
+						if(gmob.get(i).contains(pUnit.getLocation()) == true && gmob.get(i).getObjectType() != "Hero"){
 						pUnit.moveLeft();
 						}
 					}
-					//}else if(gmob.get(i).containsProjectile(eUnit.getLocation()) == true){
+				}
+					if(gmob.get(i).getObjectType() == "BProjectile"){
+						
+						BasicProjectile bp = (BasicProjectile) gmob.get(i);
+						System.out.println(bp.enemy);
+						if(this.containsProjectile(bp.getLocation(), bp.getSize()) && bp.enemy == true){
+							
+							pUnit.looseHealth(bp.damage);
+							ActionPanel.playerHealth = pUnit.getHealth();
+							gmob.remove(bp);
+						}
 					//	bp.setCollide(true);
 				//}
 			}
 		}
 	}
+
+	@Override
+	public boolean containsProjectile(Point p, int size) {
+		// TODO Auto-generated method stub
+		for(int t = 0; t<size; t++){
+			if(bounds.contains(p.x + t, p.y)){
+				return true;
+			}else if(bounds.contains(p.x, p.y + t)){
+				return true;
+			}
+			
+		}
+		
+		return false;
+	}
+	
+	public ArrayList<GameObject> getGmob(){
+		return gmob;
+	}
+	
+	public void setDamage(Double d){
+		health -= d;	
+		}
+
+	@Override
+	public void setDamage(double damage) {
+		// 
+		
+	}
+
+	
 
 }

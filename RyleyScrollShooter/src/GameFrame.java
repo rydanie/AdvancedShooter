@@ -30,7 +30,7 @@ public class GameFrame extends JFrame implements Runnable, KeyListener {
 		
 		//this.add(dp, BorderLayout.NORTH);
 		this.add(ap, BorderLayout.CENTER);
-		//this.add(hp, BorderLayout.SOUTH);
+		this.add(hp, BorderLayout.SOUTH);
 		
 		this.addKeyListener(this);
 		//ap.addKeyListener(this);
@@ -93,6 +93,11 @@ public class GameFrame extends JFrame implements Runnable, KeyListener {
 				
 			//	a.setPriority(5);
 				a.start();
+				
+				Thread b = new Thread(hp);
+				
+				//	a.setPriority(5);
+					b.start();
 				
 				
 		

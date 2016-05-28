@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -78,6 +79,14 @@ public interface Player {
 	public void setFacingRight();
 
 	public void playerBounds(ArrayList<GameObject> gmob);
+
+	public boolean contains(Point location);
+
+	public ArrayList<GameObject> getGmob();
+
+	public void setDamage(double damage);
+
+	public void setBounds(Rectangle b);
 
 	
 	

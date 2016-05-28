@@ -269,4 +269,18 @@ public class PlayableArea  implements Runnable, GameObject, Wall{
 		
 	}
 
+
+	@Override
+	public boolean contains(Point p, int r) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean containsProjectile(Point location, int size) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

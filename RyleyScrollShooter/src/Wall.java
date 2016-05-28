@@ -12,4 +12,6 @@ public interface Wall {
 	 */
 	public void setSize(Point p);
 
+	boolean contains(Point p, int r);
+
 }

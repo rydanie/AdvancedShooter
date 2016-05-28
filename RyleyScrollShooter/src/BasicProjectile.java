@@ -30,7 +30,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	int dir;
 	int pType;
 	int pro;
-	double damage = 50;
+	double damage = 15;
 	Timer proTimer;
 	Rectangle bounds = new Rectangle();
 	ArrayList<GameObject> gmob;
@@ -350,6 +350,12 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	public double getDamage() {
 		// TODO Auto-generated method stub
 		return damage;
+	}
+
+	@Override
+	public boolean containsProjectile(Point location, int size) {
+		// TODO Auto-generated method stub
+		return false;
 	}
     
 }
