@@ -28,7 +28,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	BasicProjectile bp;
 	FinalBoss finalUnit;
 	HealthPack hp;
- 	int levelNumber = 1;
+ 	int levelNumber = 13;
  	int dir;
  	int pType;
  	static double playerHealth;
@@ -42,17 +42,6 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 
 	public ActionPanel(){
 		super();
-		
-		
-		//this.setLayout(new GridLayout(1,2));
-		
-		//l = new JLabel("I Work");
-		
-		//this.add(l);
-		
-		//this.setBackground(Color.BLACK);
-		
-		//L1 =new Level_1();
 		
 		gmob = new ArrayList<GameObject>();
 		
@@ -90,17 +79,11 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 					e.printStackTrace();
 				}
 				gmob =L1.getGmob();
-				
 				findPlayer(gmob);
-				
 				enNum = 0;
-				
 				findEnemy(gmob);
-				
 				findWall(gmob);
-				
 				findHealthPack(gmob);
-				
 				levelNumber++;
 				  
 			}
@@ -117,23 +100,120 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 					e.printStackTrace();
 				}
 				gmob =L1.getGmob();
-				
 				findPlayer(gmob);
-				
 				enNum = 0;
-				
 				findEnemy(gmob);
-				
 				findWall(gmob);
-				
 				findHealthPack(gmob);
+				levelNumber++;
+				  
+			}
+			if (levelNumber == 5){
 				
+				Level_3 L1 = new Level_3();
+				
+				try {
+					L1.genLevel();
+					System.out.println();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				gmob =L1.getGmob();
+				findPlayer(gmob);
+				enNum = 0;
+				findEnemy(gmob);
+				findWall(gmob);
+				findHealthPack(gmob);
+				levelNumber++;
+				  
+			}
+			if (levelNumber == 7){
+				
+				Level_4 L1 = new Level_4();
+				
+				try {
+					L1.genLevel();
+					System.out.println();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				gmob =L1.getGmob();
+				findPlayer(gmob);
+				enNum = 0;
+				findEnemy(gmob);
+				findWall(gmob);
+				findHealthPack(gmob);
+				levelNumber++;
+				  
+			}
+			if (levelNumber == 9){
+				
+				Level_5 L1 = new Level_5();
+				
+				try {
+					L1.genLevel();
+					System.out.println();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				gmob =L1.getGmob();
+				findPlayer(gmob);
+				enNum = 0;
+				findEnemy(gmob);
+				findWall(gmob);
+				findHealthPack(gmob);
+				levelNumber++;
+				  
+			}
+			if (levelNumber == 11){
+				
+				Level_6 L1 = new Level_6();
+				
+				try {
+					L1.genLevel();
+					System.out.println();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				gmob =L1.getGmob();
+				findPlayer(gmob);
+				enNum = 0;
+				findEnemy(gmob);
+				findWall(gmob);
+				findHealthPack(gmob);
+				levelNumber++;
+				  
+			}
+			if (levelNumber == 13){
+				
+				Level_7 L1 = new Level_7();
+				
+				try {
+					L1.genLevel();
+					System.out.println();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				gmob =L1.getGmob();
+				findPlayer(gmob);
+				enNum = 0;
+				findEnemy(gmob);
+				findWall(gmob);
+				findHealthPack(gmob);
 				levelNumber++;
 				  
 			}
 			
+			try{
 			playerCollision();
-			
+			}catch(NullPointerException e){
+				e.printStackTrace();
+			}
 			enemyCollide();
 			
 			findWallA(gmob);
@@ -271,7 +351,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				finalUnit.setPlayer(pUnit);
 				
 				foo = new Thread(finalUnit);
-						foo.setPriority(Thread.MIN_PRIORITY);
+						foo.setPriority(2);
 						foo.start();
 				
 				
@@ -354,7 +434,7 @@ public void findWallA(ArrayList<GameObject> h){
 	public void healthCollide(){
 		
 		for(int i =0; i< gmob.size(); i++){
-			
+		try{	
 			if(gmob.get(i).getObjectType() == "HPack"){
 				hp = (HealthPack)gmob.get(i);
 				hp.setGmob(gmob);
@@ -362,8 +442,13 @@ public void findWallA(ArrayList<GameObject> h){
 				hp.playerHealthBounds(gmob, pUnit);
 				gmob = hp.getGmob();
 			}
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
 		}
 	}
+	
+
 	
 	public void playerCollision(){
 	
@@ -404,7 +489,8 @@ public void findWallA(ArrayList<GameObject> h){
 					}
 					*/
 					
-					gmob = eUnit.getGmob();
+					//gmob = eUnit.getGmob();
+					try{
 					for(int r =0; r<gmob.size(); r++){
 						if(gmob.get(r).getObjectType() == "BProjectile"){
 							
@@ -414,7 +500,13 @@ public void findWallA(ArrayList<GameObject> h){
 							}
 						}
 					}
-				
+					}catch(NullPointerException e){
+						//gmob = eUnit.getGmob();
+						e.printStackTrace();
+					}catch(IndexOutOfBoundsException e){
+						//gmob = eUnit.getGmob();
+						e.printStackTrace();
+					}
 					
 					//}else if(gmob.get(i).containsProjectile(eUnit.getLocation()) == true){
 					//	bp.setCollide(true);

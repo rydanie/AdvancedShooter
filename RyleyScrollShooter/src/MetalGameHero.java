@@ -532,7 +532,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 				
 				
 			
-				
+			try{	
 				if(gmob.get(i).getObjectType() == "BDWall"){
 					
 					//System.out.println("It is a wall");
@@ -559,7 +559,11 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 						}
 					}
 				}
-					if(gmob.get(i).getObjectType() == "BProjectile"){
+			}catch(NullPointerException e){
+				e.printStackTrace();
+			}
+			
+			if(gmob.get(i).getObjectType() == "BProjectile"){
 						
 						BasicProjectile bp = (BasicProjectile) gmob.get(i);
 						//System.out.println(bp.enemy);
