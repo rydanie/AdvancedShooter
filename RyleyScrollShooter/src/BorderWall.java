@@ -110,7 +110,7 @@ public class BorderWall implements Runnable, Wall, GameObject,Serializable {
 						if(bdWall.containsProjectile(bp.getLocation())){
 							//System.out.println("Up");
 							//thatHurt = (BasicProjectile) gmob.get(i);
-							System.out.println("I collided with WALL");
+							//System.out.println("I collided with WALL");
 							gmob.remove(bp);
 							//eUnit.setDamaged(bp.getDamage());
 							

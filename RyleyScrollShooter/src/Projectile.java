@@ -28,4 +28,12 @@ public interface Projectile {
 	public void setDamge(double d);
 	
 	public double getDamage();
+
+	boolean isFacingUp();
+
+	boolean isFacingDown();
+
+	boolean isFacingLeft();
+
+	boolean isFacingRight();
 }

@@ -32,6 +32,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	int pro;
 	double damage = 15;
 	Timer proTimer;
+	Timer timer;
 	Rectangle bounds = new Rectangle();
 	ArrayList<GameObject> gmob;
 	Point p;
@@ -159,7 +160,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	public void run() {
 		// TODO Auto-generated method stub
 		BasicProjectile bp = this;
-			Timer timer = new Timer(1000/250,new ActionListener(){
+			timer = new Timer(1000/250,new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					if(dir == 1){
 						fireUp();
@@ -182,6 +183,10 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			}
+			
+			if(GameFrame.endAll == true){
+				timer.stop();
 			}
 	}
 
@@ -357,5 +362,47 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public boolean isFacingUp() {
+		// TODO Auto-generated method stub
+		if(dir == 1){
+			return true;
+		}
+		return false;
+	
+	}
+
+	@Override
+	public boolean isFacingDown() {
+		// TODO Auto-generated method stub
+		
+		if(dir == 2){
+			return true;
+		}
+		return false;
+		
+	}
+
+	@Override
+	public boolean isFacingLeft() {
+		// TODO Auto-generated method stub
+		
+		if(dir == 3){
+			return true;
+		}
+		return false;
+		
+	}
+
+	@Override
+	public boolean isFacingRight() {
+		// TODO Auto-generated method stub
+		if(dir == 4){
+			return true;
+		}
+		return false;
+	}
+
     
 }

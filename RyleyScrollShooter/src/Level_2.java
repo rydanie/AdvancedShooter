@@ -1,21 +1,14 @@
 import java.awt.Color;
-import java.awt.Graphics;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-/**
- * Generates level 1 of this game
- * @author Ryley Danielson
- *
- */
-
-public class Level_1 implements Runnable, GameLevel {
+public class Level_2 implements Runnable, GameLevel {
 	
-	static MetalGameHero pUnit;
-	static int enNum = 0;
+	//static MetalGameHero pUnit;
+	//static int enNum = 0;
 	int numLevel = 1;
 	File f;
 	DrawingObject obj;
@@ -23,10 +16,10 @@ public class Level_1 implements Runnable, GameLevel {
 	ArrayList<GameObject> gmob;
 	ArrayList<DrawingObject> drob;
 	
-	public Level_1(){
+	public Level_2(){
 		drob = new ArrayList<DrawingObject>();
 		gmob = new ArrayList<GameObject>();
-		enNum = 0;
+		//enNum = 0;
 	}
 
 	@Override
@@ -57,7 +50,7 @@ public class Level_1 implements Runnable, GameLevel {
 	@Override
 	public int getEnemyCount() {
 		// TODO Auto-generated method stub
-		return enNum;
+		return 0;//enNum;
 	}
 
 	@Override
@@ -98,7 +91,7 @@ public class Level_1 implements Runnable, GameLevel {
    		
    		try{
    			
-   			f =new File("Lv1");
+   			f =new File("Lv2");
    			
    			FileInputStream fin = new FileInputStream(f.toString());
    			ObjectInputStream ois = new ObjectInputStream(fin);
@@ -118,7 +111,7 @@ public class Level_1 implements Runnable, GameLevel {
 				//System.out.println("drob " + drob.size());
    			if(obj.getColor()== Color.BLUE){
    				gobj =new MetalGameHero(obj.getPoint());
-   				pUnit = (MetalGameHero) gobj;
+   				//pUnit = (MetalGameHero) gobj;
    				System.out.println("hero");
    			}else if(obj.getColor() == Color.RED){
    				gobj = new BasicEnemy(obj.getPoint());
@@ -133,6 +126,9 @@ public class Level_1 implements Runnable, GameLevel {
    			}else if(obj.getColor() == Color.MAGENTA){
    				gobj = new PlayableArea(obj.getPoint(),obj.getSize());   				
    				System.out.println("Playable Space");
+   			}else if(obj.getColor() == Color.ORANGE){
+   				gobj = new FinalBoss(obj.getPoint());
+   				System.out.println("Final Boss ");
    			}
    			
    			if(gobj != null){
@@ -153,4 +149,5 @@ public class Level_1 implements Runnable, GameLevel {
 		
 	}
 	
+
 }

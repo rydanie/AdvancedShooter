@@ -111,6 +111,13 @@ public class StartScreen extends JFrame implements Runnable, ActionListener {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	/*
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		while(true){
 			this.repaint();
 			
@@ -120,10 +127,12 @@ public class StartScreen extends JFrame implements Runnable, ActionListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+			*/
+		
+	
 	}
 
 
 	
 	
-}
+

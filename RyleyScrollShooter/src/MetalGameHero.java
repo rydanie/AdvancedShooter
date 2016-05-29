@@ -227,9 +227,13 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 	public void gainHealth(Double gain) {
 		// TODO Auto-generated method stub
 		health += gain;
+		ActionPanel.playerHealth = health;
+		
+		System.out.println("I got here");
 		
 		if (health > limit){
 			health = 100;
+			ActionPanel.playerHealth = health;
 		}
 	}
 
@@ -352,22 +356,22 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 					System.out.println("It is a wall");
 					
 					if(this.isFacingUp()){
-						System.out.println("Up");
+						//System.out.println("Up");
 						while (this.contains(ActionPanel.gmob.get(i).getThisObjectLocation()) == true && ActionPanel.gmob.get(i).getObjectType() != "Hero"){
 						this.moveDown();
 						}
 					}else if(this.isFacingDown()){
-						System.out.println("Down");
+						//System.out.println("Down");
 						while (this.contains(ActionPanel.gmob.get(i).getThisObjectLocation()) == true && ActionPanel.gmob.get(i).getObjectType() != "Hero"){
 							this.moveUp();
 						}
 					}else if(this.isFacingLeft()){
-						System.out.println("Left");
+						//System.out.println("Left");
 						while (this.contains(ActionPanel.gmob.get(i).getThisObjectLocation()) == true && ActionPanel.gmob.get(i).getObjectType() != "Hero"){
 							this.moveDown();						this.moveRight();
 						}
 					}else if(this.isFacingRight()){
-						System.out.println("Right");
+						//System.out.println("Right");
 						while (this.contains(ActionPanel.gmob.get(i).getThisObjectLocation()) == true && ActionPanel.gmob.get(i).getObjectType() != "Hero"){
 							this.moveLeft();
 						}
@@ -453,7 +457,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
      */
     public void setBounds( Rectangle b ) {
         b.setBounds( originX, originY, sizeX, sizeY );
-        System.out.println("Bounds                                                Set");
+        //System.out.println("Bounds                                                Set");
     }
     
     /**
@@ -513,7 +517,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 		for(int r = 0; r<gmob.size(); r++){
 			if(gmob.get(r).getObjectType() == "Hero"){
 				pUnit = (Player) gmob.get(r);
-				System.out.println("I Found the player");
+				//System.out.println("I Found the player");
 			}
 		}
 		
@@ -558,7 +562,7 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 					if(gmob.get(i).getObjectType() == "BProjectile"){
 						
 						BasicProjectile bp = (BasicProjectile) gmob.get(i);
-						System.out.println(bp.enemy);
+						//System.out.println(bp.enemy);
 						if(this.containsProjectile(bp.getLocation(), bp.getSize()) && bp.enemy == true){
 							
 							pUnit.looseHealth(bp.damage);

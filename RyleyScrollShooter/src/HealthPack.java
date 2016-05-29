@@ -3,6 +3,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.awt.*;
 
 import javax.imageio.ImageIO;
@@ -23,7 +24,10 @@ public class HealthPack implements Runnable, GameObject, Serializable{
 	int originY;
 	int sizeX = 50;
 	int sizeY = 50;
+	int num;
 	Rectangle bounds = new Rectangle();
+	ArrayList<GameObject> gmob;
+	Player pUnit;
 	
 	public HealthPack(Point p){
 		setThisObjectLocation(p);
@@ -56,7 +60,7 @@ public class HealthPack implements Runnable, GameObject, Serializable{
        g.drawImage(img, originX, originY, sizeX, sizeY, null);
         
         
-        System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
+        //System.out.println( "Redrawing Image @" + originX + ", " + originY + "; " + sizeX + " sizeY " + 20);
         //this.setSize( this.getPreferredSize() );
 	}
 
@@ -131,7 +135,20 @@ public class HealthPack implements Runnable, GameObject, Serializable{
      * @return 
      */
     public boolean contains( Point p ) {
-    	return bounds.contains(p);
+    	for(int i = 0; i < 50; i++){
+			
+			if(bounds.contains(p.x + i, p.y) || bounds.contains(p.x, p.y + i)){
+				//return true;
+			//}
+				//if(bounds.contains(p.x, p.y + i ) || bounds.contains(p.x + i, p.y) || bounds.contains(p.x + i, p.y +50)|| bounds.contains(p.x + 50, p.y +i)){
+				
+		
+		return true;
+			}
+		
+}
+		return false;
+		
     }
 
 	@Override
@@ -187,4 +204,59 @@ public class HealthPack implements Runnable, GameObject, Serializable{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	public double getHealth(){
+		
+		return 25;
+	}
+	
+	public void playerHealthBounds(ArrayList<GameObject> mob, Player p) {
+		// TODO Auto-generated method stub
+		
+		gmob = mob;
+			
+			//System.out.println("It is a wall");
+		HealthPack hp = (HealthPack) gmob.get(num);
+		
+		
+				pUnit = p;
+				//System.out.println("I Found the player");
+			
+		
+		
+		
+		for(int i =0; i < gmob.size(); i++){
+			
+			//Rectangle r = ((GameObject) pUnit).getBounds();
+			
+			//System.out.println("playerCollision " + pUnit.getLocation());
+			//System.out.println("objectCollision " +	gmob.get(i).getBounds() );//+ "\n " + gmob.get(i).getObjectType());
+			//System.out.println( gmob.get(i).contains(pUnit.getLocation()) );
+				
+				
+			
+				
+				
+					//	bp.setCollide(true);
+					if(hp.contains(pUnit.getLocation())){
+						pUnit.gainHealth(hp.getHealth());
+						gmob.remove(hp);
+					}
+				//}
+			}
+		}
+	
+public ArrayList<GameObject> getGmob(){
+	return gmob;
+}
+
+public void setGmob(ArrayList<GameObject> gmob2) {
+	// TODO Auto-generated method stub
+	gmob = gmob2;
+}
+
+public void setNum(int i) {
+	// TODO Auto-generated method stub
+	num  = i;
+}
 }

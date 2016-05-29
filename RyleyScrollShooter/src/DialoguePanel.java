@@ -20,7 +20,7 @@ public class DialoguePanel extends JPanel implements Runnable {
 		
 		this.setLayout(new GridLayout(1,2));
 		
-		l = new JLabel("I Work to Talk");
+		l = new JLabel(Integer.toString(Level_1.enNum));
 		
 		this.add(l);
 		
@@ -32,7 +32,11 @@ public class DialoguePanel extends JPanel implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		while(GameFrame.endAll == false){
+			int i = ActionPanel.enNum;
+			//System.out.println("En " + i);
+			l.setText(Integer.toString(ActionPanel.enNum));
+		}
 	}
 
 }

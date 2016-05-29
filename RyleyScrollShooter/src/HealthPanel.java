@@ -37,15 +37,30 @@ public class HealthPanel extends JPanel implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while (true){
+		
+		HealthPanel p;
+		p = this;
+		ActionPanel.playerHealth = 100;
+		
+		while (GameFrame.endAll == false){
 			l.setText(Double.toString(ActionPanel.playerHealth));
 			
-			if(Double.toString(ActionPanel.playerHealth) == "70"){
-				this.setBackground(Color.YELLOW);
-			}else if(Double.toString(ActionPanel.playerHealth) == "55"){
-				this.setBackground(Color.ORANGE);
-			}else if(Double.toString(ActionPanel.playerHealth) == "30"){
-				this.setBackground(Color.RED);
+			if(ActionPanel.playerHealth == 100){
+				p.setBackground(Color.GREEN);
+				repaint();
+			}
+			
+			if(ActionPanel.playerHealth == 70){
+				p.setBackground(Color.YELLOW);
+				repaint();
+			}
+			if(ActionPanel.playerHealth == 55){
+				p.setBackground(Color.ORANGE);
+				repaint();
+			}
+			if(ActionPanel.playerHealth == 25){
+				p.setBackground(Color.RED);
+				repaint();
 			}
 		}
 	}

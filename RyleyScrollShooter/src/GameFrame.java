@@ -16,6 +16,11 @@ public class GameFrame extends JFrame implements Runnable, KeyListener {
 	DialoguePanel dp;
 	ActionPanel ap;
 	HealthPanel hp;
+	Thread a;
+	Thread b;
+	Thread d;
+	Timer timer;
+	static boolean endAll = false;
 	
 	public GameFrame(){
 		super();
@@ -24,11 +29,13 @@ public class GameFrame extends JFrame implements Runnable, KeyListener {
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		endAll =false;
+		
 		dp = new DialoguePanel();
 		ap = new ActionPanel();
 		hp = new HealthPanel();
 		
-		//this.add(dp, BorderLayout.NORTH);
+		this.add(dp, BorderLayout.NORTH);
 		this.add(ap, BorderLayout.CENTER);
 		this.add(hp, BorderLayout.SOUTH);
 		
@@ -74,32 +81,50 @@ public class GameFrame extends JFrame implements Runnable, KeyListener {
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+		
+		
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		
 		GameFrame frame  = this;
-		Timer timer = new Timer(1000/50,new ActionListener(){
+		timer = new Timer(1000/50,new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				if(ActionPanel.playerHealth > 0){
 				frame.repaint();
-			}
+				}
+				
+				if(ActionPanel.playerHealth <= 0){
+					EndFrame c = new EndFrame();
+					timer.stop();
+					endAll = true;
+					
+							frame.dispose();
+				}
+				}
+			
 
 		} );
 		
 		timer.start();
 		
-		Thread a = new Thread(ap);
+		 a = new Thread(ap);
 				
 			//	a.setPriority(5);
 				a.start();
 				
-				Thread b = new Thread(hp);
+		 b = new Thread(hp);
 				
 				//	a.setPriority(5);
 					b.start();
 				
-				
+		d = new Thread(dp);
+						
+				//	a.setPriority(5)
+				d.start();
+						
 		
 		
 		/*

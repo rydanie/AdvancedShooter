@@ -40,6 +40,7 @@ public class ToolPanel extends JPanel implements ActionListener {
         ButtonGroup bg;
         
         bg = new ButtonGroup();
+        JRadioButton BigEnemy = new JRadioButton("Big Enemy");
         JRadioButton pArea = new JRadioButton( "Playable Area");
         JRadioButton Wall = new JRadioButton( "Wall" );
         JRadioButton Enemy = new JRadioButton( "Enemy" );
@@ -52,6 +53,7 @@ public class ToolPanel extends JPanel implements ActionListener {
         //points2 = new JTextField("5");
         //pic = new JTextField("Image File Name Here");
        // NoOperation.setActionCommand("nop");
+        BigEnemy.setActionCommand("bigEnemy");
         pArea.setActionCommand("playable");
         Wall.setActionCommand( "wall" );
         Enemy.setActionCommand( "enemy" );
@@ -60,6 +62,7 @@ public class ToolPanel extends JPanel implements ActionListener {
         Polygon.setActionCommand("poly");
         picture.setActionCommand("picN");
        // NoOperation.addActionListener(this);
+        BigEnemy.addActionListener(this);
         pArea.addActionListener(this);
         Wall.addActionListener( this );
         Enemy.addActionListener( this);
@@ -72,6 +75,7 @@ public class ToolPanel extends JPanel implements ActionListener {
        // points2.addKeyListener(k);
        // pic.addKeyListener(k);
         
+        bg.add(BigEnemy);
         bg.add(pArea);
         bg.add( Wall);
         bg.add( Enemy );
@@ -84,6 +88,7 @@ public class ToolPanel extends JPanel implements ActionListener {
         JPanel unitSelectionPanel = new JPanel();
         unitSelectionPanel.setLayout( new GridLayout( 2,1 ) );
         unitSelectionPanel.add( Wall );
+        unitSelectionPanel.add( BigEnemy );
         unitSelectionPanel.add( Enemy );
         unitSelectionPanel.add( Hero );
         unitSelectionPanel.add( pArea );
@@ -134,6 +139,10 @@ public class ToolPanel extends JPanel implements ActionListener {
            	
         case("playable"):
         	check = 20;
+        	break;
+        	
+        case("bigEnemy"):
+        	check = 21;
         	break;
         	
         case("picN"):

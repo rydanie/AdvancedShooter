@@ -137,6 +137,8 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
 	    		obj = new HPBox();
 	    	}else if(check == 20){
 	    		obj = new BorderBox();
+	    	}else if(check == 21){
+	    		obj = new FBBox();
 	    	}
 	    	//}else if(check == s) {
 	    		//int[] q = {x, x+12, x+54,x+18,x+28,x, x-28, x-18, x-54, x-12};
