@@ -513,14 +513,16 @@ public class MetalGameHero implements Runnable, Player, GameObject, Serializable
 		// TODO Auto-generated method stub
 		
 		gmob = mob;
-		
+		try{
 		for(int r = 0; r<gmob.size(); r++){
 			if(gmob.get(r).getObjectType() == "Hero"){
 				pUnit = (Player) gmob.get(r);
 				//System.out.println("I Found the player");
 			}
 		}
-		
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
 		
 		for(int i =0; i < gmob.size(); i++){
 			

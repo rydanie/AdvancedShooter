@@ -28,7 +28,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	BasicProjectile bp;
 	FinalBoss finalUnit;
 	HealthPack hp;
- 	int levelNumber = 13;
+ 	int levelNumber = 9;
  	int dir;
  	int pType;
  	static double playerHealth;
@@ -207,6 +207,10 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 				findHealthPack(gmob);
 				levelNumber++;
 				  
+			}
+			if(levelNumber == 15){
+				EndFrame r = new EndFrame();
+				r.goodGame();
 			}
 			
 			try{
@@ -409,7 +413,7 @@ public void findWallA(ArrayList<GameObject> h){
 		
 			//System.out.println(h.get(i).getThisObjectLocation()+ "hello");
 			//System.out.println(Level_1.pUnit.getLocation() + "goodbye");
-		
+		try{
 		if(h.get(i).getObjectType() == "BDWall"){
 			
 			//System.out.println();
@@ -423,7 +427,9 @@ public void findWallA(ArrayList<GameObject> h){
 			
 			
 		}
-		
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -524,13 +530,16 @@ public void findWallA(ArrayList<GameObject> h){
 		for(int i =0; i< gmob.size(); i++){
 			
 			//gmob = pUnit.getGmob();
-			
+			try{
 			if(gmob.get(i).getObjectType() == "BEnemy"){
 				eUnit = (BasicEnemy)gmob.get(i);
 				eUnit.setGmob(gmob);
 				eUnit.setNum(i);
 				eUnit.setPlayer(pUnit);
 				gmob = eUnit.getGmob();
+			}
+			}catch(NullPointerException e){
+				e.printStackTrace();
 			}
 		}
 	}
@@ -726,7 +735,7 @@ public void wallCollide(){
 	            	//System.out.println("Moving Right");
 	            }else if(e.getKeyChar() == 'e'){
 	            	proElapseTime = System.currentTimeMillis() - proStartTime;
-	            	if(proElapseTime > 750){
+	            	if(proElapseTime > 250){
 	            		
 	        			if(pUnit.isFacingUp() == true){
 	        				dir = 1;

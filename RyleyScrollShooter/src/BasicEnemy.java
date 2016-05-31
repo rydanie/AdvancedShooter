@@ -311,28 +311,28 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	@Override
 	public void moveUp() {
 		// TODO Auto-generated method stub
-		originY -= 2;
+		originY -= 5;
 		setFacingUp();
 	}
 
 	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
-		originY += 2;
+		originY += 5;
 		setFacingDown();
 	}
 
 	@Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
-		originX += 2;
+		originX += 5;
 		setFacingLeft();
 	}
 
 	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
-		originX -= 2;
+		originX -= 5;
 		setFacingRight();
 	}
 
@@ -487,7 +487,7 @@ public class BasicEnemy implements Runnable, Enemy, GameObject, Serializable{
 	public void run() {
 		// TODO Auto-generated method stub
 		
-		while(GameFrame.endAll == false){
+		while(GameFrame.endAll == false && health != 0){
 			idle();
 		}	
 		

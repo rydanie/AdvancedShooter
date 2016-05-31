@@ -27,7 +27,7 @@ public class StartScreen extends JFrame implements Runnable, ActionListener {
 		
 		this.setLayout( layout );
         this.setName( "Ryley's Sooter");
-        this.setDefaultCloseOperation( JFrame.HIDE_ON_CLOSE );
+        this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         
         
         GridBagConstraints c = new GridBagConstraints();

@@ -15,19 +15,20 @@ public class EndFrame extends JFrame implements ActionListener {
 	GameFrame gf;
 	StartScreen jmf;
 	boolean closeGF;
+	JPanel p;
 	
 	public EndFrame(){
 		super();
 		
 		//this.addKeyListener(this);
-		JPanel p = new JPanel();
+		p = new JPanel();
 		layout =new GridBagLayout();
 		
 		closeGF = false;
 		
 		p.setLayout( layout );
        this.setName( "Ryley's Sooter");
-       this.setDefaultCloseOperation( JFrame.HIDE_ON_CLOSE );
+       this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
        
        
        GridBagConstraints c = new GridBagConstraints();
@@ -131,5 +132,8 @@ public boolean getCloseGF(){
 	return closeGF;
 }
 	
+public void goodGame(){
+	p.setBackground(Color.GREEN);
+}
 
 }

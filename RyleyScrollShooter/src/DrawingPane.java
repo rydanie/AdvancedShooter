@@ -339,7 +339,7 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
    	public void saveDrob(File f){
    		try{
    			//f = new File(System.getProperty("user.home"));
-   			FileOutputStream fos = new FileOutputStream(f.toString());
+   			FileOutputStream fos = new FileOutputStream(f.getName());//toString());
    			ObjectOutputStream inf = new ObjectOutputStream(fos);
    			inf.writeObject(drob);
    			System.out.println("flfwejfjdhlk");

@@ -117,7 +117,7 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	@Override
 	public void fireUp() {
 		// TODO Auto-generated method stub
-		originY -=2;
+		originY -=10;
 		
 		p = new Point(originX, originY);
 	}
@@ -125,21 +125,21 @@ public class BasicProjectile implements Runnable, Projectile, GameObject, Serial
 	@Override
 	public void fireDown() {
 		// TODO Auto-generated method stub
-		originY +=2;
+		originY +=10;
 		p = new Point(originX, originY);
 	}
 
 	@Override
 	public void fireLeft() {
 		// TODO Auto-generated method stub
-		originX -=2;
+		originX -=10;
 		p = new Point(originX, originY);
 	}
 
 	@Override
 	public void fireRight() {
 		// TODO Auto-generated method stub
-		originX +=2;
+		originX +=10;
 		p = new Point(originX, originY);
 	}
 

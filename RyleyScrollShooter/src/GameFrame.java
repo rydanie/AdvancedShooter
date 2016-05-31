@@ -44,7 +44,7 @@ public class GameFrame extends JFrame implements Runnable, KeyListener {
 		ap.setFocusable(true);
         ap.requestFocusInWindow();
 		
-		this.setSize(100,100);
+		this.setSize(1800,750);
 		this.setVisible(true);
 	}
 

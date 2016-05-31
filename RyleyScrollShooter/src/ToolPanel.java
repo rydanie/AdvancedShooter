@@ -147,7 +147,10 @@ public class ToolPanel extends JPanel implements ActionListener {
         	
         case("picN"):
         	check = 10;
+        	File f = new File(System.getProperty("user.dir"));
         	JFileChooser s = new JFileChooser();
+        	//s.setCurrentDirectory(f);
+        	
         	//s.setApproveButtonText("Open");
         	int retv = s.showOpenDialog(this);
     	
