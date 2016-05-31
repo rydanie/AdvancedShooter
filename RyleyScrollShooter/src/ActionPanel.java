@@ -28,7 +28,7 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	BasicProjectile bp;
 	FinalBoss finalUnit;
 	HealthPack hp;
- 	int levelNumber = 9;
+ 	int levelNumber = 1;
  	int dir;
  	int pType;
  	static double playerHealth;
