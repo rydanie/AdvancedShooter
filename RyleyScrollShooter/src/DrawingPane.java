@@ -343,6 +343,7 @@ public class DrawingPane extends JPanel implements ActionListener, MouseMotionLi
    			ObjectOutputStream inf = new ObjectOutputStream(fos);
    			inf.writeObject(drob);
    			System.out.println("flfwejfjdhlk");
+   			inf.close();
    			
    			//inf.close();
    		}catch(Exception e){
