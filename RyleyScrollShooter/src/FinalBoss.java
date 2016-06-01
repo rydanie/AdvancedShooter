@@ -660,9 +660,12 @@ public class FinalBoss implements Runnable, Enemy, GameObject, Serializable{
 public void enemyCollide(ArrayList<GameObject> mob, int n, Player b){
 		
 		gmob = mob;
-	
-		eUnit = (FinalBoss) gmob.get(n);
 		
+		try{
+		eUnit = (FinalBoss) gmob.get(n);
+		}catch(ClassCastException e){
+			eUnit = eUnit;
+		}
 	
 		for(int i =0; i < gmob.size(); i++){
 			
