@@ -54,7 +54,7 @@ public class HealthPanel extends JPanel implements Runnable {
 				p.setBackground(Color.YELLOW);
 				repaint();
 			}
-			if(ActionPanel.playerHealth == 55){
+			if(ActionPanel.playerHealth == 55 || ActionPanel.playerHealth == 50 ){
 				p.setBackground(Color.ORANGE);
 				repaint();
 			}
