@@ -62,6 +62,11 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		
 	}
 
+	/**
+	 * This run method goes through, with an incrementer, loads levels, 
+	 * finds objects in those levels, and initiates their threads which 
+	 * in turn call their collision methods
+	 */
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -258,6 +263,10 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	}
 	*/
 	
+	
+	/**
+	 * Calls the player's contains method
+	 */
 	public void playerBounds(){
 		
 		if(pUnit != null){
@@ -266,6 +275,10 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		}
 	}
 	
+	/**
+	 * Finds all the health pack objects in the arrayList
+	 * @param h
+	 */
 	public void findHealthPack(ArrayList<GameObject> h){
 		Thread foo;
 		
@@ -286,6 +299,10 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		}
 	}
 
+	/**
+	 * Finds the player in the array list
+	 * @param h
+	 */
 	public void findPlayer(ArrayList<GameObject> h){
 		
 		for(int i = 0; i<h.size(); i++){
@@ -313,6 +330,10 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 		}
 	}
 	
+	/**
+	 * Finds all the enemy units in the arrayList and starts their threads
+	 * @param h
+	 */
 	public void findEnemy(ArrayList<GameObject> h){
 		
 		Thread foo;
@@ -369,7 +390,10 @@ public class ActionPanel extends JPanel implements Runnable, KeyListener, MouseL
 	}
 	
 	
-	
+/**
+ * Not used but would find walls	
+ * @param h
+ */
 public void findWall(ArrayList<GameObject> h){
 		
 		Thread foo;
@@ -405,7 +429,10 @@ public void findWall(ArrayList<GameObject> h){
 	
 
 
-
+/**
+ * Finds walls and updates their location in the arrayList
+ * @param h
+ */
 public void findWallA(ArrayList<GameObject> h){
 	
 	
@@ -436,8 +463,10 @@ public void findWallA(ArrayList<GameObject> h){
 	
 }
 
-
-	public void healthCollide(){
+/**
+ * Calls the health pack contains method
+ */
+public void healthCollide(){
 		
 		for(int i =0; i< gmob.size(); i++){
 		try{	
@@ -455,7 +484,9 @@ public void findWallA(ArrayList<GameObject> h){
 	}
 	
 
-	
+	/**
+	 * Calls the wall collision method
+	 */
 	public void playerCollision(){
 	
 		for(int i =0; i < gmob.size(); i++){
@@ -524,7 +555,9 @@ public void findWallA(ArrayList<GameObject> h){
 		}
 	}
 	
-	
+	/**
+	 * calls enemy collision method
+	 */
 	public void enemyCollide(){
 		
 		for(int i =0; i< gmob.size(); i++){
@@ -545,7 +578,9 @@ public void findWallA(ArrayList<GameObject> h){
 	}
 	
 	
-	
+/**
+ * This wall collide does not work
+ */
 public void wallCollide(){
 		
 		for(int i =0; i< gmob.size(); i++){
